@@ -47,6 +47,7 @@ const Checkout = ({
     notes: ''
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const MAX_TOTAL_UPLOAD_MB = 4.5;
 
   // Auto-fill user data when authenticated
   useEffect(() => {
@@ -105,6 +106,11 @@ const Checkout = ({
 
     setFiles(prev => [...prev, ...uniqueFiles]);
   };
+
+  const totalRawBytes = files.reduce((sum, f) => sum + f.size, 0);
+  const totalRawMB = totalRawBytes / 1024 / 1024;
+  const estimatedPayloadMB = (totalRawBytes * 4 / 3) / 1024 / 1024;
+  const isOverUploadLimit = estimatedPayloadMB > MAX_TOTAL_UPLOAD_MB;
 
   const handleDragOver = (e: React.DragEvent) => {
     e.preventDefault();
@@ -186,7 +192,7 @@ const Checkout = ({
     }
   };
 
-  const isFormValid = formData.fullName && formData.email && formData.description;
+  const isFormValid = formData.fullName && formData.email && formData.description && !isOverUploadLimit;
 
   return (
     <div className="bg-slate-50 text-text-main font-body antialiased selection:bg-primary/20 selection:text-primary-dark">
@@ -464,6 +470,24 @@ const Checkout = ({
                             </div>
                           ))}
                         </div>
+                        <div
+                          className="mt-3 rounded-lg border px-3 py-2 text-xs flex items-start gap-2"
+                          style={{ borderColor: isOverUploadLimit ? '#fecaca' : '#d1fae5', backgroundColor: isOverUploadLimit ? '#fff1f2' : '#f0fdf4', color: isOverUploadLimit ? '#b91c1c' : '#065f46' }}
+                        >
+                          <span className="material-symbols-outlined text-base flex-shrink-0">
+                            {isOverUploadLimit ? 'warning' : 'check_circle'}
+                          </span>
+                          <div className="leading-relaxed">
+                            <div>
+                              Total size: {totalRawMB.toFixed(2)} MB • Estimated payload: {estimatedPayloadMB.toFixed(2)} MB • Limit: {MAX_TOTAL_UPLOAD_MB.toFixed(1)} MB
+                            </div>
+                            {isOverUploadLimit && (
+                              <div>
+                                Reduce files or size to enable submission. Tip: compress images/PDFs or upload fewer files.
+                              </div>
+                            )}
+                          </div>
+                        </div>
                       </div>
                     )}
                   </div>
@@ -506,7 +530,7 @@ const Checkout = ({
                     </>
                   ) : (
                     <>
-                      Submit Request
+                      {isOverUploadLimit ? 'Reduce Files to Submit' : 'Submit Request'}
                       <span className="material-symbols-outlined text-sm font-bold">send</span>
                     </>
                   )}

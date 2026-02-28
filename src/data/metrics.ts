@@ -1,0 +1,12 @@
+export interface Metric {
+  id: string;
+  label: string;
+  value: string;
+}
+
+export const metrics: Metric[] = [
+  { id: 'happy-clients', label: 'Happy Clients', value: '2.5k+' },
+  { id: 'projects-done', label: 'Projects Done', value: '5k+' },
+  { id: 'avg-rating', label: 'Avg. Rating', value: '4.9' },
+  { id: 'global-countries', label: 'Global Countries', value: '25+' },
+];

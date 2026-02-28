@@ -16,6 +16,12 @@ interface ServiceDetailsProps {
   onProviderClick?: () => void;
   onUserClick?: () => void;
   onServiceDetails?: (serviceId: string) => void;
+  onAboutClick?: () => void;
+  onCareersClick?: () => void;
+  onBlogClick?: () => void;
+  onHelpClick?: () => void;
+  onTermsClick?: () => void;
+  onPrivacyClick?: () => void;
 }
 
 
@@ -27,7 +33,13 @@ const ServiceDetails: React.FC<ServiceDetailsProps> = ({
   onCartClick,
   onSearch,
   onUserClick,
-  onServiceDetails
+  onServiceDetails,
+  onAboutClick,
+  onCareersClick,
+  onBlogClick,
+  onHelpClick,
+  onTermsClick,
+  onPrivacyClick
 }) => {
   const { addToCart, isInCart } = useCart();
   const { addToWatchlist, removeFromWatchlist, isInWatchlist } = useWatchlist();
@@ -448,7 +460,14 @@ const ServiceDetails: React.FC<ServiceDetailsProps> = ({
         )}
       </main>
 
-      <Footer />
+      <Footer
+        onAboutClick={onAboutClick}
+        onCareersClick={onCareersClick}
+        onBlogClick={onBlogClick}
+        onHelpClick={onHelpClick}
+        onTermsClick={onTermsClick}
+        onPrivacyClick={onPrivacyClick}
+      />
 
       {/* Fullscreen Image Modal */}
       {isFullscreen && (

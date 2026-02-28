@@ -8,9 +8,15 @@ interface BecomeProviderProps {
   onSearch?: (query: string) => void;
   onCartClick?: () => void;
   onUserClick?: () => void;
+  onAboutClick?: () => void;
+  onCareersClick?: () => void;
+  onBlogClick?: () => void;
+  onHelpClick?: () => void;
+  onTermsClick?: () => void;
+  onPrivacyClick?: () => void;
 }
 
-const BecomeProvider = ({ onHomeClick, onLoginClick, onSearch, onCartClick, onUserClick }: BecomeProviderProps) => {
+const BecomeProvider = ({ onHomeClick, onLoginClick, onSearch, onCartClick, onUserClick, onAboutClick, onCareersClick, onBlogClick, onHelpClick, onTermsClick, onPrivacyClick }: BecomeProviderProps) => {
   const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
@@ -173,7 +179,14 @@ Notes: ${notes || 'N/A'}`;
           </form>
         </div>
       </main>
-      <Footer />
+      <Footer
+        onAboutClick={onAboutClick}
+        onCareersClick={onCareersClick}
+        onBlogClick={onBlogClick}
+        onHelpClick={onHelpClick}
+        onTermsClick={onTermsClick}
+        onPrivacyClick={onPrivacyClick}
+      />
     </div>
   );
 };

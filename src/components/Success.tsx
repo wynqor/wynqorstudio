@@ -12,6 +12,12 @@ interface SuccessProps {
   onDashboardClick?: () => void;
   onProviderClick?: () => void;
   onUserClick?: () => void;
+  onAboutClick?: () => void;
+  onCareersClick?: () => void;
+  onBlogClick?: () => void;
+  onHelpClick?: () => void;
+  onTermsClick?: () => void;
+  onPrivacyClick?: () => void;
 }
 
 const Success: React.FC<SuccessProps> = ({
@@ -23,7 +29,13 @@ const Success: React.FC<SuccessProps> = ({
   onCartClick,
   onDashboardClick
   ,
-  onUserClick
+  onUserClick,
+  onAboutClick,
+  onCareersClick,
+  onBlogClick,
+  onHelpClick,
+  onTermsClick,
+  onPrivacyClick
 }) => {
   const [copiedId, setCopiedId] = useState(false);
 
@@ -115,7 +127,14 @@ const Success: React.FC<SuccessProps> = ({
         </div>
       </main>
 
-      <Footer />
+      <Footer
+        onAboutClick={onAboutClick}
+        onCareersClick={onCareersClick}
+        onBlogClick={onBlogClick}
+        onHelpClick={onHelpClick}
+        onTermsClick={onTermsClick}
+        onPrivacyClick={onPrivacyClick}
+      />
     </div>
   );
 };

@@ -10,9 +10,15 @@ interface DashboardProps {
   onSearch?: (query: string) => void;
   onCartClick?: () => void;
   onServiceDetails?: (serviceId: string) => void;
+  onAboutClick?: () => void;
+  onCareersClick?: () => void;
+  onBlogClick?: () => void;
+  onHelpClick?: () => void;
+  onTermsClick?: () => void;
+  onPrivacyClick?: () => void;
 }
 
-const Dashboard = ({ onHomeClick, onLoginClick, onSearch, onCartClick, onServiceDetails }: DashboardProps) => {
+const Dashboard = ({ onHomeClick, onLoginClick, onSearch, onCartClick, onServiceDetails, onAboutClick, onCareersClick, onBlogClick, onHelpClick, onTermsClick, onPrivacyClick }: DashboardProps) => {
   const { user } = useAuth();
   const { cartItems, getCartTotal } = useCart();
   const { watchItems, removeFromWatchlist } = useWatchlist();
@@ -142,7 +148,14 @@ const Dashboard = ({ onHomeClick, onLoginClick, onSearch, onCartClick, onService
           </section>
         </div>
       </main>
-      <Footer />
+      <Footer
+        onAboutClick={onAboutClick}
+        onCareersClick={onCareersClick}
+        onBlogClick={onBlogClick}
+        onHelpClick={onHelpClick}
+        onTermsClick={onTermsClick}
+        onPrivacyClick={onPrivacyClick}
+      />
     </div>
   );
 };

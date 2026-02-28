@@ -288,7 +288,7 @@ TOTAL AMOUNT: ₹${data.total.toFixed(2)}
 ${data.notes}` : ''}
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-If you have any questions, please contact us at: wynqor@gmail.com
+If you have any questions, please contact us at: ${this.COMPANY_EMAIL}
 
 © 2024 Wynqor Inc. All rights reserved.`.trim();
   }

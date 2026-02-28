@@ -1,7 +1,17 @@
 import React, { useState } from 'react';
 import { emailService } from '../services/emailService';
+import { site } from '../data/site';
 
-const Footer: React.FC = () => {
+interface FooterProps {
+  onAboutClick?: () => void;
+  onCareersClick?: () => void;
+  onBlogClick?: () => void;
+  onHelpClick?: () => void;
+  onTermsClick?: () => void;
+  onPrivacyClick?: () => void;
+}
+
+const Footer: React.FC<FooterProps> = ({ onAboutClick, onCareersClick, onBlogClick, onHelpClick, onTermsClick, onPrivacyClick }) => {
   return (
     <footer className="bg-secondary pt-20 pb-10 border-t border-slate-800">
       <div className="max-w-[1440px] mx-auto px-4 lg:px-6">
@@ -15,13 +25,13 @@ const Footer: React.FC = () => {
               The world's leading creative & design studio platform. Connecting elite talent with global opportunity.
             </p>
             <div className="flex gap-4">
-              <a className="size-10 rounded-full bg-slate-800/50 border border-slate-700 flex items-center justify-center text-slate-400 hover:bg-primary hover:text-white hover:border-primary transition-all duration-300" href="#">
+              <a className="size-10 rounded-full bg-slate-800/50 border border-slate-700 flex items-center justify-center text-slate-400 hover:bg-primary hover:text-white hover:border-primary transition-all duration-300" href={site.socials.linkedin}>
                 <span className="font-bold text-sm">in</span>
               </a>
-              <a className="size-10 rounded-full bg-slate-800/50 border border-slate-700 flex items-center justify-center text-slate-400 hover:bg-primary hover:text-white hover:border-primary transition-all duration-300" href="#">
+              <a className="size-10 rounded-full bg-slate-800/50 border border-slate-700 flex items-center justify-center text-slate-400 hover:bg-primary hover:text-white hover:border-primary transition-all duration-300" href={site.socials.x}>
                 <span className="font-bold text-sm">x</span>
               </a>
-              <a className="size-10 rounded-full bg-slate-800/50 border border-slate-700 flex items-center justify-center text-slate-400 hover:bg-primary hover:text-white hover:border-primary transition-all duration-300" href="#">
+              <a className="size-10 rounded-full bg-slate-800/50 border border-slate-700 flex items-center justify-center text-slate-400 hover:bg-primary hover:text-white hover:border-primary transition-all duration-300" href={site.socials.instagram}>
                 <span className="font-bold text-sm">ig</span>
               </a>
             </div>
@@ -34,18 +44,18 @@ const Footer: React.FC = () => {
           <div>
             <h4 className="text-white font-bold mb-8 text-sm uppercase tracking-wider">Company</h4>
             <ul className="space-y-4 text-slate-400 text-sm font-medium">
-              <li><a className="hover:text-primary transition-colors" href="#">About Us</a></li>
-              <li><a className="hover:text-primary transition-colors" href="#">Careers</a></li>
-              <li><a className="hover:text-primary transition-colors" href="#">Blog</a></li>
+              <li><button onClick={onAboutClick} className="hover:text-primary transition-colors bg-transparent border-0 p-0 text-left">About Us</button></li>
+              <li><button onClick={onCareersClick} className="hover:text-primary transition-colors bg-transparent border-0 p-0 text-left">Careers</button></li>
+              <li><button onClick={onBlogClick} className="hover:text-primary transition-colors bg-transparent border-0 p-0 text-left">Blog</button></li>
             </ul>
           </div>
 
           <div>
             <h4 className="text-white font-bold mb-8 text-sm uppercase tracking-wider">Support</h4>
             <ul className="space-y-4 text-slate-400 text-sm font-medium">
-              <li><a className="hover:text-primary transition-colors" href="#">Help Center</a></li>
-              <li><a className="hover:text-primary transition-colors" href="#">Terms of Service</a></li>
-              <li><a className="hover:text-primary transition-colors" href="#">Privacy Policy</a></li>
+              <li><button onClick={onHelpClick} className="hover:text-primary transition-colors bg-transparent border-0 p-0 text-left">Help Center</button></li>
+              <li><button onClick={onTermsClick} className="hover:text-primary transition-colors bg-transparent border-0 p-0 text-left">Terms of Service</button></li>
+              <li><button onClick={onPrivacyClick} className="hover:text-primary transition-colors bg-transparent border-0 p-0 text-left">Privacy Policy</button></li>
             </ul>
           </div>
           
@@ -54,15 +64,15 @@ const Footer: React.FC = () => {
             <ul className="space-y-4 text-slate-400 text-sm font-medium">
               <li className="flex items-center gap-2">
                 <span className="material-symbols-outlined text-slate-500 text-base">mail</span>
-                <a className="hover:text-primary transition-colors" href="mailto:hello@wynqor.com">hello@wynqor.com</a>
+                <a className="hover:text-primary transition-colors" href={`mailto:${site.companyEmail}`}>{site.companyEmail}</a>
               </li>
               <li className="flex items-center gap-2">
                 <span className="material-symbols-outlined text-slate-500 text-base">call</span>
-                <a className="hover:text-primary transition-colors" href="tel:+919999999999">+91 99999 99999</a>
+                <a className="hover:text-primary transition-colors" href={`tel:${site.phone.replace(/\\s/g, '')}`}>{site.phone}</a>
               </li>
               <li className="flex items-start gap-2">
                 <span className="material-symbols-outlined text-slate-500 text-base">location_on</span>
-                <span>Remote-first • Global</span>
+                <span>{site.location}</span>
               </li>
             </ul>
           </div>

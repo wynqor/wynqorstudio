@@ -7,6 +7,8 @@ export interface ServiceDetailsContent {
   relatedServices: string[];
 }
 
+import { services } from './servicesData';
+
 export const servicesDetailsData: ServiceDetailsContent[] = [
   // Branding & Identity Design
   {
@@ -505,5 +507,66 @@ export const servicesDetailsData: ServiceDetailsContent[] = [
 ];
 
 export const getServiceDetails = (serviceId: string): ServiceDetailsContent | undefined => {
-  return servicesDetailsData.find(service => service.id === serviceId);
+  const manual = servicesDetailsData.find(service => service.id === serviceId);
+  if (manual) return manual;
+  const s = services.find(x => x.id === serviceId);
+  if (!s) return undefined;
+  const templates: Record<string, { why: string; process: string[]; features: string[] }> = {
+    'Branding & Identity Design': {
+      why: 'Professional branding creates recognition, trust, and consistency across all touchpoints.',
+      process: ['Discovery', 'Concepts', 'Refinement', 'Delivery'],
+      features: ['Source Files', 'Color Palette', 'Typography', 'Mockups', 'Social Kit']
+    },
+    'Poster & Graphic Design': {
+      why: 'Platform-optimized graphics drive engagement and communicate your message clearly.',
+      process: ['Strategy', 'Design', 'Optimization', 'Export'],
+      features: ['Multiple Sizes', 'High-Res Files', 'Story/Post Formats', 'Brand Styling']
+    },
+    'Outdoor Advertising & Media': {
+      why: 'Bold, distance-readable visuals maximize recall and impact in public spaces.',
+      process: ['Location Analysis', 'Concept', 'Specs', 'Production'],
+      features: ['Large-Format Design', 'High Contrast', 'Simple Typography', 'Multiple Sizes']
+    },
+    'Website Design & Development': {
+      why: 'Responsive, fast websites convert visitors and scale with your business.',
+      process: ['Strategy', 'Design', 'Development', 'Launch'],
+      features: ['Responsive Design', 'SEO Basics', 'Analytics', 'Contact Forms']
+    },
+    'Digital Marketing': {
+      why: 'Performance marketing and content systems accelerate acquisition and retention.',
+      process: ['Audit', 'Strategy', 'Execution', 'Optimization'],
+      features: ['Keyword Research', 'On-Page', 'Reporting', 'Performance Tracking']
+    },
+    'UI/UX Design': {
+      why: 'Intuitive interfaces reduce friction and increase conversions.',
+      process: ['Research', 'Wireframes', 'Design', 'Testing'],
+      features: ['Prototypes', 'Design System', 'Handoff Files', 'Usability Testing']
+    },
+    'Content Writing': {
+      why: 'Clear, persuasive content builds trust and drives action.',
+      process: ['Research', 'Outline', 'Writing', 'Optimization'],
+      features: ['SEO Content', 'Headlines', 'Editing', 'Meta Descriptions']
+    },
+    'Video Creation & Animation': {
+      why: 'Video storytelling increases engagement and explains complex ideas.',
+      process: ['Concept', 'Script', 'Production', 'Post-Production'],
+      features: ['Voiceover', 'Music/Graphics', 'Multiple Formats', 'Captions']
+    },
+    'Photography & Creative Media': {
+      why: 'High-quality visuals improve conversion and brand perception.',
+      process: ['Prep', 'Lighting', 'Shoot', 'Editing'],
+      features: ['High-Res Images', 'Multiple Angles', 'Usage Rights', 'Fast Turnaround']
+    }
+  };
+  const t = templates[s.category];
+  const description = `${s.title} — professional ${s.category.toLowerCase()} service tailored to your business goals.`;
+  const peers = services.filter(x => x.category === s.category && x.id !== s.id).slice(0, 3).map(x => x.id);
+  return {
+    id: s.id,
+    description,
+    whyChoose: t?.why || `Choose professional ${s.title.toLowerCase()} for quality and consistency.`,
+    process: t?.process || ['Planning', 'Execution', 'Delivery'],
+    features: t?.features || ['Professional Output', 'Quality Assurance'],
+    relatedServices: peers
+  };
 };

@@ -27,6 +27,12 @@ import BecomeProvider from './components/BecomeProvider';
 import Dashboard from './components/Dashboard';
 import Failed from './components/Failed';
 import { categories } from './data/servicesData';
+import About from './components/About';
+import Careers from './components/Careers';
+import Blog from './components/Blog';
+import HelpCenter from './components/HelpCenter';
+import Terms from './components/Terms';
+import Privacy from './components/Privacy';
 
 function App() {
   return (
@@ -42,13 +48,13 @@ function App() {
 
 function AppContent() {
   const { user, isAuthenticated } = useAuth();
-  const [currentPage, setCurrentPage] = useState<'home' | 'login' | 'register' | 'otp' | 'forgot-password' | 'reset-password' | 'all-services' | 'service-details' | 'cart' | 'checkout' | 'success' | 'failed' | 'provider' | 'dashboard'>('home');
+  const [currentPage, setCurrentPage] = useState<'home' | 'login' | 'register' | 'otp' | 'forgot-password' | 'reset-password' | 'all-services' | 'service-details' | 'cart' | 'checkout' | 'success' | 'failed' | 'provider' | 'dashboard' | 'about' | 'careers' | 'blog' | 'help' | 'terms' | 'privacy'>('home');
   const [selectedServiceId, setSelectedServiceId] = useState<string>('');
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('');
 
 
-  const togglePage = (page: 'home' | 'login' | 'register' | 'otp' | 'forgot-password' | 'reset-password' | 'all-services' | 'service-details' | 'cart' | 'checkout' | 'success' | 'failed' | 'provider' | 'dashboard', serviceId?: string) => {
+  const togglePage = (page: 'home' | 'login' | 'register' | 'otp' | 'forgot-password' | 'reset-password' | 'all-services' | 'service-details' | 'cart' | 'checkout' | 'success' | 'failed' | 'provider' | 'dashboard' | 'about' | 'careers' | 'blog' | 'help' | 'terms' | 'privacy', serviceId?: string) => {
     setCurrentPage(page);
     if (serviceId) {
       setSelectedServiceId(serviceId);
@@ -131,6 +137,12 @@ function AppContent() {
       onUserClick={() => togglePage('dashboard')}
       searchQuery={searchQuery}
       selectedCategory={selectedCategory}
+      onAboutClick={() => togglePage('about')}
+      onCareersClick={() => togglePage('careers')}
+      onBlogClick={() => togglePage('blog')}
+      onHelpClick={() => togglePage('help')}
+      onTermsClick={() => togglePage('terms')}
+      onPrivacyClick={() => togglePage('privacy')}
     />;
   }
 
@@ -144,6 +156,12 @@ function AppContent() {
       onSearch={handleSearch}
       onUserClick={() => togglePage('dashboard')}
       onServiceDetails={(serviceId) => togglePage('service-details', serviceId)}
+      onAboutClick={() => togglePage('about')}
+      onCareersClick={() => togglePage('careers')}
+      onBlogClick={() => togglePage('blog')}
+      onHelpClick={() => togglePage('help')}
+      onTermsClick={() => togglePage('terms')}
+      onPrivacyClick={() => togglePage('privacy')}
     />;
   }
 
@@ -158,6 +176,12 @@ function AppContent() {
         onSearch={handleSearch}
         onCartClick={() => togglePage('cart')}
         onUserClick={() => togglePage('dashboard')}
+        onAboutClick={() => togglePage('about')}
+        onCareersClick={() => togglePage('careers')}
+        onBlogClick={() => togglePage('blog')}
+        onHelpClick={() => togglePage('help')}
+        onTermsClick={() => togglePage('terms')}
+        onPrivacyClick={() => togglePage('privacy')}
       />
     );
   }
@@ -171,6 +195,12 @@ function AppContent() {
         onSearch={handleSearch}
         onCartClick={() => togglePage('cart')}
         onUserClick={() => togglePage('dashboard')}
+        onAboutClick={() => togglePage('about')}
+        onCareersClick={() => togglePage('careers')}
+        onBlogClick={() => togglePage('blog')}
+        onHelpClick={() => togglePage('help')}
+        onTermsClick={() => togglePage('terms')}
+        onPrivacyClick={() => togglePage('privacy')}
         onSubmitSuccess={(requestId, error) => {
           if (requestId) {
             // Success - navigate to success page with request ID
@@ -203,6 +233,12 @@ function AppContent() {
         onDashboardClick={() => togglePage('dashboard')}
         onUserClick={() => togglePage('dashboard')}
         onExploreServices={() => togglePage('all-services')}
+        onAboutClick={() => togglePage('about')}
+        onCareersClick={() => togglePage('careers')}
+        onBlogClick={() => togglePage('blog')}
+        onHelpClick={() => togglePage('help')}
+        onTermsClick={() => togglePage('terms')}
+        onPrivacyClick={() => togglePage('privacy')}
       />
     );
   }
@@ -216,6 +252,12 @@ function AppContent() {
         onCartClick={() => togglePage('cart')}
         onTryAgain={() => togglePage('checkout')}
         onContactSupport={() => alert('Support contact coming soon!')}
+        onAboutClick={() => togglePage('about')}
+        onCareersClick={() => togglePage('careers')}
+        onBlogClick={() => togglePage('blog')}
+        onHelpClick={() => togglePage('help')}
+        onTermsClick={() => togglePage('terms')}
+        onPrivacyClick={() => togglePage('privacy')}
       />
     );
   }
@@ -227,6 +269,12 @@ function AppContent() {
       onSearch={handleSearch}
       onCartClick={() => togglePage('cart')}
       onUserClick={() => togglePage('dashboard')}
+      onAboutClick={() => togglePage('about')}
+      onCareersClick={() => togglePage('careers')}
+      onBlogClick={() => togglePage('blog')}
+      onHelpClick={() => togglePage('help')}
+      onTermsClick={() => togglePage('terms')}
+      onPrivacyClick={() => togglePage('privacy')}
     />;
   }
   
@@ -240,6 +288,103 @@ function AppContent() {
       onSearch={handleSearch}
       onCartClick={() => togglePage('cart')}
       onServiceDetails={(serviceId) => togglePage('service-details', serviceId)}
+      onAboutClick={() => togglePage('about')}
+      onCareersClick={() => togglePage('careers')}
+      onBlogClick={() => togglePage('blog')}
+      onHelpClick={() => togglePage('help')}
+      onTermsClick={() => togglePage('terms')}
+      onPrivacyClick={() => togglePage('privacy')}
+    />;
+  }
+
+  if (currentPage === 'about') {
+    return <About
+      onHomeClick={() => togglePage('home')}
+      onLoginClick={() => togglePage('login')}
+      onSearch={handleSearch}
+      onCartClick={() => togglePage('cart')}
+      onUserClick={() => togglePage('dashboard')}
+      onAboutClick={() => togglePage('about')}
+      onCareersClick={() => togglePage('careers')}
+      onBlogClick={() => togglePage('blog')}
+      onHelpClick={() => togglePage('help')}
+      onTermsClick={() => togglePage('terms')}
+      onPrivacyClick={() => togglePage('privacy')}
+    />;
+  }
+  if (currentPage === 'careers') {
+    return <Careers
+      onHomeClick={() => togglePage('home')}
+      onLoginClick={() => togglePage('login')}
+      onSearch={handleSearch}
+      onCartClick={() => togglePage('cart')}
+      onUserClick={() => togglePage('dashboard')}
+      onAboutClick={() => togglePage('about')}
+      onCareersClick={() => togglePage('careers')}
+      onBlogClick={() => togglePage('blog')}
+      onHelpClick={() => togglePage('help')}
+      onTermsClick={() => togglePage('terms')}
+      onPrivacyClick={() => togglePage('privacy')}
+    />;
+  }
+  if (currentPage === 'blog') {
+    return <Blog
+      onHomeClick={() => togglePage('home')}
+      onLoginClick={() => togglePage('login')}
+      onSearch={handleSearch}
+      onCartClick={() => togglePage('cart')}
+      onUserClick={() => togglePage('dashboard')}
+      onAboutClick={() => togglePage('about')}
+      onCareersClick={() => togglePage('careers')}
+      onBlogClick={() => togglePage('blog')}
+      onHelpClick={() => togglePage('help')}
+      onTermsClick={() => togglePage('terms')}
+      onPrivacyClick={() => togglePage('privacy')}
+    />;
+  }
+  if (currentPage === 'help') {
+    return <HelpCenter
+      onHomeClick={() => togglePage('home')}
+      onLoginClick={() => togglePage('login')}
+      onSearch={handleSearch}
+      onCartClick={() => togglePage('cart')}
+      onUserClick={() => togglePage('dashboard')}
+      onAboutClick={() => togglePage('about')}
+      onCareersClick={() => togglePage('careers')}
+      onBlogClick={() => togglePage('blog')}
+      onHelpClick={() => togglePage('help')}
+      onTermsClick={() => togglePage('terms')}
+      onPrivacyClick={() => togglePage('privacy')}
+    />;
+  }
+  if (currentPage === 'terms') {
+    return <Terms
+      onHomeClick={() => togglePage('home')}
+      onLoginClick={() => togglePage('login')}
+      onSearch={handleSearch}
+      onCartClick={() => togglePage('cart')}
+      onUserClick={() => togglePage('dashboard')}
+      onAboutClick={() => togglePage('about')}
+      onCareersClick={() => togglePage('careers')}
+      onBlogClick={() => togglePage('blog')}
+      onHelpClick={() => togglePage('help')}
+      onTermsClick={() => togglePage('terms')}
+      onPrivacyClick={() => togglePage('privacy')}
+    />;
+  }
+  if (currentPage === 'privacy') {
+    return <Privacy
+      onHomeClick={() => togglePage('home')}
+      onLoginClick={() => togglePage('login')}
+      onSearch={handleSearch}
+      onCartClick={() => togglePage('cart')}
+      onUserClick={() => togglePage('dashboard')}
+      onAboutClick={() => togglePage('about')}
+      onCareersClick={() => togglePage('careers')}
+      onBlogClick={() => togglePage('blog')}
+      onHelpClick={() => togglePage('help')}
+      onTermsClick={() => togglePage('terms')}
+      onPrivacyClick={() => togglePage('privacy')}
     />;
   }
 
@@ -262,7 +407,14 @@ function AppContent() {
         <Statistics />
         <CallToAction />
       </main>
-      <Footer />
+      <Footer
+        onAboutClick={() => togglePage('about')}
+        onCareersClick={() => togglePage('careers')}
+        onBlogClick={() => togglePage('blog')}
+        onHelpClick={() => togglePage('help')}
+        onTermsClick={() => togglePage('terms')}
+        onPrivacyClick={() => togglePage('privacy')}
+      />
     </div>
   );
 }

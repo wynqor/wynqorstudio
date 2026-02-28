@@ -17,6 +17,12 @@ interface AllServicesProps {
   onUserClick?: () => void;
   searchQuery?: string;
   selectedCategory?: string;
+  onAboutClick?: () => void;
+  onCareersClick?: () => void;
+  onBlogClick?: () => void;
+  onHelpClick?: () => void;
+  onTermsClick?: () => void;
+  onPrivacyClick?: () => void;
 }
 
 interface ServiceCardProps {
@@ -121,7 +127,13 @@ const AllServices: React.FC<AllServicesProps> = ({
   onCartClick,
   searchQuery = '',
   onUserClick,
-  selectedCategory = ''
+  selectedCategory = '',
+  onAboutClick,
+  onCareersClick,
+  onBlogClick,
+  onHelpClick,
+  onTermsClick,
+  onPrivacyClick
 }) => {
   const [selectedCategoryState, setSelectedCategoryState] = useState(selectedCategory || 'All Services');
   const [hasUserChangedCategory, setHasUserChangedCategory] = useState(false);
@@ -566,7 +578,14 @@ const AllServices: React.FC<AllServicesProps> = ({
         </section>
       </main>
 
-      <Footer />
+      <Footer
+        onAboutClick={onAboutClick}
+        onCareersClick={onCareersClick}
+        onBlogClick={onBlogClick}
+        onHelpClick={onHelpClick}
+        onTermsClick={onTermsClick}
+        onPrivacyClick={onPrivacyClick}
+      />
     </div>
   );
 };

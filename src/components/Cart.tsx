@@ -14,6 +14,12 @@ interface CartProps {
   onCartClick?: () => void;
   onProviderClick?: () => void;
   onUserClick?: () => void;
+  onAboutClick?: () => void;
+  onCareersClick?: () => void;
+  onBlogClick?: () => void;
+  onHelpClick?: () => void;
+  onTermsClick?: () => void;
+  onPrivacyClick?: () => void;
 }
 
 const Cart: React.FC<CartProps> = ({
@@ -25,7 +31,13 @@ const Cart: React.FC<CartProps> = ({
   onSearch,
   onCartClick,
   onProviderClick,
-  onUserClick
+  onUserClick,
+  onAboutClick,
+  onCareersClick,
+  onBlogClick,
+  onHelpClick,
+  onTermsClick,
+  onPrivacyClick
 }) => {
   const { cartItems, updateQuantity, removeFromCart } = useCart();
   const { isAuthenticated } = useAuth();
@@ -266,7 +278,14 @@ const Cart: React.FC<CartProps> = ({
         </div>
       </main>
 
-      <Footer />
+      <Footer
+        onAboutClick={onAboutClick}
+        onCareersClick={onCareersClick}
+        onBlogClick={onBlogClick}
+        onHelpClick={onHelpClick}
+        onTermsClick={onTermsClick}
+        onPrivacyClick={onPrivacyClick}
+      />
     </div>
   );
 };

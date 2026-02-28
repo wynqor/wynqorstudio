@@ -11,6 +11,12 @@ interface FailedProps {
   onContactSupport?: () => void;
   onCartClick?: () => void;
   onProviderClick?: () => void;
+  onAboutClick?: () => void;
+  onCareersClick?: () => void;
+  onBlogClick?: () => void;
+  onHelpClick?: () => void;
+  onTermsClick?: () => void;
+  onPrivacyClick?: () => void;
 }
 
 const Failed: React.FC<FailedProps> = ({
@@ -21,6 +27,12 @@ const Failed: React.FC<FailedProps> = ({
   onTryAgain,
   onContactSupport,
   onCartClick,
+  onAboutClick,
+  onCareersClick,
+  onBlogClick,
+  onHelpClick,
+  onTermsClick,
+  onPrivacyClick
 }) => {
   return (
     <div className="bg-slate-50 text-text-main font-body antialiased selection:bg-primary/20 selection:text-primary-dark flex flex-col min-h-screen">
@@ -76,7 +88,14 @@ const Failed: React.FC<FailedProps> = ({
         </div>
       </main>
 
-      <Footer />
+      <Footer
+        onAboutClick={onAboutClick}
+        onCareersClick={onCareersClick}
+        onBlogClick={onBlogClick}
+        onHelpClick={onHelpClick}
+        onTermsClick={onTermsClick}
+        onPrivacyClick={onPrivacyClick}
+      />
     </div>
   );
 };

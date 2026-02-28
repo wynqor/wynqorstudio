@@ -14,6 +14,12 @@ interface CheckoutProps {
   onProviderClick?: () => void;
   onUserClick?: () => void;
   onSubmitSuccess?: (requestId?: string | null, error?: string) => void;
+  onAboutClick?: () => void;
+  onCareersClick?: () => void;
+  onBlogClick?: () => void;
+  onHelpClick?: () => void;
+  onTermsClick?: () => void;
+  onPrivacyClick?: () => void;
 }
 
 interface FormData {
@@ -34,7 +40,13 @@ const Checkout = ({
   onSearch,
   onCartClick,
   onUserClick,
-  onSubmitSuccess
+  onSubmitSuccess,
+  onAboutClick,
+  onCareersClick,
+  onBlogClick,
+  onHelpClick,
+  onTermsClick,
+  onPrivacyClick
 }: CheckoutProps) => {
   const { cartItems } = useCart();
   const { user, isAuthenticated } = useAuth();
@@ -631,7 +643,14 @@ const Checkout = ({
         </div>
       </main>
 
-      <Footer />
+      <Footer
+        onAboutClick={onAboutClick}
+        onCareersClick={onCareersClick}
+        onBlogClick={onBlogClick}
+        onHelpClick={onHelpClick}
+        onTermsClick={onTermsClick}
+        onPrivacyClick={onPrivacyClick}
+      />
     </div>
   );
 };

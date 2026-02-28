@@ -21,6 +21,7 @@ import ServiceDetails from './components/ServiceDetails';
 import Cart from './components/Cart';
 import Checkout from './components/Checkout';
 import Success from './components/Success';
+import BecomeProvider from './components/BecomeProvider';
 import Failed from './components/Failed';
 import { categories } from './data/servicesData';
 
@@ -35,13 +36,13 @@ function App() {
 }
 
 function AppContent() {
-  const [currentPage, setCurrentPage] = useState<'home' | 'login' | 'register' | 'otp' | 'forgot-password' | 'reset-password' | 'all-services' | 'service-details' | 'cart' | 'checkout' | 'success' | 'failed'>('home');
+  const [currentPage, setCurrentPage] = useState<'home' | 'login' | 'register' | 'otp' | 'forgot-password' | 'reset-password' | 'all-services' | 'service-details' | 'cart' | 'checkout' | 'success' | 'failed' | 'provider'>('home');
   const [selectedServiceId, setSelectedServiceId] = useState<string>('');
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('');
 
 
-  const togglePage = (page: 'home' | 'login' | 'register' | 'otp' | 'forgot-password' | 'reset-password' | 'all-services' | 'service-details' | 'cart' | 'checkout' | 'success' | 'failed', serviceId?: string) => {
+  const togglePage = (page: 'home' | 'login' | 'register' | 'otp' | 'forgot-password' | 'reset-password' | 'all-services' | 'service-details' | 'cart' | 'checkout' | 'success' | 'failed' | 'provider', serviceId?: string) => {
     setCurrentPage(page);
     if (serviceId) {
       setSelectedServiceId(serviceId);
@@ -202,6 +203,14 @@ function AppContent() {
       />
     );
   }
+  
+  if (currentPage === 'provider') {
+    return <BecomeProvider
+      onHomeClick={() => togglePage('home')}
+      onLoginClick={() => togglePage('login')}
+      onSearch={handleSearch}
+    />;
+  }
 
   return (
     <div className="bg-slate-50 text-text-main font-body antialiased selection:bg-primary/20 selection:text-primary-dark">
@@ -210,6 +219,7 @@ function AppContent() {
         onHomeClick={() => togglePage('home')}
         onSearch={handleSearch}
         onCartClick={() => togglePage('cart')}
+        onProviderClick={() => togglePage('provider')}
       />
       <main className="w-full">
         <Hero onSearch={handleSearch} />
@@ -226,4 +236,3 @@ function AppContent() {
 }
 
 export default App;
-

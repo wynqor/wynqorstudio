@@ -7,9 +7,10 @@ interface HeaderProps {
   onHomeClick?: () => void;
   onSearch?: (query: string) => void;
   onCartClick?: () => void;
+  onProviderClick?: () => void;
 }
 
-const Header: React.FC<HeaderProps> = ({ onLoginClick, onHomeClick, onSearch, onCartClick }) => {
+const Header: React.FC<HeaderProps> = ({ onLoginClick, onHomeClick, onSearch, onCartClick, onProviderClick }) => {
   const { getCartCount } = useCart();
   const { user, logout, isAuthenticated } = useAuth();
   const [searchQuery, setSearchQuery] = useState('');
@@ -63,9 +64,7 @@ const Header: React.FC<HeaderProps> = ({ onLoginClick, onHomeClick, onSearch, on
           </button>
 
           <nav className="hidden md:flex items-center gap-6 text-sm font-medium text-slate-600">
-            {/* <a className="hover:text-primary transition-colors" href="#">Explore</a>
-            <a className="hover:text-primary transition-colors" href="#">Enterprise</a> */}
-            <a className="hover:text-primary transition-colors" href="#">Become a Provider</a>
+            <button onClick={onProviderClick} className="hover:text-primary transition-colors bg-transparent border-none cursor-pointer">Become a Provider</button>
           </nav>
 
           <div className="h-6 w-px bg-slate-200 hidden md:block"></div>
@@ -115,4 +114,3 @@ const Header: React.FC<HeaderProps> = ({ onLoginClick, onHomeClick, onSearch, on
 };
 
 export default Header;
-

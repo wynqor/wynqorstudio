@@ -107,6 +107,52 @@ class EmailService {
     }
   }
 
+  async sendLoginNotification(user: { name: string; email: string }): Promise<{ success: boolean; error?: string }> {
+    try {
+      const submittedAt = new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' });
+      const clientSubject = `Welcome back, ${user.name}!`;
+      const companySubject = `User Login - ${user.email}`;
+      const clientBody =
+        `👋 Hi ${user.name},
+
+You're now signed in to Wynqor.
+
+Signed in: ${submittedAt}
+
+If this wasn't you, please reply to this email immediately.
+
+© 2024 Wynqor Inc.`;
+      const companyBody =
+        `🔔 User Login Notification
+
+User: ${user.name}
+Email: ${user.email}
+Time: ${submittedAt}
+
+© 2024 Wynqor Inc.`;
+
+      const payload = {
+        clientTo: user.email,
+        clientSubject,
+        clientBody,
+        companyTo: this.COMPANY_EMAIL,
+        companySubject,
+        companyBody,
+      };
+
+      const response = await fetch('/api/sendMail', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+      const result = await response.json().catch(() => null);
+      if (response.ok && result?.success) return { success: true };
+      return { success: false, error: result?.error || 'Failed to send login notification.' };
+    } catch (error) {
+      return { success: false, error: error instanceof Error ? error.message : 'Failed to send login notification.' };
+    }
+  }
+
   private formatServicesList(cartItems: CartItem[]): string {
     return cartItems.map(item =>
       `${item.title} (${item.category}) - ${item.price} × ${item.quantity}`

@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import { emailService } from '../services/emailService';
 
 // Extend Window interface for Google Identity Services
 declare global {
@@ -82,10 +83,20 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   useEffect(() => {
     if (user) {
       localStorage.setItem('wynqor-user', JSON.stringify(user));
+      // Send one-time login notification per session
+      const emailed = localStorage.getItem('wynqor-login-emailed');
+      if (!emailed) {
+        emailService.sendLoginNotification({ name: user.name, email: user.email })
+          .catch(() => {})
+          .finally(() => {
+            localStorage.setItem('wynqor-login-emailed', 'true');
+          });
+      }
     } else {
       localStorage.removeItem('wynqor-user');
       localStorage.removeItem('wynqor-google-token');
       localStorage.removeItem('wynqor-token-expiry');
+      localStorage.removeItem('wynqor-login-emailed');
     }
   }, [user]);
 

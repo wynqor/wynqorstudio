@@ -128,6 +128,7 @@ function AppContent() {
       onClearAllFilters={handleClearAllFilters}
       onServiceDetails={(serviceId) => togglePage('service-details', serviceId)}
       onCartClick={() => togglePage('cart')}
+      onUserClick={() => togglePage('dashboard')}
       searchQuery={searchQuery}
       selectedCategory={selectedCategory}
     />;
@@ -141,6 +142,7 @@ function AppContent() {
       onBackToServices={() => togglePage('all-services')}
       onCartClick={() => togglePage('cart')}
       onSearch={handleSearch}
+      onUserClick={() => togglePage('dashboard')}
       onServiceDetails={(serviceId) => togglePage('service-details', serviceId)}
     />;
   }

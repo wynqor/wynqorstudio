@@ -14,6 +14,7 @@ interface ServiceDetailsProps {
   onCartClick?: () => void;
   onSearch?: (query: string) => void;
   onProviderClick?: () => void;
+  onUserClick?: () => void;
   onServiceDetails?: (serviceId: string) => void;
 }
 
@@ -25,6 +26,7 @@ const ServiceDetails: React.FC<ServiceDetailsProps> = ({
   onBackToServices,
   onCartClick,
   onSearch,
+  onUserClick,
   onServiceDetails
 }) => {
   const { addToCart, isInCart } = useCart();
@@ -119,6 +121,7 @@ const ServiceDetails: React.FC<ServiceDetailsProps> = ({
         onLoginClick={onLoginClick}
         onSearch={onSearch}
         onCartClick={onCartClick}
+        onUserClick={onUserClick}
       />
 
       {/* Breadcrumb */}

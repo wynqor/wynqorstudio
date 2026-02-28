@@ -14,6 +14,7 @@ interface AllServicesProps {
   onServiceDetails?: (serviceId: string) => void;
   onCartClick?: () => void;
   onProviderClick?: () => void;
+  onUserClick?: () => void;
   searchQuery?: string;
   selectedCategory?: string;
 }
@@ -119,6 +120,7 @@ const AllServices: React.FC<AllServicesProps> = ({
   onServiceDetails,
   onCartClick,
   searchQuery = '',
+  onUserClick,
   selectedCategory = ''
 }) => {
   const [selectedCategoryState, setSelectedCategoryState] = useState(selectedCategory || 'All Services');
@@ -295,6 +297,7 @@ const AllServices: React.FC<AllServicesProps> = ({
         onLoginClick={onLoginClick}
         onSearch={onSearch}
         onCartClick={onCartClick}
+        onUserClick={onUserClick}
       />
 
 

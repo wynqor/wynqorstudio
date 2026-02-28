@@ -83,20 +83,10 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   useEffect(() => {
     if (user) {
       localStorage.setItem('wynqor-user', JSON.stringify(user));
-      // Send one-time login notification per session
-      const emailed = localStorage.getItem('wynqor-login-emailed');
-      if (!emailed) {
-        emailService.sendLoginNotification({ name: user.name, email: user.email })
-          .catch(() => {})
-          .finally(() => {
-            localStorage.setItem('wynqor-login-emailed', 'true');
-          });
-      }
     } else {
       localStorage.removeItem('wynqor-user');
       localStorage.removeItem('wynqor-google-token');
       localStorage.removeItem('wynqor-token-expiry');
-      localStorage.removeItem('wynqor-login-emailed');
     }
   }, [user]);
 
@@ -170,6 +160,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       localStorage.setItem('wynqor-token-expiry', (Date.now() + 3600000).toString());
 
       login(userData);
+      emailService.sendLoginNotification({ name: userData.name, email: userData.email }).catch(() => {});
     }
   };
 

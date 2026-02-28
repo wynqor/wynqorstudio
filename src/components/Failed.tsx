@@ -9,6 +9,8 @@ interface FailedProps {
   onSearch?: (query: string) => void;
   onTryAgain?: () => void;
   onContactSupport?: () => void;
+  onCartClick?: () => void;
+  onProviderClick?: () => void;
 }
 
 const Failed: React.FC<FailedProps> = ({
@@ -17,7 +19,9 @@ const Failed: React.FC<FailedProps> = ({
   onLoginClick,
   onSearch,
   onTryAgain,
-  onContactSupport
+  onContactSupport,
+  onCartClick,
+  onProviderClick
 }) => {
   return (
     <div className="bg-slate-50 text-text-main font-body antialiased selection:bg-primary/20 selection:text-primary-dark flex flex-col min-h-screen">
@@ -25,6 +29,8 @@ const Failed: React.FC<FailedProps> = ({
         onHomeClick={onHomeClick}
         onLoginClick={onLoginClick}
         onSearch={onSearch}
+        onCartClick={onCartClick}
+        onProviderClick={onProviderClick}
       />
 
       <main className="w-full grow flex items-center justify-center py-20 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-slate-100 via-slate-50 to-slate-50">

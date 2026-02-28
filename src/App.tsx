@@ -210,6 +210,8 @@ function AppContent() {
         onHomeClick={() => togglePage('home')}
         onLoginClick={() => togglePage('login')}
         onSearch={handleSearch}
+        onCartClick={() => togglePage('cart')}
+        onProviderClick={() => togglePage('provider')}
         onTryAgain={() => togglePage('checkout')}
         onContactSupport={() => alert('Support contact coming soon!')}
       />
@@ -234,6 +236,7 @@ function AppContent() {
       onLoginClick={() => togglePage('login')}
       onSearch={handleSearch}
       onCartClick={() => togglePage('cart')}
+      onServiceDetails={(serviceId) => togglePage('service-details', serviceId)}
     />;
   }
 

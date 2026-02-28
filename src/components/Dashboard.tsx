@@ -9,9 +9,10 @@ interface DashboardProps {
   onLoginClick?: () => void;
   onSearch?: (query: string) => void;
   onCartClick?: () => void;
+  onServiceDetails?: (serviceId: string) => void;
 }
 
-const Dashboard = ({ onHomeClick, onLoginClick, onSearch, onCartClick }: DashboardProps) => {
+const Dashboard = ({ onHomeClick, onLoginClick, onSearch, onCartClick, onServiceDetails }: DashboardProps) => {
   const { user } = useAuth();
   const { cartItems, getCartTotal } = useCart();
   const { watchItems, removeFromWatchlist } = useWatchlist();
@@ -57,7 +58,11 @@ const Dashboard = ({ onHomeClick, onLoginClick, onSearch, onCartClick }: Dashboa
             ) : (
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {cartItems.map((item) => (
-                  <div key={item.id} className="border border-slate-200 rounded-lg p-4">
+                  <div
+                    key={item.id}
+                    onClick={() => onServiceDetails?.(item.id)}
+                    className="border border-slate-200 rounded-lg p-4 cursor-pointer hover:border-primary/40 transition-colors"
+                  >
                     <div className="flex gap-3">
                       <div className="size-16 rounded-lg bg-slate-100 shrink-0 overflow-hidden border border-slate-100">
                         <img alt={item.title} className="w-full h-full object-cover" src={item.image} />
@@ -81,7 +86,11 @@ const Dashboard = ({ onHomeClick, onLoginClick, onSearch, onCartClick }: Dashboa
             ) : (
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 {watchItems.map((item) => (
-                  <div key={item.id} className="border border-slate-200 rounded-lg p-4">
+                  <div
+                    key={item.id}
+                    onClick={() => onServiceDetails?.(item.id)}
+                    className="border border-slate-200 rounded-lg p-4 cursor-pointer hover:border-primary/40 transition-colors"
+                  >
                     <div className="flex gap-3">
                       <div className="size-16 rounded-lg bg-slate-100 shrink-0 overflow-hidden border border-slate-100">
                         <img alt={item.title} className="w-full h-full object-cover" src={item.image} />
@@ -92,7 +101,7 @@ const Dashboard = ({ onHomeClick, onLoginClick, onSearch, onCartClick }: Dashboa
                         <div className="text-sm font-bold text-primary">{item.price}</div>
                       </div>
                       <button
-                        onClick={() => removeFromWatchlist(item.id)}
+                        onClick={(e) => { e.stopPropagation(); removeFromWatchlist(item.id); }}
                         className="text-slate-400 hover:text-rose-600 transition-colors"
                         title="Remove from Watchlist"
                       >

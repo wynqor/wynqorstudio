@@ -14,7 +14,7 @@ interface DashboardProps {
 const Dashboard = ({ onHomeClick, onLoginClick, onSearch, onCartClick }: DashboardProps) => {
   const { user } = useAuth();
   const { cartItems, getCartTotal } = useCart();
-  const { watchItems } = useWatchlist();
+  const { watchItems, removeFromWatchlist } = useWatchlist();
   const requests = (() => {
     try {
       const key = user?.email ? `wynqor-requests:${user.email}` : 'wynqor-requests';
@@ -91,6 +91,13 @@ const Dashboard = ({ onHomeClick, onLoginClick, onSearch, onCartClick }: Dashboa
                         <div className="text-sm text-slate-500">{item.category}</div>
                         <div className="text-sm font-bold text-primary">{item.price}</div>
                       </div>
+                      <button
+                        onClick={() => removeFromWatchlist(item.id)}
+                        className="text-slate-400 hover:text-rose-600 transition-colors"
+                        title="Remove from Watchlist"
+                      >
+                        <span className="material-symbols-outlined text-[18px]">delete</span>
+                      </button>
                     </div>
                   </div>
                 ))}
@@ -111,7 +118,14 @@ const Dashboard = ({ onHomeClick, onLoginClick, onSearch, onCartClick }: Dashboa
                       <div className="text-sm text-slate-500">{new Date(req.submittedAt).toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' })}</div>
                     </div>
                     <div className="text-sm text-slate-600 mt-2">Total: ₹{Number(req.total || 0).toFixed(2)}</div>
-                    <div className="text-xs text-slate-500 mt-2">Items: {req.cartItems?.length || 0}</div>
+                    <div className="mt-3">
+                      <div className="text-xs font-bold text-slate-600 mb-1">Services in this request:</div>
+                      <ul className="text-xs text-slate-500 space-y-1">
+                        {(req.cartItems || []).map((it: any, i: number) => (
+                          <li key={`${it.id}-${i}`}>{it.title} • {it.category} • {it.price}{it.quantity > 1 ? ` × ${it.quantity}` : ''}</li>
+                        ))}
+                      </ul>
+                    </div>
                   </div>
                 ))}
               </div>

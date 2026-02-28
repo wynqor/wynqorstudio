@@ -125,6 +125,7 @@ function AppContent() {
       onHomeClick={() => togglePage('home')}
       onLoginClick={() => togglePage('login')}
       onSearch={handleSearch}
+      onProviderClick={() => togglePage('provider')}
       onClearAllFilters={handleClearAllFilters}
       onServiceDetails={(serviceId) => togglePage('service-details', serviceId)}
       onCartClick={() => togglePage('cart')}
@@ -139,6 +140,7 @@ function AppContent() {
       onHomeClick={() => togglePage('home')}
       onLoginClick={() => togglePage('login')}
       onBackToServices={() => togglePage('all-services')}
+      onProviderClick={() => togglePage('provider')}
       onCartClick={() => togglePage('cart')}
       onSearch={handleSearch}
       onServiceDetails={(serviceId) => togglePage('service-details', serviceId)}
@@ -154,6 +156,7 @@ function AppContent() {
         onCheckout={() => togglePage('checkout')}
         onContinueShopping={() => togglePage('all-services')}
         onSearch={handleSearch}
+        onCartClick={() => togglePage('cart')}
       />
     );
   }
@@ -165,6 +168,7 @@ function AppContent() {
         onLoginClick={() => togglePage('login')}
         onBackToCart={() => togglePage('cart')}
         onSearch={handleSearch}
+        onCartClick={() => togglePage('cart')}
         onSubmitSuccess={(requestId, error) => {
           if (requestId) {
             // Success - navigate to success page with request ID
@@ -193,6 +197,8 @@ function AppContent() {
         onHomeClick={() => togglePage('home')}
         onLoginClick={() => togglePage('login')}
         onSearch={handleSearch}
+        onCartClick={() => togglePage('cart')}
+        onDashboardClick={() => togglePage('dashboard')}
         onExploreServices={() => togglePage('all-services')}
       />
     );
@@ -215,6 +221,7 @@ function AppContent() {
       onHomeClick={() => togglePage('home')}
       onLoginClick={() => togglePage('login')}
       onSearch={handleSearch}
+      onCartClick={() => togglePage('cart')}
     />;
   }
   

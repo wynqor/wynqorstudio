@@ -47,11 +47,11 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
               addToWatchlist(service);
             }
           }}
-          className="absolute top-3 right-3 size-8 bg-white/20 backdrop-blur hover:bg-white text-white hover:text-rose-500 rounded-full flex items-center justify-center transition-all opacity-0 group-hover:opacity-100 z-10"
+          className={`absolute top-3 right-3 size-8 ${
+            isInWatchlist(service.id) ? 'bg-white text-rose-600' : 'bg-white/20 text-white hover:bg-white hover:text-rose-500'
+          } backdrop-blur rounded-full flex items-center justify-center transition-all opacity-0 group-hover:opacity-100 z-10`}
         >
-          <span className="material-symbols-outlined text-[18px] fill">
-            {isInWatchlist(service.id) ? 'favorite' : 'favorite'}
-          </span>
+          <span className={`material-symbols-outlined text-[18px] ${isInWatchlist(service.id) ? 'fill' : ''}`}>favorite</span>
         </button>
       </div>
 

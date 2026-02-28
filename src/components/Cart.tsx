@@ -11,6 +11,7 @@ interface CartProps {
   onCheckout?: () => void;
   onContinueShopping?: () => void;
   onSearch?: (query: string) => void;
+  onCartClick?: () => void;
 }
 
 const Cart: React.FC<CartProps> = ({
@@ -19,7 +20,8 @@ const Cart: React.FC<CartProps> = ({
   onBackToServices,
   onCheckout,
   onContinueShopping,
-  onSearch
+  onSearch,
+  onCartClick
 }) => {
   const { cartItems, updateQuantity, removeFromCart } = useCart();
   const { isAuthenticated } = useAuth();
@@ -54,6 +56,7 @@ const Cart: React.FC<CartProps> = ({
         onHomeClick={onHomeClick}
         onLoginClick={onLoginClick}
         onSearch={onSearch}
+        onCartClick={onCartClick}
       />
 
       {/* Breadcrumb */}

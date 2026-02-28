@@ -4,6 +4,7 @@ import Footer from './Footer';
 import { services, Service } from '../data/servicesData';
 import { getServiceDetails } from '../data/servicesDetailsData';
 import { useCart } from '../context/CartContext';
+import { useWatchlist } from '../context/WatchlistContext';
 
 interface ServiceDetailsProps {
   serviceId?: string;
@@ -12,6 +13,7 @@ interface ServiceDetailsProps {
   onBackToServices?: () => void;
   onCartClick?: () => void;
   onSearch?: (query: string) => void;
+  onProviderClick?: () => void;
   onServiceDetails?: (serviceId: string) => void;
 }
 
@@ -23,9 +25,11 @@ const ServiceDetails: React.FC<ServiceDetailsProps> = ({
   onBackToServices,
   onCartClick,
   onSearch,
+  onProviderClick,
   onServiceDetails
 }) => {
   const { addToCart, isInCart } = useCart();
+  const { addToWatchlist, removeFromWatchlist, isInWatchlist } = useWatchlist();
   const [selectedImage, setSelectedImage] = useState(0);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [fullscreenImageIndex, setFullscreenImageIndex] = useState(0);
@@ -116,6 +120,7 @@ const ServiceDetails: React.FC<ServiceDetailsProps> = ({
         onLoginClick={onLoginClick}
         onSearch={onSearch}
         onCartClick={onCartClick}
+        onProviderClick={onProviderClick}
       />
 
       {/* Breadcrumb */}
@@ -237,9 +242,25 @@ const ServiceDetails: React.FC<ServiceDetailsProps> = ({
                         <span className="text-slate-400 text-sm ml-1">(127 Reviews)</span>
                       </div>
                       <div className="h-4 w-px bg-slate-300"></div>
-                      <div className="flex items-center gap-1 text-emerald-600 text-sm font-semibold bg-emerald-50 px-2 py-0.5 rounded">
+                      <div className="flex items-center gap-2">
+                        <div className="flex items-center gap-1 text-emerald-600 text-sm font-semibold bg-emerald-50 px-2 py-0.5 rounded">
                         <span className="material-symbols-outlined text-[16px]">check_circle</span>
                         Verified Pro
+                        </div>
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            if (isInWatchlist(service.id)) {
+                              removeFromWatchlist(service.id);
+                            } else {
+                              addToWatchlist(service);
+                            }
+                          }}
+                          className={`size-8 ${isInWatchlist(service.id) ? 'bg-white text-rose-600' : 'bg-white/20 text-slate-600 hover:bg-white hover:text-rose-500'} backdrop-blur rounded-full flex items-center justify-center transition-all`}
+                          title={isInWatchlist(service.id) ? 'Remove from Watchlist' : 'Add to Watchlist'}
+                        >
+                          <span className={`material-symbols-outlined text-[18px] ${isInWatchlist(service.id) ? 'fill' : ''}`}>favorite</span>
+                        </button>
                       </div>
                     </div>
                     <p className="text-slate-600 leading-relaxed text-lg">
@@ -402,7 +423,21 @@ const ServiceDetails: React.FC<ServiceDetailsProps> = ({
                           </span>
                           <span className="text-xs text-slate-500">Wynqor Pro</span>
                         </div>
-                      </div>
+                          <button
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              if (isInWatchlist(relatedService.id)) {
+                                removeFromWatchlist(relatedService.id);
+                              } else {
+                                addToWatchlist(relatedService);
+                              }
+                            }}
+                            className={`ml-2 size-6 ${isInWatchlist(relatedService.id) ? 'bg-white text-rose-600' : 'bg-white/20 text-slate-600 hover:bg-white hover:text-rose-500'} rounded-full flex items-center justify-center`}
+                            title={isInWatchlist(relatedService.id) ? 'Remove from Watchlist' : 'Add to Watchlist'}
+                          >
+                            <span className={`material-symbols-outlined text-[16px] ${isInWatchlist(relatedService.id) ? 'fill' : ''}`}>favorite</span>
+                          </button>
+                        </div>
                     </div>
                   ))}
                 </div>

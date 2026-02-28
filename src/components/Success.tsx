@@ -8,6 +8,8 @@ interface SuccessProps {
   onLoginClick?: () => void;
   onSearch?: (query: string) => void;
   onExploreServices?: () => void;
+  onCartClick?: () => void;
+  onDashboardClick?: () => void;
 }
 
 const Success: React.FC<SuccessProps> = ({
@@ -15,7 +17,9 @@ const Success: React.FC<SuccessProps> = ({
   onHomeClick,
   onLoginClick,
   onSearch,
-  onExploreServices
+  onExploreServices,
+  onCartClick,
+  onDashboardClick
 }) => {
   const [copiedId, setCopiedId] = useState(false);
 
@@ -35,6 +39,7 @@ const Success: React.FC<SuccessProps> = ({
         onHomeClick={onHomeClick}
         onLoginClick={onLoginClick}
         onSearch={onSearch}
+        onCartClick={onCartClick}
       />
 
       <main className="w-full flex-grow flex items-center justify-center py-12 md:py-24">
@@ -74,7 +79,7 @@ const Success: React.FC<SuccessProps> = ({
                 </div>
                 <div className="flex flex-col sm:flex-row items-center justify-center gap-4 w-full">
                   <button
-                    onClick={() => alert('Dashboard coming soon!')}
+                    onClick={onDashboardClick}
                     className="w-full sm:w-auto py-4 px-8 bg-primary hover:bg-primary-dark text-white font-bold rounded-xl shadow-lg shadow-primary/20 hover:shadow-primary/30 transition-all transform hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98] flex items-center justify-center gap-2"
                   >
                     <span className="material-symbols-outlined text-[20px]">dashboard</span>

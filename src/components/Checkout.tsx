@@ -11,6 +11,8 @@ interface CheckoutProps {
   onBackToCart?: () => void;
   onSearch?: (query: string) => void;
   onCartClick?: () => void;
+  onProviderClick?: () => void;
+  onUserClick?: () => void;
   onSubmitSuccess?: (requestId?: string | null, error?: string) => void;
 }
 
@@ -31,6 +33,8 @@ const Checkout = ({
   onBackToCart,
   onSearch,
   onCartClick,
+  onProviderClick,
+  onUserClick,
   onSubmitSuccess
 }: CheckoutProps) => {
   const { cartItems } = useCart();
@@ -230,6 +234,8 @@ const Checkout = ({
         onLoginClick={onLoginClick}
         onSearch={onSearch}
         onCartClick={onCartClick}
+        onProviderClick={onProviderClick}
+        onUserClick={onUserClick}
       />
 
       {/* Breadcrumb */}

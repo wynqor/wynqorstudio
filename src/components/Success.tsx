@@ -10,6 +10,8 @@ interface SuccessProps {
   onExploreServices?: () => void;
   onCartClick?: () => void;
   onDashboardClick?: () => void;
+  onProviderClick?: () => void;
+  onUserClick?: () => void;
 }
 
 const Success: React.FC<SuccessProps> = ({
@@ -20,6 +22,9 @@ const Success: React.FC<SuccessProps> = ({
   onExploreServices,
   onCartClick,
   onDashboardClick
+  ,
+  onProviderClick,
+  onUserClick
 }) => {
   const [copiedId, setCopiedId] = useState(false);
 
@@ -40,6 +45,8 @@ const Success: React.FC<SuccessProps> = ({
         onLoginClick={onLoginClick}
         onSearch={onSearch}
         onCartClick={onCartClick}
+        onProviderClick={onProviderClick}
+        onUserClick={onUserClick}
       />
 
       <main className="w-full flex-grow flex items-center justify-center py-12 md:py-24">

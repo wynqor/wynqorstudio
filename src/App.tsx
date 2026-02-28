@@ -157,6 +157,8 @@ function AppContent() {
         onContinueShopping={() => togglePage('all-services')}
         onSearch={handleSearch}
         onCartClick={() => togglePage('cart')}
+        onProviderClick={() => togglePage('provider')}
+        onUserClick={() => togglePage('dashboard')}
       />
     );
   }
@@ -169,6 +171,8 @@ function AppContent() {
         onBackToCart={() => togglePage('cart')}
         onSearch={handleSearch}
         onCartClick={() => togglePage('cart')}
+        onProviderClick={() => togglePage('provider')}
+        onUserClick={() => togglePage('dashboard')}
         onSubmitSuccess={(requestId, error) => {
           if (requestId) {
             // Success - navigate to success page with request ID
@@ -199,6 +203,8 @@ function AppContent() {
         onSearch={handleSearch}
         onCartClick={() => togglePage('cart')}
         onDashboardClick={() => togglePage('dashboard')}
+        onProviderClick={() => togglePage('provider')}
+        onUserClick={() => togglePage('dashboard')}
         onExploreServices={() => togglePage('all-services')}
       />
     );
@@ -224,6 +230,7 @@ function AppContent() {
       onLoginClick={() => togglePage('login')}
       onSearch={handleSearch}
       onCartClick={() => togglePage('cart')}
+      onUserClick={() => togglePage('dashboard')}
     />;
   }
   

@@ -7,9 +7,10 @@ interface BecomeProviderProps {
   onLoginClick?: () => void;
   onSearch?: (query: string) => void;
   onCartClick?: () => void;
+  onUserClick?: () => void;
 }
 
-const BecomeProvider = ({ onHomeClick, onLoginClick, onSearch, onCartClick }: BecomeProviderProps) => {
+const BecomeProvider = ({ onHomeClick, onLoginClick, onSearch, onCartClick, onUserClick }: BecomeProviderProps) => {
   const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
@@ -121,7 +122,7 @@ Notes: ${notes || 'N/A'}`;
 
   return (
     <div className="bg-slate-50 text-text-main font-body antialiased selection:bg-primary/20 selection:text-primary-dark">
-      <Header onHomeClick={onHomeClick} onLoginClick={onLoginClick} onSearch={onSearch} onCartClick={onCartClick} />
+      <Header onHomeClick={onHomeClick} onLoginClick={onLoginClick} onSearch={onSearch} onCartClick={onCartClick} onUserClick={onUserClick} />
       <main className="w-full min-h-screen pb-24 pt-12">
         <div className="max-w-[960px] mx-auto px-4 lg:px-6">
           <h1 className="text-3xl md:text-4xl font-display font-bold text-secondary mb-6">Become a Provider</h1>

@@ -28,7 +28,7 @@ const Dashboard = ({ onHomeClick, onLoginClick, onSearch, onCartClick, onService
 
   return (
     <div className="bg-slate-50 text-text-main font-body antialiased selection:bg-primary/20 selection:text-primary-dark">
-      <Header onHomeClick={onHomeClick} onLoginClick={onLoginClick} onSearch={onSearch} onCartClick={onCartClick} />
+      <Header onHomeClick={onHomeClick} onLoginClick={onLoginClick} onSearch={onSearch} onCartClick={onCartClick} onUserClick={onHomeClick} />
       <main className="w-full min-h-screen pb-24 pt-12">
         <div className="max-w-[1200px] mx-auto px-4 lg:px-6 space-y-10">
           <h1 className="text-3xl md:text-4xl font-display font-bold text-secondary">Dashboard</h1>

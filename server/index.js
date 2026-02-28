@@ -82,6 +82,7 @@ app.post('/api/sendMail', upload.array('files', 5), async (req, res) => {
       companyTo,
       companySubject,
       companyBody,
+      attachments,
     } = req.body || {};
 
     if (!smtpUser || !smtpPass) {
@@ -100,6 +101,16 @@ app.post('/api/sendMail', upload.array('files', 5), async (req, res) => {
       content: f.buffer,
       contentType: f.mimetype,
     }));
+    const jsonAttachments = Array.isArray(attachments)
+      ? attachments
+          .filter((a) => a && a.filename && a.content)
+          .map((a) => ({
+            filename: a.filename,
+            content: Buffer.from(a.content, 'base64'),
+            contentType: a.contentType || undefined,
+          }))
+      : [];
+    const finalAttachments = [...uploadedFiles, ...jsonAttachments];
 
     // Send client confirmation (no attachments)
     await transporter.sendMail({
@@ -115,7 +126,7 @@ app.post('/api/sendMail', upload.array('files', 5), async (req, res) => {
       to: companyAddress,
       subject: companySubject,
       text: companyBody,
-      attachments: uploadedFiles,
+      attachments: finalAttachments,
     });
 
     return res.json({ success: true });

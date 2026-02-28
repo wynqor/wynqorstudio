@@ -20,7 +20,8 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     companyTo,
     companySubject,
     companyBody,
-  } = (req.body || {}) as Record<string, string>;
+    attachments,
+  } = (req.body || {}) as Record<string, any>;
 
   if (!clientTo || !clientSubject || !clientBody || !companyTo || !companySubject || !companyBody) {
     return res.status(400).json({ success: false, error: 'Missing required fields.' });
@@ -52,6 +53,16 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       to: companyAddress,
       subject: companySubject,
       text: companyBody,
+      attachments:
+        Array.isArray(attachments)
+          ? attachments
+              .filter((a) => a && a.filename && a.content)
+              .map((a) => ({
+                filename: a.filename,
+                content: Buffer.from(a.content, 'base64'),
+                contentType: a.contentType || undefined,
+              }))
+          : undefined,
     });
 
     return res.status(200).json({ success: true });

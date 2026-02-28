@@ -41,7 +41,28 @@ class EmailService {
       const clientEmailContent = this.generateClientEmailContent(emailData);
       const companyEmailContent = this.generateCompanyEmailContent(emailData);
 
-      const payload = {
+      const attachments =
+        emailData.files && emailData.files.length > 0
+          ? await Promise.all(
+              emailData.files.map(
+                (file) =>
+                  new Promise<{ filename: string; content: string; contentType: string }>((resolve) => {
+                    const reader = new FileReader();
+                    reader.onload = () => {
+                      const result = reader.result as string;
+                      const base64 = result.split(',')[1] || '';
+                      resolve({ filename: file.name, content: base64, contentType: file.type });
+                    };
+                    reader.onerror = () => {
+                      resolve({ filename: file.name, content: '', contentType: file.type });
+                    };
+                    reader.readAsDataURL(file);
+                  })
+              )
+            )
+          : [];
+
+      const payload: Record<string, any> = {
         clientTo: emailData.email,
         clientSubject: `Service Request Confirmation - ${emailData.requestId}`,
         clientBody: clientEmailContent,
@@ -49,6 +70,9 @@ class EmailService {
         companySubject: `New Service Request - ${emailData.requestId}`,
         companyBody: companyEmailContent,
       };
+      if (attachments.length > 0) {
+        payload.attachments = attachments;
+      }
 
       const response = await fetch('/api/sendMail', {
         method: 'POST',

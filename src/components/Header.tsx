@@ -104,14 +104,15 @@ const Header: React.FC<HeaderProps> = ({ onLoginClick, onHomeClick, onSearch, on
               type="button"
               ref={categoryButtonRef}
               onClick={() => setShowCategoryMenu(v => !v)}
-              className="h-full pl-4 pr-3 flex items-center gap-1 text-xs font-semibold text-slate-600 hover:text-primary border-r border-slate-200 hover:bg-slate-50 rounded-l-full transition-colors"
+              className="h-full w-44 pl-4 pr-3 flex items-center justify-between gap-1 text-xs font-semibold text-slate-600 hover:text-primary border-r border-slate-200 hover:bg-slate-50 rounded-l-full transition-colors"
             >
-              {selectedCategory} <span className="material-symbols-outlined text-sm">{showCategoryMenu ? 'expand_less' : 'expand_more'}</span>
+              <span className="truncate max-w-[8.5rem]">{selectedCategory}</span>
+              <span className="material-symbols-outlined text-sm">{showCategoryMenu ? 'expand_less' : 'expand_more'}</span>
             </button>
           </div>
           <input
             ref={inputRef}
-            className="w-full bg-slate-100/80 border border-slate-200/50 hover:bg-white focus:bg-white focus:border-primary focus:ring-4 focus:ring-primary/10 rounded-full py-3 pl-36 pr-12 text-sm transition-all shadow-inner"
+            className="w-full bg-slate-100/80 border border-slate-200/50 hover:bg-white focus:bg-white focus:border-primary focus:ring-4 focus:ring-primary/10 rounded-full py-3 pl-52 pr-12 text-sm transition-all shadow-inner"
             placeholder="Find services like 'Logo Design'..."
             type="text"
             value={searchQuery}
@@ -137,6 +138,7 @@ const Header: React.FC<HeaderProps> = ({ onLoginClick, onHomeClick, onSearch, on
                     onClick={() => {
                       setSelectedCategory('All Categories');
                       setShowCategoryMenu(false);
+                      if (onSearch) onSearch('');
                     }}
                   >
                     All Categories
@@ -149,6 +151,7 @@ const Header: React.FC<HeaderProps> = ({ onLoginClick, onHomeClick, onSearch, on
                       onClick={() => {
                         setSelectedCategory(c.name);
                         setShowCategoryMenu(false);
+                        if (onSearch) onSearch(c.name);
                       }}
                     >
                       {c.name}
@@ -242,7 +245,7 @@ const Header: React.FC<HeaderProps> = ({ onLoginClick, onHomeClick, onSearch, on
         </div>
       </div>
       {mobileSearchOpen && (
-        <div className="fixed inset-0 z-[60] bg-white">
+        <div className="fixed inset-0 z-[100] bg-white overflow-y-auto overscroll-contain relative">
           <div className="flex items-center gap-2 p-3 border-b border-slate-200">
             <button onClick={() => setMobileSearchOpen(false)} className="p-2 rounded-full hover:bg-slate-100 text-slate-600">
               <span className="material-symbols-outlined">arrow_back</span>
@@ -272,9 +275,9 @@ const Header: React.FC<HeaderProps> = ({ onLoginClick, onHomeClick, onSearch, on
               </button>
             </form>
           </div>
-          <div className="p-3">
+          <div className="p-3 bg-white">
             <div className="mb-2 text-xs font-bold text-slate-500">Suggestions</div>
-            <div className="border border-slate-200 rounded-lg overflow-hidden">
+            <div className="border border-slate-200 rounded-lg overflow-hidden bg-white shadow-md">
               {suggestions.map((s, idx) => (
                 <button
                   key={`${s.type}-${s.label}-m-${idx}`}

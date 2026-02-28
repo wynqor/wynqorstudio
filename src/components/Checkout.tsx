@@ -33,7 +33,6 @@ const Checkout = ({
   onBackToCart,
   onSearch,
   onCartClick,
-  onProviderClick,
   onUserClick,
   onSubmitSuccess
 }: CheckoutProps) => {
@@ -234,7 +233,6 @@ const Checkout = ({
         onLoginClick={onLoginClick}
         onSearch={onSearch}
         onCartClick={onCartClick}
-        onProviderClick={onProviderClick}
         onUserClick={onUserClick}
       />
 

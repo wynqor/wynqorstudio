@@ -125,7 +125,6 @@ function AppContent() {
       onHomeClick={() => togglePage('home')}
       onLoginClick={() => togglePage('login')}
       onSearch={handleSearch}
-      onProviderClick={() => togglePage('provider')}
       onClearAllFilters={handleClearAllFilters}
       onServiceDetails={(serviceId) => togglePage('service-details', serviceId)}
       onCartClick={() => togglePage('cart')}
@@ -140,7 +139,6 @@ function AppContent() {
       onHomeClick={() => togglePage('home')}
       onLoginClick={() => togglePage('login')}
       onBackToServices={() => togglePage('all-services')}
-      onProviderClick={() => togglePage('provider')}
       onCartClick={() => togglePage('cart')}
       onSearch={handleSearch}
       onServiceDetails={(serviceId) => togglePage('service-details', serviceId)}
@@ -171,7 +169,6 @@ function AppContent() {
         onBackToCart={() => togglePage('cart')}
         onSearch={handleSearch}
         onCartClick={() => togglePage('cart')}
-        onProviderClick={() => togglePage('provider')}
         onUserClick={() => togglePage('dashboard')}
         onSubmitSuccess={(requestId, error) => {
           if (requestId) {
@@ -217,7 +214,6 @@ function AppContent() {
         onLoginClick={() => togglePage('login')}
         onSearch={handleSearch}
         onCartClick={() => togglePage('cart')}
-        onProviderClick={() => togglePage('provider')}
         onTryAgain={() => togglePage('checkout')}
         onContactSupport={() => alert('Support contact coming soon!')}
       />

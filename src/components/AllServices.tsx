@@ -118,7 +118,6 @@ const AllServices: React.FC<AllServicesProps> = ({
   onClearAllFilters,
   onServiceDetails,
   onCartClick,
-  onProviderClick,
   searchQuery = '',
   selectedCategory = ''
 }) => {
@@ -296,7 +295,6 @@ const AllServices: React.FC<AllServicesProps> = ({
         onLoginClick={onLoginClick}
         onSearch={onSearch}
         onCartClick={onCartClick}
-        onProviderClick={onProviderClick}
       />
 
 

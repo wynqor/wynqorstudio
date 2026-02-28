@@ -23,7 +23,6 @@ const Success: React.FC<SuccessProps> = ({
   onCartClick,
   onDashboardClick
   ,
-  onProviderClick,
   onUserClick
 }) => {
   const [copiedId, setCopiedId] = useState(false);
@@ -45,7 +44,6 @@ const Success: React.FC<SuccessProps> = ({
         onLoginClick={onLoginClick}
         onSearch={onSearch}
         onCartClick={onCartClick}
-        onProviderClick={onProviderClick}
         onUserClick={onUserClick}
       />
 

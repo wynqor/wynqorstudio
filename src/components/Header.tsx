@@ -65,7 +65,9 @@ const Header: React.FC<HeaderProps> = ({ onLoginClick, onHomeClick, onSearch, on
           </button>
 
           <nav className="hidden md:flex items-center gap-6 text-sm font-medium text-slate-600">
-            <button onClick={onProviderClick} className="hover:text-primary transition-colors bg-transparent border-none cursor-pointer">Become a Provider</button>
+            {onProviderClick && (
+              <button onClick={onProviderClick} className="hover:text-primary transition-colors bg-transparent border-none cursor-pointer">Become a Provider</button>
+            )}
           </nav>
 
           <div className="h-6 w-px bg-slate-200 hidden md:block"></div>

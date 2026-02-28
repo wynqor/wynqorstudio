@@ -25,7 +25,6 @@ const ServiceDetails: React.FC<ServiceDetailsProps> = ({
   onBackToServices,
   onCartClick,
   onSearch,
-  onProviderClick,
   onServiceDetails
 }) => {
   const { addToCart, isInCart } = useCart();
@@ -120,7 +119,6 @@ const ServiceDetails: React.FC<ServiceDetailsProps> = ({
         onLoginClick={onLoginClick}
         onSearch={onSearch}
         onCartClick={onCartClick}
-        onProviderClick={onProviderClick}
       />
 
       {/* Breadcrumb */}

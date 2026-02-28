@@ -66,9 +66,6 @@ const Hero: React.FC<HeroProps> = ({ onSearch }) => {
                   <span className="material-symbols-outlined">search</span>
                 </button>
               </form>
-              <button className="absolute right-2 top-2 size-10 bg-primary hover:bg-primary-light text-white rounded-lg flex items-center justify-center transition-all shadow-lg z-10">
-                <span className="material-symbols-outlined">search</span>
-              </button>
             </div>
             <span className="hidden sm:block text-slate-500 font-serif italic px-2">or</span>
             <button className="px-8 py-4 bg-white hover:bg-slate-50 text-secondary rounded-xl font-bold transition-all shadow-[0_0_20px_rgba(255,255,255,0.1)] hover:shadow-[0_0_30px_rgba(255,255,255,0.2)] transform hover:-translate-y-0.5">

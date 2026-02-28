@@ -21,6 +21,8 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     companySubject,
     companyBody,
     attachments,
+    clientHtml,
+    companyHtml,
   } = (req.body || {}) as Record<string, any>;
 
   if (!clientTo || !clientSubject || !clientBody || !companyTo || !companySubject || !companyBody) {
@@ -46,6 +48,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       to: clientTo,
       subject: clientSubject,
       text: clientBody,
+      html: clientHtml,
     });
 
     await transporter.sendMail({
@@ -53,6 +56,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       to: companyAddress,
       subject: companySubject,
       text: companyBody,
+      html: companyHtml,
       attachments:
         Array.isArray(attachments)
           ? attachments

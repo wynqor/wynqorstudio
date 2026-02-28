@@ -83,6 +83,8 @@ app.post('/api/sendMail', upload.array('files', 5), async (req, res) => {
       companySubject,
       companyBody,
       attachments,
+      clientHtml,
+      companyHtml,
     } = req.body || {};
 
     if (!smtpUser || !smtpPass) {
@@ -118,6 +120,7 @@ app.post('/api/sendMail', upload.array('files', 5), async (req, res) => {
       to: clientTo,
       subject: clientSubject,
       text: clientBody,
+      html: clientHtml,
     });
 
     // Send company notification (with attachments)
@@ -126,6 +129,7 @@ app.post('/api/sendMail', upload.array('files', 5), async (req, res) => {
       to: companyAddress,
       subject: companySubject,
       text: companyBody,
+      html: companyHtml,
       attachments: finalAttachments,
     });
 

@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import { useAuth } from './AuthContext';
 import { Service } from '../data/servicesData';
 
 export interface CartItem extends Service {
@@ -32,10 +33,12 @@ interface CartProviderProps {
 
 export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
+  const { user } = useAuth();
+  const storageKey = `wynqor-cart${user?.email ? `:${user.email}` : ''}`;
 
   // Load cart from localStorage on mount
   useEffect(() => {
-    const savedCart = localStorage.getItem('wynqor-cart');
+    const savedCart = localStorage.getItem(storageKey) || localStorage.getItem('wynqor-cart');
     if (savedCart) {
       try {
         setCartItems(JSON.parse(savedCart));
@@ -43,12 +46,12 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
         console.error('Failed to load cart from localStorage:', error);
       }
     }
-  }, []);
+  }, [storageKey]);
 
   // Save cart to localStorage whenever it changes
   useEffect(() => {
-    localStorage.setItem('wynqor-cart', JSON.stringify(cartItems));
-  }, [cartItems]);
+    localStorage.setItem(storageKey, JSON.stringify(cartItems));
+  }, [cartItems, storageKey]);
 
   const addToCart = (service: Service) => {
     setCartItems(prevItems => {

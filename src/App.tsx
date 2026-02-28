@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { CartProvider } from './context/CartContext';
+import { WatchlistProvider } from './context/WatchlistContext';
 import { AuthProvider } from './context/AuthContext';
+import { useAuth } from './context/AuthContext';
 
 import Header from './components/Header';
 import Hero from './components/Hero';
@@ -22,6 +24,7 @@ import Cart from './components/Cart';
 import Checkout from './components/Checkout';
 import Success from './components/Success';
 import BecomeProvider from './components/BecomeProvider';
+import Dashboard from './components/Dashboard';
 import Failed from './components/Failed';
 import { categories } from './data/servicesData';
 
@@ -29,20 +32,23 @@ function App() {
   return (
     <AuthProvider>
       <CartProvider>
-        <AppContent />
+        <WatchlistProvider>
+          <AppContent />
+        </WatchlistProvider>
       </CartProvider>
     </AuthProvider>
   );
 }
 
 function AppContent() {
-  const [currentPage, setCurrentPage] = useState<'home' | 'login' | 'register' | 'otp' | 'forgot-password' | 'reset-password' | 'all-services' | 'service-details' | 'cart' | 'checkout' | 'success' | 'failed' | 'provider'>('home');
+  const { user, isAuthenticated } = useAuth();
+  const [currentPage, setCurrentPage] = useState<'home' | 'login' | 'register' | 'otp' | 'forgot-password' | 'reset-password' | 'all-services' | 'service-details' | 'cart' | 'checkout' | 'success' | 'failed' | 'provider' | 'dashboard'>('home');
   const [selectedServiceId, setSelectedServiceId] = useState<string>('');
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('');
 
 
-  const togglePage = (page: 'home' | 'login' | 'register' | 'otp' | 'forgot-password' | 'reset-password' | 'all-services' | 'service-details' | 'cart' | 'checkout' | 'success' | 'failed' | 'provider', serviceId?: string) => {
+  const togglePage = (page: 'home' | 'login' | 'register' | 'otp' | 'forgot-password' | 'reset-password' | 'all-services' | 'service-details' | 'cart' | 'checkout' | 'success' | 'failed' | 'provider' | 'dashboard', serviceId?: string) => {
     setCurrentPage(page);
     if (serviceId) {
       setSelectedServiceId(serviceId);
@@ -211,6 +217,18 @@ function AppContent() {
       onSearch={handleSearch}
     />;
   }
+  
+  if (currentPage === 'dashboard') {
+    if (!isAuthenticated || !user) {
+      setCurrentPage('login');
+    }
+    return <Dashboard
+      onHomeClick={() => togglePage('home')}
+      onLoginClick={() => togglePage('login')}
+      onSearch={handleSearch}
+      onCartClick={() => togglePage('cart')}
+    />;
+  }
 
   return (
     <div className="bg-slate-50 text-text-main font-body antialiased selection:bg-primary/20 selection:text-primary-dark">
@@ -220,6 +238,7 @@ function AppContent() {
         onSearch={handleSearch}
         onCartClick={() => togglePage('cart')}
         onProviderClick={() => togglePage('provider')}
+        onUserClick={() => togglePage('dashboard')}
       />
       <main className="w-full">
         <Hero onSearch={handleSearch} />

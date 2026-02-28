@@ -178,6 +178,35 @@ const Checkout = ({
 
       if (emailResult.success) {
         sessionStorage.setItem('lastRequestId', requestId);
+        const historyItem = {
+          requestId,
+          submittedAt: new Date().toISOString(),
+          fullName: formData.fullName,
+          email: formData.email,
+          phone: formData.phone,
+          businessName: formData.businessName,
+          cartItems,
+          subtotal,
+          serviceFee,
+          total,
+        };
+        try {
+          const key = user?.email ? `wynqor-requests:${user.email}` : 'wynqor-requests';
+          const existing = localStorage.getItem(key);
+          const arr = existing ? JSON.parse(existing) : [];
+          arr.unshift(historyItem);
+          localStorage.setItem(key, JSON.stringify(arr));
+        } catch {
+          try {
+            const key = user?.email ? `wynqor-requests:${user.email}` : 'wynqor-requests';
+            localStorage.setItem(key, JSON.stringify([historyItem]));
+          } catch {
+            try {
+              const key = user?.email ? `wynqor-requests:${user.email}` : 'wynqor-requests';
+              localStorage.removeItem(key);
+            } catch { void 0; }
+          }
+        }
         onSubmitSuccess?.(requestId);
       } else {
         throw new Error(emailResult.error || 'Failed to send emails');

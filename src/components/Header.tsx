@@ -8,9 +8,10 @@ interface HeaderProps {
   onSearch?: (query: string) => void;
   onCartClick?: () => void;
   onProviderClick?: () => void;
+  onUserClick?: () => void;
 }
 
-const Header: React.FC<HeaderProps> = ({ onLoginClick, onHomeClick, onSearch, onCartClick, onProviderClick }) => {
+const Header: React.FC<HeaderProps> = ({ onLoginClick, onHomeClick, onSearch, onCartClick, onProviderClick, onUserClick }) => {
   const { getCartCount } = useCart();
   const { user, logout, isAuthenticated } = useAuth();
   const [searchQuery, setSearchQuery] = useState('');
@@ -83,14 +84,14 @@ const Header: React.FC<HeaderProps> = ({ onLoginClick, onHomeClick, onSearch, on
             </button>
 
             {isAuthenticated && user ? (
-              <div className="flex items-center gap-3 pl-2 cursor-pointer group">
+              <div className="flex items-center gap-3 pl-2 cursor-pointer group" onClick={onUserClick}>
                 <div className="size-10 rounded-full bg-cover bg-center ring-2 ring-white shadow-md group-hover:ring-primary transition-all" style={{ backgroundImage: `url(${user.avatar})` }}></div>
                 <div className="hidden md:flex flex-col">
                   <span className="text-sm font-medium text-slate-700">{user.name}</span>
                   <span className="text-xs text-slate-500">{user.email}</span>
                 </div>
                 <button
-                  onClick={logout}
+                  onClick={(e) => { e.stopPropagation(); logout(); }}
                   className="text-slate-400 hover:text-rose-500 transition-colors p-1"
                   title="Logout"
                 >

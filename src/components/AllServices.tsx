@@ -3,6 +3,7 @@ import Header from './Header';
 import Footer from './Footer';
 import { services, Service } from '../data/servicesData';
 import { useCart } from '../context/CartContext';
+import { useWatchlist } from '../context/WatchlistContext';
 import { recommendationsData } from '../data/recommendationsData';
 
 interface AllServicesProps {
@@ -26,6 +27,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
   onDetailsClick
 }) => {
   const { addToCart, isInCart } = useCart();
+  const { addToWatchlist, removeFromWatchlist, isInWatchlist } = useWatchlist();
 
   const handleAddToCart = (e: React.MouseEvent) => {
     e.stopPropagation(); // Prevent triggering onDetailsClick
@@ -50,8 +52,20 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
             Trending
           </span>
         )}
-        <button className="absolute top-3 right-3 size-8 bg-white/20 backdrop-blur hover:bg-white text-white hover:text-rose-500 rounded-full flex items-center justify-center transition-all opacity-0 group-hover:opacity-100 z-10">
-          <span className="material-symbols-outlined text-[18px] fill">favorite</span>
+        <button
+          onClick={(e) => {
+            e.stopPropagation();
+            if (isInWatchlist(service.id)) {
+              removeFromWatchlist(service.id);
+            } else {
+              addToWatchlist(service);
+            }
+          }}
+          className="absolute top-3 right-3 size-8 bg-white/20 backdrop-blur hover:bg-white text-white hover:text-rose-500 rounded-full flex items-center justify-center transition-all opacity-0 group-hover:opacity-100 z-10"
+        >
+          <span className="material-symbols-outlined text-[18px] fill">
+            {isInWatchlist(service.id) ? 'favorite' : 'favorite'}
+          </span>
         </button>
       </div>
       <div className="p-4 flex-1 flex flex-col">

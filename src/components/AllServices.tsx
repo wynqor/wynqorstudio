@@ -4,7 +4,6 @@ import Footer from './Footer';
 import { services, Service } from '../data/servicesData';
 import { useCart } from '../context/CartContext';
 import { useWatchlist } from '../context/WatchlistContext';
-import { recommendationsData } from '../data/recommendationsData';
 
 interface AllServicesProps {
   onHomeClick?: () => void;
@@ -145,6 +144,7 @@ const AllServices: React.FC<AllServicesProps> = ({
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 20; // 4 rows × 5 columns max
   const filterDropdownRef = useRef<HTMLDivElement>(null);
+  const { addToCart } = useCart();
 
   // Update category state when prop changes (user navigates to new category)
   useEffect(() => {
@@ -299,8 +299,51 @@ const AllServices: React.FC<AllServicesProps> = ({
   );
 
 
-  // Use static recommendations data
-  const recommendations = recommendationsData;
+  // Contextual recommendations (keep UI same, improve relevance)
+  const recommendations = (() => {
+    const formatInr = (n: number) => `₹${Math.round(n).toLocaleString('en-IN')}`;
+    const parsePrice = (p: string) => parseFloat(p.replace('₹', '').replace(/,/g, '')) || 0;
+    const parseDays = (d?: string) => {
+      const n = parseInt((d || '').split(' ')[0]);
+      return isNaN(n) ? 0 : n;
+    };
+    const score = (s: Service) => (parseFloat(s.rating || '0') * 10) + (s.isBestseller ? 50 : 0) + (s.isTrending ? 25 : 0);
+    const inCategory = selectedCategoryState && selectedCategoryState !== 'All Services'
+      ? filteredServices
+      : services;
+    const sorted = [...inCategory].sort((a, b) => score(b) - score(a));
+    const uniqueByTitle = (() => {
+      const seen = new Set<string>();
+      return sorted.filter(s => (seen.has(s.title) ? false : (seen.add(s.title), true)));
+    })();
+    const picks = uniqueByTitle.slice(0, 6);
+
+    // Build multiple bundles (pairs) with 15% discount
+    const discountPct = 0.15;
+    const bundles = [];
+    for (let i = 0; i + 1 < picks.length && bundles.length < 3; i += 2) {
+      const a = picks[i], b = picks[i + 1];
+      const total = parsePrice(a.price) + parsePrice(b.price);
+      const discounted = total * (1 - discountPct);
+      const savings = total - discounted;
+      const title = `Combined Package: ${a.title} + ${b.title}`;
+      const desc = `Bundle and save ${Math.round(discountPct * 100)}%. Includes ${a.title} and ${b.title}.`;
+      const durationDays = Math.max(parseDays(a.duration), parseDays(b.duration));
+      const duration = durationDays ? `${durationDays} Days` : 'Flexible';
+      const rating = ((parseFloat(a.rating || '0') + parseFloat(b.rating || '0')) / 2).toFixed(1);
+      bundles.push({
+        type: 'bundle' as const,
+        id: `bundle-${a.id}-${b.id}`,
+        image: a.image,
+        category: 'Bundle Offer',
+        title,
+        description: desc,
+        price: formatInr(discounted),
+        _bundleMeta: { discounted, duration, rating, total, savings, discountPct }
+      });
+    }
+    return bundles;
+  })();
 
   return (
     <div className="bg-slate-50 text-text-main font-body antialiased selection:bg-primary/20 selection:text-primary-dark">
@@ -552,16 +595,15 @@ const AllServices: React.FC<AllServicesProps> = ({
               </a>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {recommendations.slice(0, 3).map((rec, index) => (
+              {recommendations.slice(0, 3).map((rec: any, index) => (
                 <div
                   key={index}
-                  onClick={() => onServiceDetails?.(rec.id)}
-                  className="flex gap-4 p-4 rounded-xl hover:bg-slate-50 transition-colors border border-transparent hover:border-slate-100 group cursor-pointer"
+                  className="flex gap-4 p-4 rounded-xl hover:bg-slate-50 transition-colors border border-transparent hover:border-slate-100 group"
                 >
                   <div className="size-24 rounded-lg overflow-hidden shrink-0">
                     <img alt={rec.title} className="w-full h-full object-cover" src={rec.image} />
                   </div>
-                  <div>
+                  <div className="flex-1">
                     <span className="text-[10px] font-bold text-primary uppercase tracking-wide block mb-1">
                       {rec.category}
                     </span>
@@ -569,7 +611,36 @@ const AllServices: React.FC<AllServicesProps> = ({
                       {rec.title}
                     </h4>
                     <p className="text-xs text-slate-500 mb-2">{rec.description}</p>
-                    <span className="font-black text-sm text-secondary">{rec.price}</span>
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-2">
+                        <span className="font-black text-sm text-secondary">{rec.price}</span>
+                        <span className="text-[11px] text-slate-500 line-through">
+                          ₹{Math.round(rec._bundleMeta.total).toLocaleString('en-IN')}
+                        </span>
+                        <span className="text-[11px] font-bold text-emerald-600">
+                          Save ₹{Math.round(rec._bundleMeta.savings).toLocaleString('en-IN')} ({Math.round(rec._bundleMeta.discountPct * 100)}%)
+                        </span>
+                      </div>
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          const { discounted, duration, rating } = rec._bundleMeta;
+                          const bundleService: Service = {
+                            id: rec.id,
+                            title: rec.title,
+                            category: 'Bundle Offer',
+                            price: `₹${Math.round(discounted).toLocaleString('en-IN')}`,
+                            duration,
+                            rating,
+                            image: rec.image,
+                          };
+                          addToCart(bundleService);
+                        }}
+                        className="px-3 py-1.5 text-xs font-bold rounded-lg bg-primary text-white hover:bg-primary-dark"
+                      >
+                        Add Bundle
+                      </button>
+                    </div>
                   </div>
                 </div>
               ))}

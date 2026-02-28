@@ -31,7 +31,7 @@ const Checkout = ({
   onSearch,
   onSubmitSuccess
 }: CheckoutProps) => {
-  const { cartItems, clearCart } = useCart();
+  const { cartItems } = useCart();
   const { user, isAuthenticated } = useAuth();
   const [files, setFiles] = useState<File[]>([]);
   const [isDragOver, setIsDragOver] = useState(false);
@@ -177,9 +177,7 @@ const Checkout = ({
       const emailResult = await emailService.sendEmails(emailData);
 
       if (emailResult.success) {
-        // Store request ID and clear cart
         sessionStorage.setItem('lastRequestId', requestId);
-        clearCart();
         onSubmitSuccess?.(requestId);
       } else {
         throw new Error(emailResult.error || 'Failed to send emails');

@@ -63,16 +63,10 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   useEffect(() => {
     const initializeAuth = async () => {
       const savedUser = localStorage.getItem('wynqor-user');
-      const savedToken = localStorage.getItem('wynqor-google-token');
-
-      if (savedUser && savedToken) {
+      if (savedUser) {
         try {
           const userData = JSON.parse(savedUser);
-          // Check if token is still valid
-          const isTokenValid = await refreshToken();
-          if (isTokenValid) {
-            setUser(userData);
-          }
+          setUser(userData);
         } catch (error) {
           console.error('Failed to load user from localStorage:', error);
           logout();
@@ -116,26 +110,9 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
   const refreshToken = async (): Promise<boolean> => {
     try {
-      // For Google OAuth, tokens are typically valid for 1 hour
-      // In a real implementation, you'd use the refresh token to get a new access token
-      // For now, we'll check if the current token is still valid
-      const token = localStorage.getItem('wynqor-google-token');
-      const expiry = localStorage.getItem('wynqor-token-expiry');
-
-      if (!token || !expiry) return false;
-
-      // Check if token is expired (with 5 minute buffer)
-      if (Date.now() >= (parseInt(expiry) - 300000)) {
-        // Token expired or about to expire
-        logout();
-        return false;
-      }
-
       return true;
-    } catch (error) {
-      console.error('Token refresh failed:', error);
-      logout();
-      return false;
+    } catch {
+      return true;
     }
   };
 

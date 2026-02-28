@@ -107,6 +107,36 @@ class EmailService {
     }
   }
 
+  async sendNewsletter(email: string): Promise<{ success: boolean; error?: string }> {
+    try {
+      const submittedAt = new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' });
+      const clientSubject = 'Welcome to Wynqor Newsletter';
+      const companySubject = 'New Newsletter Subscription';
+      const clientBody =
+        `🎉 Thanks for subscribing!\n\nYou're now part of the Wynqor newsletter.\n\nSubscribed: ${submittedAt}\n\nYou will receive updates on new services, offers and case studies.\n\n© 2024 Wynqor Inc.`;
+      const companyBody =
+        `🆕 Newsletter Subscription\n\nEmail: ${email}\nSubscribed: ${submittedAt}\n\n© 2024 Wynqor Inc.`;
+      const payload = {
+        clientTo: email,
+        clientSubject,
+        clientBody,
+        companyTo: this.COMPANY_EMAIL,
+        companySubject,
+        companyBody,
+      };
+      const response = await fetch('/api/sendMail', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+      const result = await response.json().catch(() => null);
+      if (response.ok && result?.success) return { success: true };
+      return { success: false, error: result?.error || 'Failed to subscribe.' };
+    } catch (error) {
+      return { success: false, error: error instanceof Error ? error.message : 'Failed to subscribe.' };
+    }
+  }
+
   async sendLoginNotification(user: { name: string; email: string }): Promise<{ success: boolean; error?: string }> {
     try {
       const submittedAt = new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' });

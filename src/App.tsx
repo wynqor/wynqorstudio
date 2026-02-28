@@ -155,7 +155,6 @@ function AppContent() {
         onContinueShopping={() => togglePage('all-services')}
         onSearch={handleSearch}
         onCartClick={() => togglePage('cart')}
-        onProviderClick={() => togglePage('provider')}
         onUserClick={() => togglePage('dashboard')}
       />
     );
@@ -200,7 +199,6 @@ function AppContent() {
         onSearch={handleSearch}
         onCartClick={() => togglePage('cart')}
         onDashboardClick={() => togglePage('dashboard')}
-        onProviderClick={() => togglePage('provider')}
         onUserClick={() => togglePage('dashboard')}
         onExploreServices={() => togglePage('all-services')}
       />

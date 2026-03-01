@@ -282,7 +282,7 @@ const computeReviews = (id: string, rating: number, flags: { bestseller?: boolea
 const manualOverrides: Record<string, Partial<Service>> = {
   'logo-design': { rating: '5.0', isBestseller: true },
   'explainer-videos': { rating: '4.9', isTrending: true },
-  'business-website': { price: '₹8,000', duration: '10 Days', rating: '4.9' },
+  'business-website': { price: '₹8', duration: '10 Days', rating: '4.9' },
   'ecommerce-website': { price: '₹15,000', duration: '14 Days', rating: '4.8' },
   'wordpress-development': { price: '₹6,000', duration: '8 Days', rating: '4.9' },
   'social-media-management': { price: '₹5,000', duration: '30 Days', rating: '4.9' },

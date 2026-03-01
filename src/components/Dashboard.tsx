@@ -4,6 +4,7 @@ import Footer from './Footer';
 import { useAuth } from '../context/AuthContext';
 import { useCart } from '../context/CartContext';
 import { useWatchlist } from '../context/WatchlistContext';
+import { emailService } from '../services/emailService';
 
 interface DashboardProps {
   onHomeClick?: () => void;
@@ -125,6 +126,18 @@ const Dashboard = ({ onHomeClick, onLoginClick, onSearch, onCartClick, onService
               note: '',
               paidAt: new Date().toISOString()
             });
+            try {
+              await emailService.sendPaymentReceipt({
+                requestId: selectedRequest.requestId,
+                paymentId: response.razorpay_payment_id,
+                amount: Number(selectedRequest.total || 0),
+                method: 'UPI (Razorpay)',
+                email: user?.email || '',
+                name: user?.name || '',
+                cartItems: selectedRequest.cartItems || [],
+                submittedAt: selectedRequest.submittedAt || ''
+              });
+            } catch { /* noop */ }
             setShowPaymentModal(false);
           }
         },

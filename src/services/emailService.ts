@@ -471,6 +471,96 @@ This is an automated notification. Please respond to the client directly.
 © 2024 Wynqor Inc. All rights reserved.`.trim();
   }
 
+  async sendPaymentReceipt(info: {
+    requestId: string;
+    paymentId: string;
+    amount: number;
+    method: string;
+    email: string;
+    name?: string;
+    cartItems?: CartItem[];
+    submittedAt?: string;
+  }): Promise<{ success: boolean; error?: string }> {
+    try {
+      const when = new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' });
+      const servicesList = (info.cartItems || [])
+        .map(item => `${item.title} (${item.category}) - ${item.price} × ${item.quantity}`)
+        .join('\n');
+      const clientSubject = `Payment Received - ${info.requestId}`;
+      const companySubject = `Payment Success - ${info.requestId}`;
+      const clientBody =
+        `✅ PAYMENT SUCCESSFUL
+
+Request ID: ${info.requestId}
+Payment ID: ${info.paymentId}
+Method: ${info.method}
+Amount: ₹${info.amount.toFixed(2)}
+Time: ${when}
+
+${servicesList ? `Services:\n${servicesList}\n` : ''}`.trim();
+
+      const companyBody =
+        `💰 PAYMENT RECEIVED
+
+Request ID: ${info.requestId}
+Client: ${info.name || ''} <${info.email}>
+Payment ID: ${info.paymentId}
+Method: ${info.method}
+Amount: ₹${info.amount.toFixed(2)}
+Time: ${when}
+
+${servicesList ? `Services:\n${servicesList}\n` : ''}`.trim();
+
+      const clientHtml =
+        `<div style="font-family:Inter,system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif;padding:20px">
+          <h2 style="margin:0 0 12px;color:#0f172a">Payment Successful</h2>
+          <div style="color:#334155;font-size:14px;line-height:1.6">
+            <div><strong>Request ID:</strong> ${info.requestId}</div>
+            <div><strong>Payment ID:</strong> ${info.paymentId}</div>
+            <div><strong>Method:</strong> ${info.method}</div>
+            <div><strong>Amount:</strong> ₹${info.amount.toFixed(2)}</div>
+            <div><strong>Time:</strong> ${when}</div>
+            ${servicesList ? `<div style="margin-top:12px"><strong>Services:</strong><pre style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:8px">${servicesList}</pre></div>` : ''}
+          </div>
+        </div>`;
+
+      const companyHtml =
+        `<div style="font-family:Inter,system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif;padding:20px">
+          <h2 style="margin:0 0 12px;color:#0f172a">Payment Received</h2>
+          <div style="color:#334155;font-size:14px;line-height:1.6">
+            <div><strong>Request ID:</strong> ${info.requestId}</div>
+            <div><strong>Client:</strong> ${info.name || ''} &lt;${info.email}&gt;</div>
+            <div><strong>Payment ID:</strong> ${info.paymentId}</div>
+            <div><strong>Method:</strong> ${info.method}</div>
+            <div><strong>Amount:</strong> ₹${info.amount.toFixed(2)}</div>
+            <div><strong>Time:</strong> ${when}</div>
+            ${servicesList ? `<div style="margin-top:12px"><strong>Services:</strong><pre style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:8px">${servicesList}</pre></div>` : ''}
+          </div>
+        </div>`;
+
+      const payload = {
+        clientTo: info.email,
+        clientSubject,
+        clientBody,
+        clientHtml,
+        companyTo: this.COMPANY_EMAIL,
+        companySubject,
+        companyBody,
+        companyHtml
+      };
+
+      const response = await fetch('/api/sendMail', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+      const result = await response.json().catch(() => null);
+      if (response.ok && result?.success) return { success: true };
+      return { success: false, error: result?.error || 'Failed to send receipt emails.' };
+    } catch (error) {
+      return { success: false, error: error instanceof Error ? error.message : 'Failed to send receipt emails.' };
+    }
+  }
 
 }
 

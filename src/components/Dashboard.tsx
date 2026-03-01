@@ -36,13 +36,6 @@ const Dashboard = ({ onHomeClick, onLoginClick, onSearch, onCartClick, onService
       const raw = localStorage.getItem(paymentsStorageKey) || localStorage.getItem('wynqor-payments');
       return raw ? JSON.parse(raw) : {};
     } catch (e) {
-      savePayment(selectedRequest.requestId, {
-        status: 'Failed',
-        method: 'Razorpay UPI',
-        ref: '',
-        note: '',
-        paidAt: new Date().toISOString()
-      });
       return {};
     }
   })() as Record<string, { status: 'Unpaid' | 'Paid' | 'Failed'; method?: string; ref?: string; note?: string; paidAt?: string }>;

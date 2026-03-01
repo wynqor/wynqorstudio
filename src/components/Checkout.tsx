@@ -27,6 +27,9 @@ interface FormData {
   email: string;
   phone: string;
   businessName: string;
+  billingName: string;
+  billingAddress: string;
+  gstin: string;
   description: string;
   deadline: string;
   budget: string;
@@ -58,6 +61,9 @@ const Checkout = ({
     email: '',
     phone: '',
     businessName: '',
+    billingName: '',
+    billingAddress: '',
+    gstin: '',
     description: '',
     deadline: '',
     budget: '',
@@ -163,6 +169,9 @@ const Checkout = ({
         email: formData.email,
         phone: formData.phone,
         businessName: formData.businessName,
+        billingName: formData.billingName,
+        billingAddress: formData.billingAddress,
+        gstin: formData.gstin,
 
         // Project details
         description: formData.description,
@@ -313,6 +322,48 @@ const Checkout = ({
                 </div>
                 <div className="p-6 lg:p-8 space-y-6">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                      <label className="block text-sm font-semibold text-slate-700 mb-2" htmlFor="billingName">
+                        Billing Name
+                      </label>
+                      <input
+                        className="w-full rounded-xl border border-slate-200 bg-slate-50 focus:border-primary focus:ring-4 focus:ring-primary/10 transition-all placeholder:text-slate-400 px-4 py-3"
+                        id="billingName"
+                        name="billingName"
+                        placeholder="e.g. Company Pvt Ltd"
+                        type="text"
+                        value={formData.billingName}
+                        onChange={handleInputChange}
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-semibold text-slate-700 mb-2" htmlFor="gstin">
+                        GSTIN (Optional)
+                      </label>
+                      <input
+                        className="w-full rounded-xl border border-slate-200 bg-slate-50 focus:border-primary focus:ring-4 focus:ring-primary/10 transition-all placeholder:text-slate-400 px-4 py-3"
+                        id="gstin"
+                        name="gstin"
+                        placeholder="e.g. 22AAAAA0000A1Z5"
+                        type="text"
+                        value={formData.gstin}
+                        onChange={handleInputChange}
+                      />
+                    </div>
+                    <div className="md:col-span-2">
+                      <label className="block text-sm font-semibold text-slate-700 mb-2" htmlFor="billingAddress">
+                        Billing Address
+                      </label>
+                      <input
+                        className="w-full rounded-xl border border-slate-200 bg-slate-50 focus:border-primary focus:ring-4 focus:ring-primary/10 transition-all placeholder:text-slate-400 px-4 py-3"
+                        id="billingAddress"
+                        name="billingAddress"
+                        placeholder="Street, City, State, PIN"
+                        type="text"
+                        value={formData.billingAddress}
+                        onChange={handleInputChange}
+                      />
+                    </div>
                     <div>
                       <label className="block text-sm font-semibold text-slate-700 mb-2" htmlFor="fullName">
                         Full Name

@@ -33,6 +33,22 @@ const Terms: React.FC<PageProps> = ({ onHomeClick, onLoginClick, onSearch, onCar
             <p className="mt-3 text-slate-300 max-w-2xl">Please read these terms carefully before using Wynqor.</p>
           </div>
         </section>
+        <section className="py-12 bg-white border-t border-slate-200">
+          <div className="max-w-[1440px] mx-auto px-4 lg:px-6 grid md:grid-cols-3 gap-8">
+            <div className="p-6 rounded-xl border border-slate-200">
+              <div className="text-sm font-bold text-primary mb-2">Service Scope</div>
+              <p className="text-slate-600 text-sm">Statements of Work define deliverables, timelines, and revision rounds. Out-of-scope requests are quoted separately.</p>
+            </div>
+            <div className="p-6 rounded-xl border border-slate-200">
+              <div className="text-sm font-bold text-primary mb-2">Payments & Refunds</div>
+              <p className="text-slate-600 text-sm">Milestone-based invoicing. Refunds considered case-by-case for unstarted work. Taxes per jurisdiction.</p>
+            </div>
+            <div className="p-6 rounded-xl border border-slate-200">
+              <div className="text-sm font-bold text-primary mb-2">Intellectual Property</div>
+              <p className="text-slate-600 text-sm">Final deliverables transfer on full payment. Third-party assets remain with their respective owners.</p>
+            </div>
+          </div>
+        </section>
         <section className="py-12">
           <div className="max-w-[1440px] mx-auto px-4 lg:px-6 grid lg:grid-cols-4 gap-12">
             <aside className="lg:col-span-1">

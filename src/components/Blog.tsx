@@ -18,10 +18,12 @@ interface PageProps {
 
 const Blog: React.FC<PageProps> = ({ onHomeClick, onLoginClick, onSearch, onCartClick, onUserClick, onAboutClick, onCareersClick, onBlogClick, onHelpClick, onTermsClick, onPrivacyClick }) => {
   const posts = [
-    { title: 'Designing for Conversion', excerpt: 'Principles to improve UX and business outcomes.', category: 'Design' },
-    { title: 'Brand Systems at Scale', excerpt: 'Building consistent brands across touchpoints.', category: 'Brand' },
-    { title: 'Modern Frontend Performance', excerpt: 'Techniques to ship fast and delight users.', category: 'Engineering' },
-    { title: 'Go-to-Market for Startups', excerpt: 'From zero to one with speed.', category: 'Growth' },
+    { title: 'Designing for Conversion', excerpt: 'Principles to improve UX and business outcomes.', category: 'Design', author: 'Team Wynqor', date: 'Feb 2026', read: '6 min' },
+    { title: 'Brand Systems at Scale', excerpt: 'Building consistent brands across touchpoints.', category: 'Brand', author: 'Studio', date: 'Jan 2026', read: '5 min' },
+    { title: 'Modern Frontend Performance', excerpt: 'Techniques to ship fast and delight users.', category: 'Engineering', author: 'Engineering', date: 'Dec 2025', read: '8 min' },
+    { title: 'Go-to-Market for Startups', excerpt: 'From zero to one with speed.', category: 'Growth', author: 'Growth', date: 'Nov 2025', read: '7 min' },
+    { title: 'Packaging That Sells', excerpt: 'Designing packaging for shelf impact and compliance.', category: 'Design', author: 'Brand', date: 'Oct 2025', read: '6 min' },
+    { title: 'Naming Sprint Framework', excerpt: 'How we run fast naming/tagline sprints.', category: 'Brand', author: 'Strategy', date: 'Sep 2025', read: '4 min' },
   ];
   const categories = ['All', 'Design', 'Brand', 'Engineering', 'Growth'];
   const [activeCategory, setActiveCategory] = React.useState('All');
@@ -60,8 +62,12 @@ const Blog: React.FC<PageProps> = ({ onHomeClick, onLoginClick, onSearch, onCart
                 <article key={idx} className="p-6 rounded-xl bg-white border border-slate-200 shadow-sm">
                   <span className="text-[10px] font-bold text-primary uppercase tracking-wide">{p.category}</span>
                   <h3 className="mt-1 text-lg font-bold text-secondary">{p.title}</h3>
+                  <div className="mt-1 text-xs text-slate-500">{p.author} • {p.date} • {p.read}</div>
                   <p className="mt-2 text-sm text-slate-600">{p.excerpt}</p>
-                  <button className="mt-4 px-4 py-2 rounded-lg border border-slate-200 text-slate-700 hover:bg-slate-50 font-bold">Read</button>
+                  <div className="mt-4 flex gap-2">
+                    <button className="px-4 py-2 rounded-lg border border-slate-200 text-slate-700 hover:bg-slate-50 font-bold">Read</button>
+                    <button className="px-4 py-2 rounded-lg bg-slate-900 text-white hover:bg-slate-800 font-bold">Share</button>
+                  </div>
                 </article>
               ))}
             </div>

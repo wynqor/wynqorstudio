@@ -42,6 +42,38 @@ const About: React.FC<PageProps> = ({ onHomeClick, onLoginClick, onSearch, onCar
             </div>
           </div>
         </section>
+        <section className="py-12 bg-white border-t border-slate-200">
+          <div className="max-w-[1440px] mx-auto px-4 lg:px-6 grid md:grid-cols-3 gap-8">
+            <div className="p-6 rounded-xl border border-slate-200">
+              <div className="text-sm font-bold text-primary mb-2">Our Customers</div>
+              <p className="text-slate-600 text-sm">Startups, SMBs, and enterprises across ecommerce, fintech, education, hospitality, and healthcare. Engagements range from rapid turnarounds to long-term retainers.</p>
+              <div className="mt-4 grid grid-cols-2 gap-2 text-xs text-slate-500">
+                <span className="px-3 py-1 rounded-full bg-slate-100">Ecommerce</span>
+                <span className="px-3 py-1 rounded-full bg-slate-100">Fintech</span>
+                <span className="px-3 py-1 rounded-full bg-slate-100">Education</span>
+                <span className="px-3 py-1 rounded-full bg-slate-100">Hospitality</span>
+              </div>
+            </div>
+            <div className="p-6 rounded-xl border border-slate-200">
+              <div className="text-sm font-bold text-primary mb-2">Founding Story</div>
+              <p className="text-slate-600 text-sm">Wynqor started as a distributed studio with a singular focus: blend strategy, design, and engineering to deliver outcomes. Today we operate globally with a remote-first team and on-ground partners.</p>
+              <ul className="mt-4 space-y-2 text-sm text-slate-600">
+                <li>Outcome-focused delivery</li>
+                <li>Transparent execution</li>
+                <li>Scalable systems and processes</li>
+              </ul>
+            </div>
+            <div className="p-6 rounded-xl border border-slate-200">
+              <div className="text-sm font-bold text-primary mb-2">Trust & Reliability</div>
+              <p className="text-slate-600 text-sm">Structured SOWs, clear timelines, and regular progress updates. Secure handling of assets and data per industry-standard practices.</p>
+              <ul className="mt-4 space-y-2 text-sm text-slate-600">
+                <li>Milestone-based workflows</li>
+                <li>Versioned design and code handoffs</li>
+                <li>Asset backups and encryption in transit</li>
+              </ul>
+            </div>
+          </div>
+        </section>
         <section className="py-12">
           <div className="max-w-[1440px] mx-auto px-4 lg:px-6 grid lg:grid-cols-3 gap-12">
             <div className="lg:col-span-2 space-y-8">

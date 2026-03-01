@@ -67,6 +67,32 @@ const HelpCenter: React.FC<PageProps> = ({ onHomeClick, onLoginClick, onSearch, 
                 </div>
               ))}
             </div>
+            <div className="mt-10 grid md:grid-cols-3 gap-6">
+              <div className="p-6 rounded-xl bg-white border border-slate-200 shadow-sm">
+                <div className="text-sm font-bold text-primary mb-2">Contact Support</div>
+                <ul className="space-y-2 text-sm text-slate-600">
+                  <li>Email: support@wynqor.com</li>
+                  <li>Phone: +91-00000-00000</li>
+                  <li>Hours: Mon–Sat, 10:00–18:00 IST</li>
+                </ul>
+              </div>
+              <div className="p-6 rounded-xl bg-white border border-slate-200 shadow-sm">
+                <div className="text-sm font-bold text-primary mb-2">Order & Billing</div>
+                <ul className="space-y-2 text-sm text-slate-600">
+                  <li>Invoices and GST details</li>
+                  <li>Payment methods and refunds</li>
+                  <li>Service scope and add-ons</li>
+                </ul>
+              </div>
+              <div className="p-6 rounded-xl bg-white border border-slate-200 shadow-sm">
+                <div className="text-sm font-bold text-primary mb-2">Project Delivery</div>
+                <ul className="space-y-2 text-sm text-slate-600">
+                  <li>Milestones and timelines</li>
+                  <li>Asset handoff formats</li>
+                  <li>Revisions and approvals</li>
+                </ul>
+              </div>
+            </div>
             <h2 className="mt-10 text-2xl font-bold text-secondary font-display">FAQs</h2>
             <div className="mt-6 space-y-4">
               {filteredFaqs.map((f, idx) => (

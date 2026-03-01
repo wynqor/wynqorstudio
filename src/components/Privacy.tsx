@@ -33,6 +33,34 @@ const Privacy: React.FC<PageProps> = ({ onHomeClick, onLoginClick, onSearch, onC
             <p className="mt-3 text-slate-300 max-w-2xl">Your privacy matters. This policy explains how we handle data.</p>
           </div>
         </section>
+        <section className="py-12 bg-white border-t border-slate-200">
+          <div className="max-w-[1440px] mx-auto px-4 lg:px-6 grid md:grid-cols-3 gap-8">
+            <div className="p-6 rounded-xl border border-slate-200">
+              <div className="text-sm font-bold text-primary mb-2">Information We Collect</div>
+              <ul className="space-y-2 text-sm text-slate-600">
+                <li>Account details and contact information</li>
+                <li>Project briefs and attachments</li>
+                <li>Usage analytics and device data</li>
+              </ul>
+            </div>
+            <div className="p-6 rounded-xl border border-slate-200">
+              <div className="text-sm font-bold text-primary mb-2">How We Use It</div>
+              <ul className="space-y-2 text-sm text-slate-600">
+                <li>Provide and improve services</li>
+                <li>Communication and support</li>
+                <li>Security and fraud prevention</li>
+              </ul>
+            </div>
+            <div className="p-6 rounded-xl border border-slate-200">
+              <div className="text-sm font-bold text-primary mb-2">Retention & Control</div>
+              <ul className="space-y-2 text-sm text-slate-600">
+                <li>Retention per legal and operational needs</li>
+                <li>Access, correction, deletion requests via support</li>
+                <li>Vendor DPA where applicable</li>
+              </ul>
+            </div>
+          </div>
+        </section>
         <section className="py-12">
           <div className="max-w-[1440px] mx-auto px-4 lg:px-6 grid lg:grid-cols-4 gap-12">
             <aside className="lg:col-span-1">

@@ -714,6 +714,235 @@ export const getServiceDetails = (serviceId: string): ServiceDetailsContent | un
     process: [`Planning`, `Production`, `Review`, `Delivery`],
     features: ['Quality output', 'Source files', 'Support', 'Revisions']
   };
+  const keywordPools: Array<{
+    match: RegExp;
+    why: string[];
+    process: string[];
+    features: string[];
+  }> = [
+    {
+      match: /packaging|label|bottle/i,
+      why: [
+        'Shelf-impact packaging that meets print and manufacturing constraints.',
+        'Consumer-driven design that improves pickup and recall.',
+        'Specification-accurate dielines for flawless production.'
+      ],
+      process: [
+        'Market and competitor study',
+        'Dieline and spec setup',
+        `Concept design for ${s.title}`,
+        'Mockups and regulatory checks'
+      ],
+      features: [
+        'Production-ready dielines',
+        'CMYK and spot color files',
+        '3D and shelf mockups',
+        'Compliance checklist',
+        'Print vendor pack',
+        'Material/finish recommendations'
+      ]
+    },
+    {
+      match: /naming|tagline/i,
+      why: [
+        'Memorable brand naming aligned with positioning and audience.',
+        'Trademark-aware shortlists reduce future legal risk.',
+        'Taglines that communicate promise and differentiation.'
+      ],
+      process: [
+        'Brief and positioning',
+        'Creative sprint and curation',
+        'Shortlist with rationale',
+        'Availability checks'
+      ],
+      features: [
+        'Name shortlist with meanings',
+        'Tagline options and tone notes',
+        'Linguistic checks',
+        'Domain availability scan',
+        'Trademark class guidance',
+        'Rollout recommendations'
+      ]
+    },
+    {
+      match: /business\s*card|letterhead|stationery/i,
+      why: [
+        'Professional stationery that reinforces brand credibility.',
+        'Optimized layouts for readability and print accuracy.',
+        'Consistent system across touchpoints.'
+      ],
+      process: [
+        'Template structure',
+        `Design creation for ${s.title}`,
+        'Proofing and adjustments',
+        'Press-ready exports'
+      ],
+      features: [
+        'Print-ready PDFs with bleeds',
+        'Editable source files',
+        'Color and type specs',
+        'QR and contact optimization',
+        'Multiple layout variants',
+        'Export presets'
+      ]
+    },
+    {
+      match: /social\s*media|poster|flyer|brochure|menu|campaign|banner/i,
+      why: [
+        'Format-specific designs optimized for each platform.',
+        'Clear messaging and hierarchy for fast comprehension.',
+        'Consistent branding across sizes and ratios.'
+      ],
+      process: [
+        'Campaign brief and key message',
+        `Art direction for ${s.title}`,
+        'Multi-size production',
+        'Quality review and export'
+      ],
+      features: [
+        'Post and story variants',
+        'High-res exports',
+        'CTA placement',
+        'Brand grid and margins',
+        'Editable sources',
+        'Scheduling-ready files'
+      ]
+    },
+    {
+      match: /portfolio|business\s*website|landing|redesign|wordpress|e-?commerce|marketplace|booking|lms|membership|static/i,
+      why: [
+        'Conversion-focused layouts with fast performance.',
+        'Semantic structure and SEO-ready content framework.',
+        'Flexible architecture to scale features.'
+      ],
+      process: [
+        'IA and sitemap',
+        `UI design for ${s.title}`,
+        'Frontend implementation',
+        'QA and deployment'
+      ],
+      features: [
+        'Responsive templates',
+        'Core Web Vitals optimization',
+        'Forms and integrations',
+        'Analytics and SEO basics',
+        'Documentation',
+        'Handover session'
+      ]
+    },
+    {
+      match: /seo|google\s*ads|meta\s*ads|social\s*media\s*management|email\s*campaign|influencer|orm|analytics|lead\s*generation|sms|chatbot/i,
+      why: [
+        'Measurable growth through iterative experiments.',
+        'Channel mix tailored to audience and goals.',
+        'Clear reporting and insight loops.'
+      ],
+      process: [
+        'Audit and objectives',
+        `Strategy for ${s.title}`,
+        'Execution and tracking',
+        'Optimization and reporting'
+      ],
+      features: [
+        'KPI and tracking plan',
+        'Creatives and copy',
+        'A/B testing',
+        'Weekly performance snapshots',
+        'Monthly reports',
+        'Compliance checklist'
+      ]
+    },
+    {
+      match: /ui|ux|wireframe|prototype|journey|design\s*system|usability/i,
+      why: [
+        'Evidence-based decisions from user insights.',
+        'Design system to accelerate delivery.',
+        'Validated flows reduce rework.'
+      ],
+      process: [
+        'Research and personas',
+        `Wireframes for ${s.title}`,
+        'High-fidelity design',
+        'Usability sessions'
+      ],
+      features: [
+        'Interactive prototypes',
+        'Tokenized components',
+        'Accessibility notes',
+        'Dev-ready specs',
+        'Handoff package',
+        'Test report'
+      ]
+    },
+    {
+      match: /copywriting|blog|product\s*description|ad\s*copy|script|whitepaper|press\s*release|caption/i,
+      why: [
+        'Persuasive copy tuned to audience intent.',
+        'SEO and readability baked into the structure.',
+        'Consistent tone aligned to brand.'
+      ],
+      process: [
+        'Brief and research',
+        `Outline for ${s.title}`,
+        'Draft and revisions',
+        'Optimization and final'
+      ],
+      features: [
+        'Keywords and meta',
+        'Headlines and CTAs',
+        'Internal linking',
+        'Proofread deliverables',
+        'Tone and style notes',
+        'Distribution snippets'
+      ]
+    },
+    {
+      match: /promo|explainer|reel|short|logo\s*animation|voiceover|subtitle|motion\s*poster|demo|2d|3d|corporate\s*(presentation|documentary)|wedding|festival|virtual\s*tour|ar\s*filter/i,
+      why: [
+        'Story-first production to drive engagement.',
+        'Professional assets across sound and visuals.',
+        'Multi-format delivery for broad reach.'
+      ],
+      process: [
+        'Concept and script',
+        `Production for ${s.title}`,
+        'Edit and sound',
+        'Masters and handoff'
+      ],
+      features: [
+        'VO and music options',
+        'Motion graphics',
+        'Captions and subtitles',
+        'Multiple aspect ratios',
+        'Color and audio mix',
+        'Delivery masters'
+      ]
+    },
+    {
+      match: /photography|drone|lifestyle|fashion|jewelry|staging|360/i,
+      why: [
+        'High-quality visuals that elevate products and brand.',
+        'Controlled lighting and framing for consistency.',
+        'Editing pipeline for polished delivery.'
+      ],
+      process: [
+        'Prep and shot list',
+        `Shoot for ${s.title}`,
+        'Selection and edits',
+        'Delivery and usage rights'
+      ],
+      features: [
+        'High-res exports',
+        'Multiple angles',
+        'Lifestyle and studio sets',
+        'Retouching',
+        'Usage license',
+        'Online gallery'
+      ]
+    }
+  ];
+  const matched = keywordPools.find(k => k.match.test(s.title) || k.match.test(s.id));
+  const basePool = matched ? matched : cat;
   const pickMany = (arr: string[], count: number) => {
     const res: string[] = [];
     const used = new Set<number>();
@@ -726,9 +955,27 @@ export const getServiceDetails = (serviceId: string): ServiceDetailsContent | un
     }
     return res;
   };
-  const why = pickMany(cat.why, 1)[0];
-  const process = pickMany(cat.process, Math.min(4, cat.process.length));
-  const features = pickMany(cat.features, Math.min(6, cat.features.length));
+  const nSeed = (min: number, max: number) => {
+    const span = Math.max(1, max - min + 1);
+    const val = min + (rnd(span) % span);
+    h = (h * 16777619) >>> 0;
+    return val;
+  };
+  const quantify = (text: string): string => {
+    if (/concept|option|variant/i.test(text)) {
+      const a = nSeed(2, 5), b = nSeed(a, a + 3);
+      return `${a}–${b} ${text}`;
+    }
+    if (/post|size|angle|screen/i.test(text)) {
+      const a = nSeed(3, 10);
+      return `${a} ${text}`;
+    }
+    return text;
+  };
+  const why = pickMany(basePool.why, 1)[0];
+  const process = pickMany(basePool.process, Math.min(4, basePool.process.length));
+  const featuresRaw = pickMany(basePool.features, Math.min(6, basePool.features.length));
+  const features = featuresRaw.map(quantify);
   const peers = services.filter(x => x.category === s.category && x.id !== s.id).slice(0, 3).map(x => x.id);
   return {
     id: s.id,

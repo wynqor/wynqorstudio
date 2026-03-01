@@ -1,3 +1,4 @@
+import React from 'react';
 import Header from './Header';
 import Footer from './Footer';
 import { useAuth } from '../context/AuthContext';
@@ -22,6 +23,23 @@ const Dashboard = ({ onHomeClick, onLoginClick, onSearch, onCartClick, onService
   const { user } = useAuth();
   const { cartItems, getCartTotal } = useCart();
   const { watchItems, removeFromWatchlist } = useWatchlist();
+  const paymentsStorageKey = user?.email ? `wynqor-payments:${user.email}` : 'wynqor-payments';
+  const [showPaymentModal, setShowPaymentModal] = React.useState(false);
+  const [selectedRequest, setSelectedRequest] = React.useState<any | null>(null);
+  const [paymentMethod, setPaymentMethod] = React.useState<'UPI' | 'Bank Transfer' | 'Card (Mock)'>('UPI');
+  const [paymentRef, setPaymentRef] = React.useState('');
+  const [paymentNote, setPaymentNote] = React.useState('');
+  const payments = (() => {
+    try {
+      const raw = localStorage.getItem(paymentsStorageKey) || localStorage.getItem('wynqor-payments');
+      return raw ? JSON.parse(raw) : {};
+    } catch {
+      return {};
+    }
+  })() as Record<string, { status: 'Unpaid' | 'Paid' | 'Failed'; method?: string; ref?: string; note?: string; paidAt?: string }>;
+  const getPaymentStatus = (reqId: string) => payments[reqId]?.status || 'Unpaid';
+  const upiId = 'wynqor@upi';
+  const bankInfo = { account: 'Wynqor Pvt Ltd', number: '0000000000', ifsc: 'BANK0000000' };
   const requests = (() => {
     try {
       const key = user?.email ? `wynqor-requests:${user.email}` : 'wynqor-requests';
@@ -31,6 +49,44 @@ const Dashboard = ({ onHomeClick, onLoginClick, onSearch, onCartClick, onService
       return [];
     }
   })();
+
+  const openPaymentFor = (req: any) => {
+    setSelectedRequest(req);
+    setPaymentMethod('UPI');
+    setPaymentRef('');
+    setPaymentNote('');
+    setShowPaymentModal(true);
+  };
+
+  const savePayment = (reqId: string, record: { status: 'Unpaid' | 'Paid' | 'Failed'; method?: string; ref?: string; note?: string; paidAt?: string }) => {
+    try {
+      const raw = localStorage.getItem(paymentsStorageKey);
+      const obj = raw ? JSON.parse(raw) : {};
+      obj[reqId] = record;
+      localStorage.setItem(paymentsStorageKey, JSON.stringify(obj));
+    } catch {
+      try {
+        const raw = localStorage.getItem('wynqor-payments');
+        const obj = raw ? JSON.parse(raw) : {};
+        obj[reqId] = record;
+        localStorage.setItem('wynqor-payments', JSON.stringify(obj));
+      } catch { void 0; }
+    }
+  };
+
+  const handlePaymentSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!selectedRequest) return;
+    const record = {
+      status: 'Paid' as const,
+      method: paymentMethod,
+      ref: paymentRef,
+      note: paymentNote,
+      paidAt: new Date().toISOString()
+    };
+    savePayment(selectedRequest.requestId, record);
+    setShowPaymentModal(false);
+  };
 
   return (
     <div className="bg-slate-50 text-text-main font-body antialiased selection:bg-primary/20 selection:text-primary-dark">
@@ -133,6 +189,21 @@ const Dashboard = ({ onHomeClick, onLoginClick, onSearch, onCartClick, onService
                       <div className="text-sm text-slate-500">{new Date(req.submittedAt).toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' })}</div>
                     </div>
                     <div className="text-sm text-slate-600 mt-2">Total: ₹{Number(req.total || 0).toFixed(2)}</div>
+                    <div className="mt-2 flex items-center gap-2">
+                      <span className={`text-xs font-bold px-2 py-1 rounded ${getPaymentStatus(req.requestId) === 'Paid' ? 'bg-emerald-100 text-emerald-700' : 'bg-amber-100 text-amber-700'}`}>
+                        {getPaymentStatus(req.requestId)}
+                      </span>
+                      {getPaymentStatus(req.requestId) !== 'Paid' && (
+                        <button onClick={() => openPaymentFor(req)} className="text-xs font-bold px-3 py-1 rounded bg-primary text-white hover:bg-primary-dark">
+                          Pay Now
+                        </button>
+                      )}
+                      {getPaymentStatus(req.requestId) === 'Paid' && (
+                        <button onClick={() => openPaymentFor(req)} className="text-xs font-bold px-3 py-1 rounded border border-slate-300 text-slate-700 hover:bg-slate-50">
+                          View Payment
+                        </button>
+                      )}
+                    </div>
                     <div className="mt-3">
                       <div className="text-xs font-bold text-slate-600 mb-1">Services in this request:</div>
                       <ul className="text-xs text-slate-500 space-y-1">
@@ -146,6 +217,66 @@ const Dashboard = ({ onHomeClick, onLoginClick, onSearch, onCartClick, onService
               </div>
             )}
           </section>
+          {showPaymentModal && selectedRequest && (
+            <section className="fixed inset-0 z-50 bg-black/40 flex items-center justify-center">
+              <div className="w-full max-w-[640px] mx-auto bg-white rounded-2xl border border-slate-200 shadow-xl p-6">
+                <div className="flex items-center justify-between">
+                  <h3 className="text-lg font-bold text-secondary font-display">Payment for {selectedRequest.requestId}</h3>
+                  <button onClick={() => setShowPaymentModal(false)} className="text-slate-500 hover:text-primary">
+                    <span className="material-symbols-outlined">close</span>
+                  </button>
+                </div>
+                <div className="mt-3 text-sm text-slate-600">Amount Due: <span className="font-bold text-secondary">₹{Number(selectedRequest.total || 0).toFixed(2)}</span></div>
+                <form onSubmit={handlePaymentSubmit} className="mt-6 space-y-4">
+                  <div>
+                    <label className="block text-sm font-semibold text-slate-700 mb-2">Payment Method</label>
+                    <select value={paymentMethod} onChange={e => setPaymentMethod(e.target.value as any)} className="w-full px-3 py-2 rounded-lg border border-slate-200">
+                      <option>UPI</option>
+                      <option>Bank Transfer</option>
+                      <option>Card (Mock)</option>
+                    </select>
+                  </div>
+                  {paymentMethod === 'UPI' && (
+                    <div className="text-xs text-slate-600 bg-slate-50 border border-slate-200 rounded-lg p-3">
+                      Pay to UPI ID: <span className="font-bold">{upiId}</span>. Enter your transaction/reference ID below after payment.
+                    </div>
+                  )}
+                  {paymentMethod === 'Bank Transfer' && (
+                    <div className="text-xs text-slate-600 bg-slate-50 border border-slate-200 rounded-lg p-3">
+                      Account: <span className="font-bold">{bankInfo.account}</span><br/>
+                      Account No: <span className="font-bold">{bankInfo.number}</span><br/>
+                      IFSC: <span className="font-bold">{bankInfo.ifsc}</span>
+                    </div>
+                  )}
+                  {paymentMethod === 'Card (Mock)' && (
+                    <div className="text-xs text-slate-600 bg-slate-50 border border-slate-200 rounded-lg p-3">
+                      Mock card payment for testing on Vercel free tier. No actual charge.
+                    </div>
+                  )}
+                  <div>
+                    <label className="block text-sm font-semibold text-slate-700 mb-2">Transaction/Reference ID</label>
+                    <input value={paymentRef} onChange={e => setPaymentRef(e.target.value)} className="w-full px-3 py-2 rounded-lg border border-slate-200" placeholder="e.g., UPI/Bank txn ID"/>
+                  </div>
+                  <div>
+                    <label className="block text-sm font-semibold text-slate-700 mb-2">Note (optional)</label>
+                    <textarea value={paymentNote} onChange={e => setPaymentNote(e.target.value)} className="w-full px-3 py-2 rounded-lg border border-slate-200" rows={3} placeholder="Any additional info..."/>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <button type="submit" className="px-4 py-2 rounded-lg bg-primary text-white font-bold">Mark as Paid</button>
+                    <button type="button" onClick={() => setShowPaymentModal(false)} className="px-4 py-2 rounded-lg border border-slate-200 text-slate-700 font-bold">Cancel</button>
+                  </div>
+                </form>
+                {payments[selectedRequest.requestId]?.status === 'Paid' && (
+                  <div className="mt-6 text-xs text-slate-600">
+                    Current Status: <span className="font-bold text-emerald-700">Paid</span><br/>
+                    Method: {payments[selectedRequest.requestId]?.method}<br/>
+                    Ref: {payments[selectedRequest.requestId]?.ref}<br/>
+                    Paid At: {new Date(payments[selectedRequest.requestId]?.paidAt || '').toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' })}
+                  </div>
+                )}
+              </div>
+            </section>
+          )}
         </div>
       </main>
       <Footer

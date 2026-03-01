@@ -208,7 +208,7 @@ function AppContent() {
             // Store request ID for success page
             setTimeout(() => {
               // In a real app, you'd pass the requestId to the success page
-              // console.log('Request submitted successfully with ID:', requestId);
+              console.log('Request submitted successfully with ID:', requestId);
             }, 100);
           } else {
             // Error - navigate to failed page
@@ -294,8 +294,6 @@ function AppContent() {
       onHelpClick={() => togglePage('help')}
       onTermsClick={() => togglePage('terms')}
       onPrivacyClick={() => togglePage('privacy')}
-      onPaymentSuccess={() => togglePage('success')}
-      onPaymentFailed={() => togglePage('failed')}
     />;
   }
 

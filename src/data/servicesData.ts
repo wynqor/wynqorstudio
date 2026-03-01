@@ -209,7 +209,7 @@ const defaultImages: Record<string, string> = {
 };
 
 const defaultPricing: Record<string, { price: string; duration: string }> = {
-  'Branding & Identity Design': { price: '₹1,499', duration: '3 Days' },
+  'Branding & Identity Design': { price: '₹1', duration: '3 Days' },
   'Poster & Graphic Design': { price: '₹999', duration: '2 Days' },
   'Outdoor Advertising & Media': { price: '₹3,499', duration: '5 Days' },
   'Website Design & Development': { price: '₹9,999', duration: '12 Days' },

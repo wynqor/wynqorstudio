@@ -26,9 +26,6 @@ const Dashboard = ({ onHomeClick, onLoginClick, onSearch, onCartClick, onService
   const paymentsStorageKey = user?.email ? `wynqor-payments:${user.email}` : 'wynqor-payments';
   const [showPaymentModal, setShowPaymentModal] = React.useState(false);
   const [selectedRequest, setSelectedRequest] = React.useState<any | null>(null);
-  const [paymentMethod, setPaymentMethod] = React.useState<'UPI' | 'Bank Transfer' | 'Card (Mock)'>('UPI');
-  const [paymentRef, setPaymentRef] = React.useState('');
-  const [paymentNote, setPaymentNote] = React.useState('');
   const [isPaying, setIsPaying] = React.useState(false);
   const razorpayKey = (import.meta as any).env.VITE_RAZORPAY_KEY_ID || '';
   const payments = (() => {
@@ -40,7 +37,6 @@ const Dashboard = ({ onHomeClick, onLoginClick, onSearch, onCartClick, onService
     }
   })() as Record<string, { status: 'Unpaid' | 'Paid' | 'Failed'; method?: string; ref?: string; note?: string; paidAt?: string }>;
   const getPaymentStatus = (reqId: string) => payments[reqId]?.status || 'Unpaid';
-  const bankInfo = { account: 'Wynqor Pvt Ltd', number: '0000000000', ifsc: 'BANK0000000' };
   const requests = (() => {
     try {
       const key = user?.email ? `wynqor-requests:${user.email}` : 'wynqor-requests';
@@ -53,9 +49,6 @@ const Dashboard = ({ onHomeClick, onLoginClick, onSearch, onCartClick, onService
 
   const openPaymentFor = (req: any) => {
     setSelectedRequest(req);
-    setPaymentMethod('UPI');
-    setPaymentRef('');
-    setPaymentNote('');
     setShowPaymentModal(true);
   };
 
@@ -73,20 +66,6 @@ const Dashboard = ({ onHomeClick, onLoginClick, onSearch, onCartClick, onService
         localStorage.setItem('wynqor-payments', JSON.stringify(obj));
       } catch { void 0; }
     }
-  };
-
-  const handlePaymentSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!selectedRequest) return;
-    const record = {
-      status: 'Paid' as const,
-      method: paymentMethod,
-      ref: paymentRef,
-      note: paymentNote,
-      paidAt: new Date().toISOString()
-    };
-    savePayment(selectedRequest.requestId, record);
-    setShowPaymentModal(false);
   };
 
   const loadScript = (src: string) =>
@@ -141,9 +120,9 @@ const Dashboard = ({ onHomeClick, onLoginClick, onSearch, onCartClick, onService
           if (v?.success) {
             savePayment(selectedRequest.requestId, {
               status: 'Paid',
-              method: 'Razorpay UPI',
+              method: 'UPI (Razorpay)',
               ref: response.razorpay_payment_id,
-              note: paymentNote,
+              note: '',
               paidAt: new Date().toISOString()
             });
             setShowPaymentModal(false);
@@ -299,50 +278,22 @@ const Dashboard = ({ onHomeClick, onLoginClick, onSearch, onCartClick, onService
                   </button>
                 </div>
                 <div className="mt-3 text-sm text-slate-600">Amount Due: <span className="font-bold text-secondary">₹{Number(selectedRequest.total || 0).toFixed(2)}</span></div>
-                <form onSubmit={handlePaymentSubmit} className="mt-6 space-y-4">
-                  <div>
-                    <label className="block text-sm font-semibold text-slate-700 mb-2">Payment Method</label>
-                    <select value={paymentMethod} onChange={e => setPaymentMethod(e.target.value as any)} className="w-full px-3 py-2 rounded-lg border border-slate-200">
-                      <option>UPI</option>
-                      <option>Bank Transfer</option>
-                      <option>Card (Mock)</option>
-                    </select>
+                <div className="mt-6 space-y-4">
+                  <div className="text-xs text-slate-600 bg-slate-50 border border-slate-200 rounded-lg p-3">
+                    Sirf UPI/QR ke through payment karein. Neeche “Pay via UPI QR” button se Razorpay checkout khulega aur aap QR scan karke payment kar sakte hain. Payment successful hote hi status “Paid” ho jayega.
                   </div>
-                  {paymentMethod === 'UPI' && (
-                    <div className="text-xs text-slate-600 bg-slate-50 border border-slate-200 rounded-lg p-3">
-                      Scan and pay using UPI. Click the button below to open UPI QR and complete payment.
-                      <div className="mt-3">
-                        <button disabled={!razorpayKey || isPaying} onClick={startRazorpayUpi} className="px-4 py-2 rounded-lg bg-primary text-white font-bold disabled:bg-slate-400">
-                          {isPaying ? 'Processing...' : 'Pay via UPI QR'}
-                        </button>
-                      </div>
-                    </div>
-                  )}
-                  {paymentMethod === 'Bank Transfer' && (
-                    <div className="text-xs text-slate-600 bg-slate-50 border border-slate-200 rounded-lg p-3">
-                      Account: <span className="font-bold">{bankInfo.account}</span><br/>
-                      Account No: <span className="font-bold">{bankInfo.number}</span><br/>
-                      IFSC: <span className="font-bold">{bankInfo.ifsc}</span>
-                    </div>
-                  )}
-                  {paymentMethod === 'Card (Mock)' && (
-                    <div className="text-xs text-slate-600 bg-slate-50 border border-slate-200 rounded-lg p-3">
-                      Mock card payment for testing on Vercel free tier. No actual charge.
+                  {!razorpayKey && (
+                    <div className="text-xs text-rose-600 bg-rose-50 border border-rose-200 rounded-lg p-3">
+                      Real UPI/QR payment enable karne ke liye environment me VITE_RAZORPAY_KEY_ID set karna hoga.
                     </div>
                   )}
                   <div>
-                    <label className="block text-sm font-semibold text-slate-700 mb-2">Transaction/Reference ID</label>
-                    <input value={paymentRef} onChange={e => setPaymentRef(e.target.value)} className="w-full px-3 py-2 rounded-lg border border-slate-200" placeholder="e.g., UPI/Bank txn ID"/>
+                    <button disabled={!razorpayKey || isPaying} onClick={startRazorpayUpi} className="px-4 py-2 rounded-lg bg-primary text-white font-bold disabled:bg-slate-400">
+                      {isPaying ? 'Processing...' : 'Pay via UPI QR'}
+                    </button>
+                    <button type="button" onClick={() => setShowPaymentModal(false)} className="ml-3 px-4 py-2 rounded-lg border border-slate-200 text-slate-700 font-bold">Close</button>
                   </div>
-                  <div>
-                    <label className="block text-sm font-semibold text-slate-700 mb-2">Note (optional)</label>
-                    <textarea value={paymentNote} onChange={e => setPaymentNote(e.target.value)} className="w-full px-3 py-2 rounded-lg border border-slate-200" rows={3} placeholder="Any additional info..."/>
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <button type="submit" className="px-4 py-2 rounded-lg bg-primary text-white font-bold">Mark as Paid</button>
-                    <button type="button" onClick={() => setShowPaymentModal(false)} className="px-4 py-2 rounded-lg border border-slate-200 text-slate-700 font-bold">Cancel</button>
-                  </div>
-                </form>
+                </div>
                 {payments[selectedRequest.requestId]?.status === 'Paid' && (
                   <div className="mt-6 text-xs text-slate-600">
                     Current Status: <span className="font-bold text-emerald-700">Paid</span><br/>

@@ -230,11 +230,8 @@ Time: ${submittedAt}
 
     const ranges = data.cartItems.map(i => parseRange(i.duration));
     const minDays = Math.max(1, ...ranges.map(r => r.min || 0));
-    const sumUpperMinusOne = ranges.reduce((acc, r) => {
-      const upperFinal = Math.max(r.min || 0, (r.max || 0) - 1); // use upperBound - 1 as requested
-      return acc + Math.max(0, upperFinal);
-    }, 0);
-    const maxDays = Math.max(minDays, sumUpperMinusOne || minDays);
+    const sumUpper = ranges.reduce((acc, r) => acc + Math.max(0, r.max || 0), 0);
+    const maxDays = Math.max(minDays, sumUpper || minDays);
 
     const suggested = new Date();
     suggested.setDate(suggested.getDate() + minDays);

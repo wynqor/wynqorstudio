@@ -216,18 +216,31 @@ Time: ${submittedAt}
   }
 
   private computeDelivery(data: EmailData) {
-    const days = data.cartItems.map(i => {
-      const n = parseInt((i.duration || '').split(' ')[0]);
-      return isNaN(n) ? 0 : n;
-    });
-    const maxDays = Math.max(1, ...days);
-    const sumDays = days.reduce((a, b) => a + b, 0);
-    const minDays = Math.max(1, maxDays);
+    const parseRange = (duration?: string): { min: number; max: number } => {
+      const raw = (duration || '').split(' ')[0]; // "5–7" or "5"
+      if (!raw) return { min: 0, max: 0 };
+      const parts = raw.split('–');
+      const min = parseInt(parts[0] || '0');
+      const max = parts[1] ? parseInt(parts[1]) : min;
+      return {
+        min: isNaN(min) ? 0 : min,
+        max: isNaN(max) ? (isNaN(min) ? 0 : min) : max
+      };
+    };
+
+    const ranges = data.cartItems.map(i => parseRange(i.duration));
+    const minDays = Math.max(1, ...ranges.map(r => r.min || 0));
+    const sumUpperMinusOne = ranges.reduce((acc, r) => {
+      const upperFinal = Math.max(r.min || 0, (r.max || 0) - 1); // use upperBound - 1 as requested
+      return acc + Math.max(0, upperFinal);
+    }, 0);
+    const maxDays = Math.max(minDays, sumUpperMinusOne || minDays);
+
     const suggested = new Date();
     suggested.setDate(suggested.getDate() + minDays);
     const suggestedDate = suggested.toLocaleDateString('en-IN', { year: 'numeric', month: 'long', day: 'numeric' });
     const deadlineText = this.formatDeadline(data.deadline);
-    return { minDays, maxDays: sumDays || minDays, suggestedDate, deadlineText };
+    return { minDays, maxDays, suggestedDate, deadlineText };
   }
 
   private generateClientEmailContent(data: EmailData): string {

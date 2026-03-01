@@ -1,4 +1,5 @@
 import React from 'react';
+import logo from '../images/logo1.jpeg';
 
 interface LoginHeaderProps {
   onHomeClick?: () => void;
@@ -13,7 +14,7 @@ const LoginHeader: React.FC<LoginHeaderProps> = ({ onHomeClick }) => {
             onClick={onHomeClick}
             className="flex items-center gap-2.5 group bg-transparent border-none cursor-pointer"
           >
-            <div className="size-9 bg-primary rounded-xl shadow-lg shadow-primary/20 flex items-center justify-center text-white font-black text-xl group-hover:bg-primary-dark transition-colors">W</div>
+            <img src={logo} alt="Wynqor" className="size-9 rounded-xl shadow-lg shadow-primary/20 object-cover" />
             <h1 className="text-2xl font-bold tracking-tight dark:text-white text-secondary font-display">Wynqor<span className="text-primary text-3xl leading-none">.</span></h1>
           </button>
         </div>

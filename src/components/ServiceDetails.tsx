@@ -252,7 +252,7 @@ const ServiceDetails: React.FC<ServiceDetailsProps> = ({
                       <div className="flex items-center gap-1">
                         <span className="material-symbols-outlined fill text-yellow-400 text-[20px]">star</span>
                         <span className="text-slate-900 font-bold text-lg">{service.rating}</span>
-                        <span className="text-slate-400 text-sm ml-1">(127 Reviews)</span>
+                        <span className="text-slate-400 text-sm ml-1">({service.reviewCount || 120} Reviews)</span>
                       </div>
                       <div className="h-4 w-px bg-slate-300"></div>
                       <div className="flex items-center gap-2">

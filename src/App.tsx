@@ -294,8 +294,6 @@ function AppContent() {
       onHelpClick={() => togglePage('help')}
       onTermsClick={() => togglePage('terms')}
       onPrivacyClick={() => togglePage('privacy')}
-      onPaymentSuccess={() => togglePage('success')}
-      onPaymentFailed={() => togglePage('failed')}
     />;
   }
 

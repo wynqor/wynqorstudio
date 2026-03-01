@@ -18,11 +18,9 @@ interface DashboardProps {
   onHelpClick?: () => void;
   onTermsClick?: () => void;
   onPrivacyClick?: () => void;
-  onPaymentSuccess?: () => void;
-  onPaymentFailed?: () => void;
 }
 
-const Dashboard = ({ onHomeClick, onLoginClick, onSearch, onCartClick, onServiceDetails, onAboutClick, onCareersClick, onBlogClick, onHelpClick, onTermsClick, onPrivacyClick, onPaymentSuccess, onPaymentFailed }: DashboardProps) => {
+const Dashboard = ({ onHomeClick, onLoginClick, onSearch, onCartClick, onServiceDetails, onAboutClick, onCareersClick, onBlogClick, onHelpClick, onTermsClick, onPrivacyClick }: DashboardProps) => {
   const { user } = useAuth();
   const { cartItems, getCartTotal } = useCart();
   const { watchItems, removeFromWatchlist } = useWatchlist();
@@ -119,8 +117,7 @@ const Dashboard = ({ onHomeClick, onLoginClick, onSearch, onCartClick, onService
               paidAt: new Date().toISOString()
             });
             sessionStorage.setItem('lastRequestId', selectedRequest.requestId);
-            setShowPaymentModal(false);
-            onPaymentFailed?.();
+            // Keep modal open to show status and allow retry
           }
         },
         handler: async function (response: any) {
@@ -155,8 +152,7 @@ const Dashboard = ({ onHomeClick, onLoginClick, onSearch, onCartClick, onService
               });
             } catch { /* noop */ }
             sessionStorage.setItem('lastRequestId', selectedRequest.requestId);
-            setShowPaymentModal(false);
-            onPaymentSuccess?.();
+            // Keep modal open to show success details
           }
         },
         method: { upi: true, card: false, netbanking: false, wallet: false }
@@ -172,8 +168,7 @@ const Dashboard = ({ onHomeClick, onLoginClick, onSearch, onCartClick, onService
             paidAt: new Date().toISOString()
           });
           sessionStorage.setItem('lastRequestId', selectedRequest.requestId);
-          setShowPaymentModal(false);
-          onPaymentFailed?.();
+          // Keep modal open to allow retry
         });
       }
       rz.open();
@@ -186,8 +181,7 @@ const Dashboard = ({ onHomeClick, onLoginClick, onSearch, onCartClick, onService
         paidAt: new Date().toISOString()
       });
       sessionStorage.setItem('lastRequestId', selectedRequest.requestId || '');
-      onPaymentFailed?.();
-      setShowPaymentModal(false);
+      // Keep modal open to allow retry
     } finally {
       setIsPaying(false);
     }

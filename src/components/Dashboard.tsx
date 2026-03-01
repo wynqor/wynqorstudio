@@ -18,9 +18,11 @@ interface DashboardProps {
   onHelpClick?: () => void;
   onTermsClick?: () => void;
   onPrivacyClick?: () => void;
+  onPaymentSuccess?: () => void;
+  onPaymentFailed?: () => void;
 }
 
-const Dashboard = ({ onHomeClick, onLoginClick, onSearch, onCartClick, onServiceDetails, onAboutClick, onCareersClick, onBlogClick, onHelpClick, onTermsClick, onPrivacyClick }: DashboardProps) => {
+const Dashboard = ({ onHomeClick, onLoginClick, onSearch, onCartClick, onServiceDetails, onAboutClick, onCareersClick, onBlogClick, onHelpClick, onTermsClick, onPrivacyClick, onPaymentSuccess, onPaymentFailed }: DashboardProps) => {
   const { user } = useAuth();
   const { cartItems, getCartTotal } = useCart();
   const { watchItems, removeFromWatchlist } = useWatchlist();
@@ -106,7 +108,21 @@ const Dashboard = ({ onHomeClick, onLoginClick, onSearch, onCartClick, onService
         order_id: order.id,
         notes: { requestId: selectedRequest.requestId },
         prefill: { email: user?.email || '', name: user?.name || '' },
-        theme: { color: '#3b82f6' },
+        theme: { color: '#0ea5e9' },
+        modal: {
+          ondismiss: () => {
+            savePayment(selectedRequest.requestId, {
+              status: 'Failed',
+              method: 'UPI (Razorpay)',
+              ref: '',
+              note: '',
+              paidAt: new Date().toISOString()
+            });
+            sessionStorage.setItem('lastRequestId', selectedRequest.requestId);
+            setShowPaymentModal(false);
+            onPaymentFailed?.();
+          }
+        },
         handler: async function (response: any) {
           const verifyResp = await fetch('/api/verifyPayment', {
             method: 'POST',
@@ -138,14 +154,39 @@ const Dashboard = ({ onHomeClick, onLoginClick, onSearch, onCartClick, onService
                 submittedAt: selectedRequest.submittedAt || ''
               });
             } catch { /* noop */ }
+            sessionStorage.setItem('lastRequestId', selectedRequest.requestId);
             setShowPaymentModal(false);
+            onPaymentSuccess?.();
           }
         },
         method: { upi: true, card: false, netbanking: false, wallet: false }
       };
       const rz = new (window as any).Razorpay(options);
+      if (rz && typeof rz.on === 'function') {
+        rz.on('payment.failed', () => {
+          savePayment(selectedRequest.requestId, {
+            status: 'Failed',
+            method: 'UPI (Razorpay)',
+            ref: '',
+            note: '',
+            paidAt: new Date().toISOString()
+          });
+          sessionStorage.setItem('lastRequestId', selectedRequest.requestId);
+          setShowPaymentModal(false);
+          onPaymentFailed?.();
+        });
+      }
       rz.open();
     } catch (e) {
+      savePayment(selectedRequest.requestId, {
+        status: 'Failed',
+        method: 'UPI (Razorpay)',
+        ref: '',
+        note: '',
+        paidAt: new Date().toISOString()
+      });
+      sessionStorage.setItem('lastRequestId', selectedRequest.requestId || '');
+      onPaymentFailed?.();
       setShowPaymentModal(false);
     } finally {
       setIsPaying(false);
@@ -254,17 +295,23 @@ const Dashboard = ({ onHomeClick, onLoginClick, onSearch, onCartClick, onService
                     </div>
                     <div className="text-sm text-slate-600 mt-2">Total: ₹{Number(req.total || 0).toFixed(2)}</div>
                     <div className="mt-2 flex items-center gap-2">
-                      <span className={`text-xs font-bold px-2 py-1 rounded ${getPaymentStatus(req.requestId) === 'Paid' ? 'bg-emerald-100 text-emerald-700' : 'bg-amber-100 text-amber-700'}`}>
-                        {getPaymentStatus(req.requestId)}
+                      <span className={`text-xs font-bold px-2 py-1 rounded ${
+                        getPaymentStatus(req.requestId) === 'Paid'
+                          ? 'bg-emerald-100 text-emerald-700'
+                          : getPaymentStatus(req.requestId) === 'Failed'
+                            ? 'bg-rose-100 text-rose-700'
+                            : 'bg-amber-100 text-amber-700'
+                      }`}>
+                        {getPaymentStatus(req.requestId) === 'Failed' ? 'Failed — Retry' : getPaymentStatus(req.requestId)}
                       </span>
                       {getPaymentStatus(req.requestId) !== 'Paid' && (
-                        <button onClick={() => openPaymentFor(req)} className="text-xs font-bold px-3 py-1 rounded bg-primary text-white hover:bg-primary-dark">
-                          Pay Now
+                        <button onClick={() => openPaymentFor(req)} className="text-xs font-bold px-3 py-1 rounded bg-primary text-white hover:bg-primary-dark shadow-sm">
+                          Pay Securely
                         </button>
                       )}
                       {getPaymentStatus(req.requestId) === 'Paid' && (
-                        <button onClick={() => openPaymentFor(req)} className="text-xs font-bold px-3 py-1 rounded border border-slate-300 text-slate-700 hover:bg-slate-50">
-                          View Payment
+                        <button onClick={() => openPaymentFor(req)} className="text-xs font-bold px-3 py-1 rounded border border-primary text-primary hover:bg-primary/10">
+                          Payment Details
                         </button>
                       )}
                     </div>
@@ -292,16 +339,13 @@ const Dashboard = ({ onHomeClick, onLoginClick, onSearch, onCartClick, onService
                 </div>
                 <div className="mt-3 text-sm text-slate-600">Amount Due: <span className="font-bold text-secondary">₹{Number(selectedRequest.total || 0).toFixed(2)}</span></div>
                 <div className="mt-6 space-y-4">
-                  <div className="text-xs text-slate-600 bg-slate-50 border border-slate-200 rounded-lg p-3">
-                    Sirf UPI/QR ke through payment karein. Neeche “Pay via UPI QR” button se Razorpay checkout khulega aur aap QR scan karke payment kar sakte hain. Payment successful hote hi status “Paid” ho jayega.
-                  </div>
                   {!razorpayKey && (
                     <div className="text-xs text-rose-600 bg-rose-50 border border-rose-200 rounded-lg p-3">
                       Real UPI/QR payment enable karne ke liye environment me VITE_RAZORPAY_KEY_ID set karna hoga.
                     </div>
                   )}
                   <div>
-                    <button disabled={!razorpayKey || isPaying} onClick={startRazorpayUpi} className="px-4 py-2 rounded-lg bg-primary text-white font-bold disabled:bg-slate-400">
+                    <button disabled={!razorpayKey || isPaying} onClick={startRazorpayUpi} className="px-5 py-3 rounded-xl bg-primary text-white font-bold disabled:bg-slate-400 shadow-lg hover:bg-primary-dark">
                       {isPaying ? 'Processing...' : 'Pay via UPI QR'}
                     </button>
                     <button type="button" onClick={() => setShowPaymentModal(false)} className="ml-3 px-4 py-2 rounded-lg border border-slate-200 text-slate-700 font-bold">Close</button>
@@ -313,6 +357,14 @@ const Dashboard = ({ onHomeClick, onLoginClick, onSearch, onCartClick, onService
                     Method: {payments[selectedRequest.requestId]?.method}<br/>
                     Ref: {payments[selectedRequest.requestId]?.ref}<br/>
                     Paid At: {new Date(payments[selectedRequest.requestId]?.paidAt || '').toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' })}
+                  </div>
+                )}
+                {payments[selectedRequest.requestId]?.status === 'Failed' && (
+                  <div className="mt-6 text-xs text-slate-600">
+                    Current Status: <span className="font-bold text-rose-700">Failed</span><br/>
+                    <button disabled={isPaying} onClick={startRazorpayUpi} className="mt-2 px-4 py-2 rounded-lg bg-primary text-white font-bold disabled:bg-slate-400">
+                      Retry Payment
+                    </button>
                   </div>
                 )}
               </div>

@@ -7,12 +7,13 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   }
 
   try {
-    const smtpHost = process.env.SMTP_HOST;
-    const smtpPort = Number(process.env.SMTP_PORT || 587);
-    const smtpUser = process.env.SMTP_USER;
-    const smtpPass = process.env.SMTP_PASS;
+    const smtpHost = process.env.SMTP_HOST || 'smtp.gmail.com';
+    const smtpPort = Number(process.env.SMTP_PORT || 465);
+    const smtpUser = process.env.SMTP_USER || process.env.EMAIL_USER;
+    const rawPass = process.env.SMTP_PASS || process.env.EMAIL_PASS || '';
+    const smtpPass = rawPass.replace(/\s+/g, '');
 
-    if (!smtpHost || !smtpUser || !smtpPass) {
+    if (!smtpUser || !smtpPass) {
       return res.status(500).json({ success: false, error: 'Server email credentials not configured.' });
     }
 

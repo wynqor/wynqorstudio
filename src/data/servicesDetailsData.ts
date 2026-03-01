@@ -511,62 +511,231 @@ export const getServiceDetails = (serviceId: string): ServiceDetailsContent | un
   if (manual) return manual;
   const s = services.find(x => x.id === serviceId);
   if (!s) return undefined;
-  const templates: Record<string, { why: string; process: string[]; features: string[] }> = {
+  const seedKey = `${s.id}:${s.category}:${s.title}`;
+  let h = 2166136261;
+  for (let i = 0; i < seedKey.length; i++) {
+    h ^= seedKey.charCodeAt(i);
+    h += (h << 1) + (h << 4) + (h << 7) + (h << 8) + (h << 24);
+  }
+  const rnd = (n: number) => Math.abs((h >>> 0) % n);
+  const pools: Record<string, { why: string[]; process: string[]; features: string[] }> = {
     'Branding & Identity Design': {
-      why: 'Professional branding creates recognition, trust, and consistency across all touchpoints.',
-      process: ['Discovery', 'Concepts', 'Refinement', 'Delivery'],
-      features: ['Source Files', 'Color Palette', 'Typography', 'Mockups', 'Social Kit']
+      why: [
+        'Distinct brand memory and consistent application across channels.',
+        'Strategic identity that improves recognition and trust.',
+        'Systematic assets for scalable brand operations.'
+      ],
+      process: [
+        `Brand discovery for ${s.title}`,
+        `Concept development for ${s.title}`,
+        `Iteration and refinement`,
+        `Final delivery with assets`
+      ],
+      features: [
+        `${s.title} master file set`,
+        'Color palette and usage',
+        'Typography guidelines',
+        'Mockups for key touchpoints',
+        'Social media kit',
+        'Exported formats for print and web'
+      ]
     },
     'Poster & Graphic Design': {
-      why: 'Platform-optimized graphics drive engagement and communicate your message clearly.',
-      process: ['Strategy', 'Design', 'Optimization', 'Export'],
-      features: ['Multiple Sizes', 'High-Res Files', 'Story/Post Formats', 'Brand Styling']
+      why: [
+        'Platform-optimized visuals increase engagement.',
+        'Clear messaging drives better campaign results.',
+        'Consistent styling elevates brand perception.'
+      ],
+      process: [
+        `Campaign brief and objectives`,
+        `Design production for ${s.title}`,
+        `Format optimization`,
+        `Final exports and handoff`
+      ],
+      features: [
+        'Multiple sizes per platform',
+        'High-resolution exports',
+        'Story and post variants',
+        'CTA placement and styling',
+        'Brand-consistent layouts',
+        'Editable source files'
+      ]
     },
     'Outdoor Advertising & Media': {
-      why: 'Bold, distance-readable visuals maximize recall and impact in public spaces.',
-      process: ['Location Analysis', 'Concept', 'Specs', 'Production'],
-      features: ['Large-Format Design', 'High Contrast', 'Simple Typography', 'Multiple Sizes']
+      why: [
+        'Distance-readable layouts maximize recall.',
+        'Durable design fit for large formats.',
+        'Impactful messages for high-traffic areas.'
+      ],
+      process: [
+        `Location and spec analysis`,
+        `Concept creation for ${s.title}`,
+        `Technical setup for large format`,
+        `Production-ready delivery`
+      ],
+      features: [
+        'Large-format files',
+        'High-contrast color system',
+        'Simple typography scales well',
+        'Multiple size variants',
+        'Material and finish guidance',
+        'Print vendor coordination'
+      ]
     },
     'Website Design & Development': {
-      why: 'Responsive, fast websites convert visitors and scale with your business.',
-      process: ['Strategy', 'Design', 'Development', 'Launch'],
-      features: ['Responsive Design', 'SEO Basics', 'Analytics', 'Contact Forms']
+      why: [
+        'Fast, responsive experiences convert better.',
+        'Structured content improves navigation.',
+        'Scalable stack supports future growth.'
+      ],
+      process: [
+        `Information architecture`,
+        `UI design for ${s.title}`,
+        `Frontend integration`,
+        `Testing and launch`
+      ],
+      features: [
+        'Responsive layouts',
+        'SEO-friendly structure',
+        'Contact and lead forms',
+        'Analytics setup',
+        'Performance optimization',
+        'Documentation and handover'
+      ]
     },
     'Digital Marketing': {
-      why: 'Performance marketing and content systems accelerate acquisition and retention.',
-      process: ['Audit', 'Strategy', 'Execution', 'Optimization'],
-      features: ['Keyword Research', 'On-Page', 'Reporting', 'Performance Tracking']
+      why: [
+        'Measurable growth through performance channels.',
+        'Systematic experimentation improves ROI.',
+        'Holistic strategy across acquisition and retention.'
+      ],
+      process: [
+        `Audit and goal setting`,
+        `Strategy for ${s.title}`,
+        `Execution across channels`,
+        `Monitoring and optimization`
+      ],
+      features: [
+        'Keyword and audience research',
+        'On-page and creative assets',
+        'Tracking and reporting',
+        'A/B testing framework',
+        'Monthly performance reviews',
+        'Compliance and brand safety'
+      ]
     },
     'UI/UX Design': {
-      why: 'Intuitive interfaces reduce friction and increase conversions.',
-      process: ['Research', 'Wireframes', 'Design', 'Testing'],
-      features: ['Prototypes', 'Design System', 'Handoff Files', 'Usability Testing']
+      why: [
+        'Usability improvements reduce friction.',
+        'Design systems accelerate delivery.',
+        'Tested flows increase conversion.'
+      ],
+      process: [
+        `User research and insights`,
+        `Wireframes for ${s.title}`,
+        `High-fidelity design`,
+        `Usability validation`
+      ],
+      features: [
+        'Prototypes',
+        'Design tokens and components',
+        'Interaction specs',
+        'Developer handoff files',
+        'Accessibility checklist',
+        'Testing plan'
+      ]
     },
     'Content Writing': {
-      why: 'Clear, persuasive content builds trust and drives action.',
-      process: ['Research', 'Outline', 'Writing', 'Optimization'],
-      features: ['SEO Content', 'Headlines', 'Editing', 'Meta Descriptions']
+      why: [
+        'Persuasive copy drives action.',
+        'Structured content improves comprehension.',
+        'SEO readiness increases discoverability.'
+      ],
+      process: [
+        `Brief and audience research`,
+        `Outline for ${s.title}`,
+        `Draft and edit`,
+        `Optimization and final`
+      ],
+      features: [
+        'SEO keywords and meta',
+        'Engaging headlines',
+        'Internal linking plan',
+        'Tone and style guide',
+        'Proofreading',
+        'Distribution snippets'
+      ]
     },
     'Video Creation & Animation': {
-      why: 'Video storytelling increases engagement and explains complex ideas.',
-      process: ['Concept', 'Script', 'Production', 'Post-Production'],
-      features: ['Voiceover', 'Music/Graphics', 'Multiple Formats', 'Captions']
+      why: [
+        'High-impact storytelling boosts engagement.',
+        'Professional production elevates brand.',
+        'Multi-format output improves reach.'
+      ],
+      process: [
+        `Concept and script for ${s.title}`,
+        `Production or animation`,
+        `Edit and sound`,
+        `Export and handoff`
+      ],
+      features: [
+        'Voiceover options',
+        'Music and graphics',
+        'Caption files',
+        'Multiple aspect ratios',
+        'Color grading',
+        'Delivery-ready masters'
+      ]
     },
     'Photography & Creative Media': {
-      why: 'High-quality visuals improve conversion and brand perception.',
-      process: ['Prep', 'Lighting', 'Shoot', 'Editing'],
-      features: ['High-Res Images', 'Multiple Angles', 'Usage Rights', 'Fast Turnaround']
+      why: [
+        'High-quality visuals improve conversion.',
+        'Consistent lighting and framing increase appeal.',
+        'Professional editing ensures polish.'
+      ],
+      process: [
+        `Preparation and setup`,
+        `Shoot plan for ${s.title}`,
+        `Capture session`,
+        `Edit and delivery`
+      ],
+      features: [
+        'High-resolution images',
+        'Multiple angles',
+        'Lifestyle variants',
+        'White background set',
+        'Usage rights',
+        'Online gallery'
+      ]
     }
   };
-  const t = templates[s.category];
-  const description = `${s.title} — professional ${s.category.toLowerCase()} service tailored to your business goals.`;
+  const cat = pools[s.category] || {
+    why: [`Professional ${s.title} tailored to your goals.`],
+    process: [`Planning`, `Production`, `Review`, `Delivery`],
+    features: ['Quality output', 'Source files', 'Support', 'Revisions']
+  };
+  const pickMany = (arr: string[], count: number) => {
+    const res: string[] = [];
+    const used = new Set<number>();
+    for (let i = 0; i < count && i < arr.length; i++) {
+      let idx = rnd(arr.length);
+      while (used.has(idx)) idx = (idx + 1) % arr.length;
+      used.add(idx);
+      res.push(arr[idx]);
+      h = (h * 16777619) >>> 0;
+    }
+    return res;
+  };
+  const why = pickMany(cat.why, 1)[0];
+  const process = pickMany(cat.process, Math.min(4, cat.process.length));
+  const features = pickMany(cat.features, Math.min(6, cat.features.length));
   const peers = services.filter(x => x.category === s.category && x.id !== s.id).slice(0, 3).map(x => x.id);
   return {
     id: s.id,
-    description,
-    whyChoose: t?.why || `Choose professional ${s.title.toLowerCase()} for quality and consistency.`,
-    process: t?.process || ['Planning', 'Execution', 'Delivery'],
-    features: t?.features || ['Professional Output', 'Quality Assurance'],
+    description: `${s.title} — tailored ${s.category.toLowerCase()} solution for your specific objectives.`,
+    whyChoose: why,
+    process,
+    features,
     relatedServices: peers
   };
 };

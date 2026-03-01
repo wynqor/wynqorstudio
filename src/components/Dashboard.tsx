@@ -29,16 +29,24 @@ const Dashboard = ({ onHomeClick, onLoginClick, onSearch, onCartClick, onService
   const [paymentMethod, setPaymentMethod] = React.useState<'UPI' | 'Bank Transfer' | 'Card (Mock)'>('UPI');
   const [paymentRef, setPaymentRef] = React.useState('');
   const [paymentNote, setPaymentNote] = React.useState('');
+  const [isPaying, setIsPaying] = React.useState(false);
+  const razorpayKey = (import.meta as any).env.VITE_RAZORPAY_KEY_ID || '';
   const payments = (() => {
     try {
       const raw = localStorage.getItem(paymentsStorageKey) || localStorage.getItem('wynqor-payments');
       return raw ? JSON.parse(raw) : {};
-    } catch {
+    } catch (e) {
+      savePayment(selectedRequest.requestId, {
+        status: 'Failed',
+        method: 'Razorpay UPI',
+        ref: '',
+        note: '',
+        paidAt: new Date().toISOString()
+      });
       return {};
     }
   })() as Record<string, { status: 'Unpaid' | 'Paid' | 'Failed'; method?: string; ref?: string; note?: string; paidAt?: string }>;
   const getPaymentStatus = (reqId: string) => payments[reqId]?.status || 'Unpaid';
-  const upiId = 'wynqor@upi';
   const bankInfo = { account: 'Wynqor Pvt Ltd', number: '0000000000', ifsc: 'BANK0000000' };
   const requests = (() => {
     try {
@@ -86,6 +94,77 @@ const Dashboard = ({ onHomeClick, onLoginClick, onSearch, onCartClick, onService
     };
     savePayment(selectedRequest.requestId, record);
     setShowPaymentModal(false);
+  };
+
+  const loadScript = (src: string) =>
+    new Promise<boolean>((resolve) => {
+      const s = document.createElement('script');
+      s.src = src;
+      s.onload = () => resolve(true);
+      s.onerror = () => resolve(false);
+      document.body.appendChild(s);
+    });
+
+  const startRazorpayUpi = async () => {
+    if (!selectedRequest) return;
+    setIsPaying(true);
+    try {
+      const resp = await fetch('/api/createOrder', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          amount: Number(selectedRequest.total || 0),
+          currency: 'INR',
+          receipt: selectedRequest.requestId,
+          notes: { email: user?.email || '' }
+        })
+      });
+      const data = await resp.json().catch(() => null);
+      if (!data?.success) throw new Error(data?.error || 'Failed to create order');
+      const ok = await loadScript('https://checkout.razorpay.com/v1/checkout.js');
+      if (!ok) throw new Error('Failed to load Razorpay');
+      const order = data.order;
+      const options: any = {
+        key: razorpayKey,
+        amount: order.amount,
+        currency: order.currency,
+        name: 'Wynqor',
+        description: 'Service Payment',
+        order_id: order.id,
+        notes: { requestId: selectedRequest.requestId },
+        prefill: { email: user?.email || '', name: user?.name || '' },
+        theme: { color: '#3b82f6' },
+        handler: async function (response: any) {
+          const verifyResp = await fetch('/api/verifyPayment', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              order_id: order.id,
+              payment_id: response.razorpay_payment_id,
+              signature: response.razorpay_signature
+            })
+          });
+          const v = await verifyResp.json().catch(() => null);
+          if (v?.success) {
+            savePayment(selectedRequest.requestId, {
+              status: 'Paid',
+              method: 'Razorpay UPI',
+              ref: response.razorpay_payment_id,
+              note: paymentNote,
+              paidAt: new Date().toISOString()
+            });
+            setShowPaymentModal(false);
+          }
+        },
+        method: { upi: true, card: false, netbanking: false, wallet: false }
+      };
+      const rz = new (window as any).Razorpay(options);
+      rz.open();
+    } catch (e) {
+      setShowPaymentModal(false);
+    } finally {
+      setIsPaying(false);
+    }
   };
 
   return (
@@ -238,7 +317,12 @@ const Dashboard = ({ onHomeClick, onLoginClick, onSearch, onCartClick, onService
                   </div>
                   {paymentMethod === 'UPI' && (
                     <div className="text-xs text-slate-600 bg-slate-50 border border-slate-200 rounded-lg p-3">
-                      Pay to UPI ID: <span className="font-bold">{upiId}</span>. Enter your transaction/reference ID below after payment.
+                      Scan and pay using UPI. Click the button below to open UPI QR and complete payment.
+                      <div className="mt-3">
+                        <button disabled={!razorpayKey || isPaying} onClick={startRazorpayUpi} className="px-4 py-2 rounded-lg bg-primary text-white font-bold disabled:bg-slate-400">
+                          {isPaying ? 'Processing...' : 'Pay via UPI QR'}
+                        </button>
+                      </div>
                     </div>
                   )}
                   {paymentMethod === 'Bank Transfer' && (

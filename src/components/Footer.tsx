@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { emailService } from '../services/emailService';
 import { site } from '../data/site';
+import logo from '../images/logo1.jpeg';
 
 interface FooterProps {
   onAboutClick?: () => void;
@@ -18,7 +19,7 @@ const Footer: React.FC<FooterProps> = ({ onAboutClick, onCareersClick, onBlogCli
         <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-20">
           <div className="pr-8">
             <div className="flex items-center gap-3 mb-8">
-              <div className="size-10 bg-primary rounded-xl flex items-center justify-center text-white font-black text-xl shadow-lg shadow-primary/20">W</div>
+              <img src={logo} alt="Wynqor" className="size-10 rounded-xl shadow-lg shadow-primary/20 object-cover" />
               <h2 className="text-3xl font-bold text-white tracking-tight">Wynqor</h2>
             </div>
             <p className="text-slate-400 text-sm leading-relaxed mb-8 max-w-sm">

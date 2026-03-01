@@ -303,9 +303,15 @@ const AllServices: React.FC<AllServicesProps> = ({
   const recommendations = (() => {
     const formatInr = (n: number) => `₹${Math.round(n).toLocaleString('en-IN')}`;
     const parsePrice = (p: string) => parseFloat(p.replace('₹', '').replace(/,/g, '')) || 0;
-    const parseDays = (d?: string) => {
-      const n = parseInt((d || '').split(' ')[0]);
-      return isNaN(n) ? 0 : n;
+    const parseRange = (d?: string) => {
+      const raw = (d || '').split(' ')[0];
+      const parts = raw.split('–');
+      const min = parseInt(parts[0] || '0');
+      const max = parts[1] ? parseInt(parts[1]) : min;
+      return {
+        min: isNaN(min) ? 0 : min,
+        max: isNaN(max) ? (isNaN(min) ? 0 : min) : max
+      };
     };
     const score = (s: Service) => (parseFloat(s.rating || '0') * 10) + (s.isBestseller ? 50 : 0) + (s.isTrending ? 25 : 0);
     const inCategory = selectedCategoryState && selectedCategoryState !== 'All Services'
@@ -328,8 +334,11 @@ const AllServices: React.FC<AllServicesProps> = ({
       const savings = total - discounted;
       const title = `Combined Package: ${a.title} + ${b.title}`;
       const desc = `Bundle and save ${Math.round(discountPct * 100)}%. Includes ${a.title} and ${b.title}.`;
-      const durationDays = Math.max(parseDays(a.duration), parseDays(b.duration));
-      const duration = durationDays ? `${durationDays} Days` : 'Flexible';
+      const ra = parseRange(a.duration);
+      const rb = parseRange(b.duration);
+      const minDays = Math.max(ra.min, rb.min);
+      const maxDays = (ra.max || ra.min) + (rb.max || rb.min);
+      const duration = minDays && maxDays ? `${minDays}–${maxDays} Days` : 'Flexible';
       const rating = ((parseFloat(a.rating || '0') + parseFloat(b.rating || '0')) / 2).toFixed(1);
       bundles.push({
         type: 'bundle' as const,

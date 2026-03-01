@@ -48,7 +48,7 @@ const Checkout = ({
   onTermsClick,
   onPrivacyClick
 }: CheckoutProps) => {
-  const { cartItems } = useCart();
+  const { cartItems, clearCart } = useCart();
   const { user, isAuthenticated } = useAuth();
   const [files, setFiles] = useState<File[]>([]);
   const [isDragOver, setIsDragOver] = useState(false);
@@ -224,6 +224,7 @@ const Checkout = ({
             } catch { void 0; }
           }
         }
+        clearCart();
         onSubmitSuccess?.(requestId);
       } else {
         throw new Error(emailResult.error || 'Failed to send emails');

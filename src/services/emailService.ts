@@ -28,24 +28,66 @@ export interface EmailData {
 class EmailService {
   private readonly COMPANY_EMAIL = import.meta.env.VITE_COMPANY_EMAIL || 'wynqor@gmail.com';
 
-  private renderPlain(title: string, items: Array<[string, string]>, servicesList?: string): string {
+  private renderPlainSections(
+    title: string,
+    intro: string,
+    sections: Array<{ heading: string; rows: Array<[string, string]> }>,
+    servicesList?: string,
+    footer?: string
+  ): string {
     const header = `${title}`.trim();
-    const lines = items.filter(([, v]) => v !== '' && v !== undefined && v !== null).map(([k, v]) => `${k}: ${v}`);
-    const servicesBlock = servicesList ? `\nServices:\n${servicesList}\n` : '';
-    return `${header}\n\n${lines.join('\n')}\n\n${servicesBlock}`.trim();
+    const introBlock = intro ? `${intro}\n` : '';
+    const secBlocks = sections
+      .map((sec) => {
+        const rows = sec.rows
+          .filter(([, v]) => v !== '' && v !== undefined && v !== null)
+          .map(([k, v]) => `${k}: ${v}`)
+          .join('\n');
+        if (!rows) return '';
+        return `${sec.heading}\n${'─'.repeat(Math.max(8, sec.heading.length))}\n${rows}`;
+      })
+      .filter(Boolean)
+      .join('\n\n');
+    const servicesBlock = servicesList ? `\n\nSelected Services\n──────────────────\n${servicesList}` : '';
+    const footerBlock = footer ? `\n\n${footer}` : '';
+    return `${header}\n\n${introBlock}${secBlocks}${servicesBlock}${footerBlock}`.trim();
   }
 
-  private renderHtml(title: string, items: Array<[string, string]>, servicesList?: string): string {
-    const fields = items
-      .filter(([, v]) => v !== '' && v !== undefined && v !== null)
-      .map(([k, v]) => `<div><strong>${k}:</strong> ${v}</div>`)
+  private renderHtmlSections(
+    title: string,
+    intro: string,
+    sections: Array<{ heading: string; rows: Array<[string, string]> }>,
+    servicesList?: string,
+    footer?: string
+  ): string {
+    const secBlocks = sections
+      .map((sec) => {
+        const rows = sec.rows
+          .filter(([, v]) => v !== '' && v !== undefined && v !== null)
+          .map(([k, v]) => `<div style="margin:2px 0"><span style="color:#0f172a;font-weight:600">${k}:</span> <span style="color:#334155">${v}</span></div>`)
+          .join('');
+        if (!rows) return '';
+        return `<div style="margin:16px 0">
+          <div style="color:#0f172a;font-weight:700;margin:0 0 8px">${sec.heading}</div>
+          <div style="border:1px solid #e2e8f0;border-radius:8px;padding:12px;background:#fff">${rows}</div>
+        </div>`;
+      })
+      .filter(Boolean)
       .join('');
+    const introBlock = intro ? `<p style="color:#334155">${intro}</p>` : '';
     const services = servicesList
-      ? `<div style="margin-top:12px"><strong>Services:</strong><pre style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:8px;white-space:pre-wrap">${servicesList}</pre></div>`
+      ? `<div style="margin:16px 0">
+          <div style="color:#0f172a;font-weight:700;margin:0 0 8px">Selected Services</div>
+          <pre style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:12px;white-space:pre-wrap;color:#334155">${servicesList}</pre>
+        </div>`
       : '';
+    const footerBlock = footer ? `<p style="color:#64748b;font-size:12px;margin-top:16px">${footer}</p>` : '';
     return `<div style="font-family:Inter,system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif;padding:20px">
       <h2 style="margin:0 0 12px;color:#0f172a">${title}</h2>
-      <div style="color:#334155;font-size:14px;line-height:1.6">${fields}${services}</div>
+      ${introBlock}
+      ${secBlocks}
+      ${services}
+      ${footerBlock}
     </div>`;
   }
 
@@ -62,24 +104,28 @@ class EmailService {
       const submittedAt = new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' });
       const clientSubject = 'Application Received - Wynqor Careers';
       const companySubject = `New Career Application - ${app.name} (${app.area})`;
-      const clientItems: Array<[string, string]> = [
-        ['Application', app.area],
-        ['Submitted', submittedAt]
-      ];
-      const companyItems: Array<[string, string]> = [
-        ['Name', app.name],
-        ['Email', app.email],
-        ['Phone', app.phone || ''],
-        ['Area', app.area],
-        ['Portfolio', app.portfolio || ''],
-        ['GitHub', app.github || ''],
-        ['Notes', app.note || ''],
-        ['Submitted', submittedAt]
-      ];
-      const clientBody = this.renderPlain('Application Received', clientItems);
-      const companyBody = this.renderPlain('Career Application', companyItems);
-      const clientHtml = this.renderHtml('Application Received', clientItems);
-      const companyHtml = this.renderHtml('Career Application', companyItems);
+      const clientBody = this.renderPlainSections(
+        'Application Received',
+        `Thanks for applying to Wynqor.`,
+        [
+          { heading: 'Application', rows: [['Role/Area', app.area], ['Submitted', submittedAt]] }
+        ]
+      );
+      const companyBody = this.renderPlainSections(
+        'Career Application',
+        '',
+        [
+          { heading: 'Candidate', rows: [['Name', app.name], ['Email', app.email], ['Phone', app.phone || '']] },
+          { heading: 'Details', rows: [['Area', app.area], ['Portfolio', app.portfolio || ''], ['GitHub', app.github || ''], ['Notes', app.note || '']] },
+          { heading: 'Meta', rows: [['Submitted', submittedAt]] }
+        ]
+      );
+      const clientHtml = this.renderHtmlSections('Application Received', `Thanks for applying to Wynqor.`, [{ heading: 'Application', rows: [['Role/Area', app.area], ['Submitted', submittedAt]] }]);
+      const companyHtml = this.renderHtmlSections('Career Application', '', [
+        { heading: 'Candidate', rows: [['Name', app.name], ['Email', app.email], ['Phone', app.phone || '']] },
+        { heading: 'Details', rows: [['Area', app.area], ['Portfolio', app.portfolio || ''], ['GitHub', app.github || ''], ['Notes', app.note || '']] },
+        { heading: 'Meta', rows: [['Submitted', submittedAt]] }
+      ]);
       const payload = {
         clientTo: app.email,
         clientSubject,
@@ -116,23 +162,28 @@ class EmailService {
       const submittedAt = new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' });
       const clientSubject = 'Referral Submitted - Wynqor Careers';
       const companySubject = `New Referral - ${ref.candidateName} (by ${ref.referrerName})`;
-      const clientItems: Array<[string, string]> = [
-        ['Referrer', `${ref.referrerName}`],
-        ['Candidate', `${ref.candidateName}`],
-        ['Submitted', submittedAt]
-      ];
-      const companyItems: Array<[string, string]> = [
-        ['Referrer', `${ref.referrerName} <${ref.referrerEmail}>`],
-        ['Candidate', `${ref.candidateName} <${ref.candidateEmail}>`],
-        ['Profile', ref.profileLink || ''],
-        ['Relation', ref.relation || ''],
-        ['Notes', ref.note || ''],
-        ['Submitted', submittedAt]
-      ];
-      const clientBody = this.renderPlain('Referral Submitted', clientItems);
-      const companyBody = this.renderPlain('Career Referral', companyItems);
-      const clientHtml = this.renderHtml('Referral Submitted', clientItems);
-      const companyHtml = this.renderHtml('Career Referral', companyItems);
+      const clientBody = this.renderPlainSections(
+        'Referral Submitted',
+        `Thanks for referring ${ref.candidateName} to Wynqor.`,
+        [{ heading: 'Summary', rows: [['Referrer', ref.referrerName], ['Candidate', ref.candidateName], ['Submitted', submittedAt]] }]
+      );
+      const companyBody = this.renderPlainSections(
+        'Career Referral',
+        '',
+        [
+          { heading: 'Referrer', rows: [['Name', ref.referrerName], ['Email', ref.referrerEmail]] },
+          { heading: 'Candidate', rows: [['Name', ref.candidateName], ['Email', ref.candidateEmail], ['Profile', ref.profileLink || '']] },
+          { heading: 'Notes', rows: [['Relation', ref.relation || ''], ['Notes', ref.note || '']] },
+          { heading: 'Meta', rows: [['Submitted', submittedAt]] }
+        ]
+      );
+      const clientHtml = this.renderHtmlSections('Referral Submitted', `Thanks for referring ${ref.candidateName} to Wynqor.`, [{ heading: 'Summary', rows: [['Referrer', ref.referrerName], ['Candidate', ref.candidateName], ['Submitted', submittedAt]] }]);
+      const companyHtml = this.renderHtmlSections('Career Referral', '', [
+        { heading: 'Referrer', rows: [['Name', ref.referrerName], ['Email', ref.referrerEmail]] },
+        { heading: 'Candidate', rows: [['Name', ref.candidateName], ['Email', ref.candidateEmail], ['Profile', ref.profileLink || '']] },
+        { heading: 'Notes', rows: [['Relation', ref.relation || ''], ['Notes', ref.note || '']] },
+        { heading: 'Meta', rows: [['Submitted', submittedAt]] }
+      ]);
       const payload = {
         clientTo: ref.referrerEmail,
         clientSubject,
@@ -168,41 +219,56 @@ class EmailService {
 
       const servicesList = this.formatServicesList(emailData.cartItems);
       const delivery = this.computeDelivery(emailData);
-      const clientItems: Array<[string, string]> = [
-        ['Request ID', emailData.requestId],
-        ['Submitted', emailData.submittedAt],
-        ['Client', `${emailData.fullName} <${emailData.email}>`],
-        ['Phone', emailData.phone],
-        ['Business', emailData.businessName],
-        ['Description', emailData.description],
-        ['Deadline', this.formatDeadline(emailData.deadline)],
-        ['Budget', this.formatBudget(emailData.budget)],
-        ['Subtotal', `₹${emailData.subtotal.toFixed(2)}`],
-        ['Service Fee', `₹${emailData.serviceFee.toFixed(2)}`],
-        ['Total', `₹${emailData.total.toFixed(2)}`],
-        ['Delivery Window', `${delivery.minDays}–${delivery.maxDays} days`],
-        ['Suggested Date', delivery.suggestedDate]
-      ];
-      const companyItems: Array<[string, string]> = [
-        ['Request ID', emailData.requestId],
-        ['Submitted', emailData.submittedAt],
-        ['Client', `${emailData.fullName} <${emailData.email}>`],
-        ['Phone', emailData.phone],
-        ['Business', emailData.businessName],
-        ['Description', emailData.description],
-        ['Deadline', this.formatDeadline(emailData.deadline)],
-        ['Budget', this.formatBudget(emailData.budget)],
-        ['Subtotal', `₹${emailData.subtotal.toFixed(2)}`],
-        ['Service Fee', `₹${emailData.serviceFee.toFixed(2)}`],
-        ['Total', `₹${emailData.total.toFixed(2)}`],
-        ['Delivery Window', `${delivery.minDays}–${delivery.maxDays} days`],
-        ['Suggested Date', delivery.suggestedDate],
-        ['Notes', emailData.notes]
-      ];
-      const clientEmailContent = this.renderPlain('Request Received', clientItems, servicesList);
-      const companyEmailContent = this.renderPlain('New Service Request', companyItems, servicesList);
-      const clientHtml = this.renderHtml('Request Received', clientItems, servicesList);
-      const companyHtml = this.renderHtml('New Service Request', companyItems, servicesList);
+      const clientEmailContent = this.renderPlainSections(
+        'Request Received',
+        'Thank you for choosing Wynqor. Your request has been received.',
+        [
+          { heading: 'Request Details', rows: [['Request ID', emailData.requestId], ['Submitted', emailData.submittedAt]] },
+          { heading: 'Your Information', rows: [['Full Name', emailData.fullName], ['Email', emailData.email], ['Phone', emailData.phone], ['Business', emailData.businessName]] },
+          { heading: 'Project Details', rows: [['Description', emailData.description], ['Deadline', this.formatDeadline(emailData.deadline)], ['Budget', this.formatBudget(emailData.budget)], ['Notes', emailData.notes]] },
+          { heading: 'Delivery & Timeline', rows: [['Delivery Window', `${delivery.minDays}–${delivery.maxDays} days`], ['Suggested Date', delivery.suggestedDate]] },
+          { heading: 'Pricing Breakdown', rows: [['Subtotal', `₹${emailData.subtotal.toFixed(2)}`], ['Service Fee', `₹${emailData.serviceFee.toFixed(2)}`], ['Total', `₹${emailData.total.toFixed(2)}`]] }
+        ],
+        servicesList,
+        `If you have questions, reply to this email or contact us at ${this.COMPANY_EMAIL}.`
+      );
+      const companyEmailContent = this.renderPlainSections(
+        'New Service Request',
+        'Please review and respond within 24 hours.',
+        [
+          { heading: 'Request Details', rows: [['Request ID', emailData.requestId], ['Submitted', emailData.submittedAt]] },
+          { heading: 'Client', rows: [['Name', emailData.fullName], ['Email', emailData.email], ['Phone', emailData.phone], ['Business', emailData.businessName]] },
+          { heading: 'Project', rows: [['Description', emailData.description], ['Deadline', this.formatDeadline(emailData.deadline)], ['Budget', this.formatBudget(emailData.budget)], ['Notes', emailData.notes]] },
+          { heading: 'Delivery', rows: [['Window', `${delivery.minDays}–${delivery.maxDays} days`], ['Suggested Date', delivery.suggestedDate]] },
+          { heading: 'Pricing', rows: [['Subtotal', `₹${emailData.subtotal.toFixed(2)}`], ['Service Fee', `₹${emailData.serviceFee.toFixed(2)}`], ['Total', `₹${emailData.total.toFixed(2)}`]] }
+        ],
+        servicesList
+      );
+      const clientHtml = this.renderHtmlSections(
+        'Request Received',
+        'Thank you for choosing Wynqor. Your request has been received.',
+        [
+          { heading: 'Request Details', rows: [['Request ID', emailData.requestId], ['Submitted', emailData.submittedAt]] },
+          { heading: 'Your Information', rows: [['Full Name', emailData.fullName], ['Email', emailData.email], ['Phone', emailData.phone], ['Business', emailData.businessName]] },
+          { heading: 'Project Details', rows: [['Description', emailData.description], ['Deadline', this.formatDeadline(emailData.deadline)], ['Budget', this.formatBudget(emailData.budget)], ['Notes', emailData.notes]] },
+          { heading: 'Delivery & Timeline', rows: [['Delivery Window', `${delivery.minDays}–${delivery.maxDays} days`], ['Suggested Date', delivery.suggestedDate]] },
+          { heading: 'Pricing Breakdown', rows: [['Subtotal', `₹${emailData.subtotal.toFixed(2)}`], ['Service Fee', `₹${emailData.serviceFee.toFixed(2)}`], ['Total', `₹${emailData.total.toFixed(2)}`]] }
+        ],
+        servicesList,
+        `If you have questions, reply to this email or contact us at ${this.COMPANY_EMAIL}.`
+      );
+      const companyHtml = this.renderHtmlSections(
+        'New Service Request',
+        'Please review and respond within 24 hours.',
+        [
+          { heading: 'Request Details', rows: [['Request ID', emailData.requestId], ['Submitted', emailData.submittedAt]] },
+          { heading: 'Client', rows: [['Name', emailData.fullName], ['Email', emailData.email], ['Phone', emailData.phone], ['Business', emailData.businessName]] },
+          { heading: 'Project', rows: [['Description', emailData.description], ['Deadline', this.formatDeadline(emailData.deadline)], ['Budget', this.formatBudget(emailData.budget)], ['Notes', emailData.notes]] },
+          { heading: 'Delivery', rows: [['Window', `${delivery.minDays}–${delivery.maxDays} days`], ['Suggested Date', delivery.suggestedDate]] },
+          { heading: 'Pricing', rows: [['Subtotal', `₹${emailData.subtotal.toFixed(2)}`], ['Service Fee', `₹${emailData.serviceFee.toFixed(2)}`], ['Total', `₹${emailData.total.toFixed(2)}`]] }
+        ],
+        servicesList
+      );
 
       const attachments =
         emailData.files && emailData.files.length > 0
@@ -275,20 +341,12 @@ class EmailService {
   async sendNewsletter(email: string): Promise<{ success: boolean; error?: string }> {
     try {
       const submittedAt = new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' });
-      const clientSubject = 'Newsletter Subscription Confirmed';
+      const clientSubject = 'Subscription Confirmed';
       const companySubject = 'New Newsletter Subscription';
-      const clientItems: Array<[string, string]> = [
-        ['Email', email],
-        ['Subscribed', submittedAt]
-      ];
-      const companyItems: Array<[string, string]> = [
-        ['Email', email],
-        ['Subscribed', submittedAt]
-      ];
-      const clientBody = this.renderPlain('Subscription Confirmed', clientItems);
-      const companyBody = this.renderPlain('Newsletter Subscription', companyItems);
-      const clientHtml = this.renderHtml('Subscription Confirmed', clientItems);
-      const companyHtml = this.renderHtml('Newsletter Subscription', companyItems);
+      const clientBody = this.renderPlainSections('Subscription Confirmed', 'You will receive updates on new services, offers and case studies.', [{ heading: 'Details', rows: [['Email', email], ['Subscribed', submittedAt]] }]);
+      const companyBody = this.renderPlainSections('Newsletter Subscription', '', [{ heading: 'Details', rows: [['Email', email], ['Subscribed', submittedAt]] }]);
+      const clientHtml = this.renderHtmlSections('Subscription Confirmed', 'You will receive updates on new services, offers and case studies.', [{ heading: 'Details', rows: [['Email', email], ['Subscribed', submittedAt]] }]);
+      const companyHtml = this.renderHtmlSections('Newsletter Subscription', '', [{ heading: 'Details', rows: [['Email', email], ['Subscribed', submittedAt]] }]);
       const payload = {
         clientTo: email,
         clientSubject,
@@ -315,22 +373,12 @@ class EmailService {
   async sendLoginNotification(user: { name: string; email: string }): Promise<{ success: boolean; error?: string }> {
     try {
       const submittedAt = new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' });
-      const clientSubject = `Sign-in Confirmed - ${user.name}`;
+      const clientSubject = `Sign-in Confirmed`;
       const companySubject = `User Login - ${user.email}`;
-      const clientItems: Array<[string, string]> = [
-        ['User', user.name],
-        ['Email', user.email],
-        ['Time', submittedAt]
-      ];
-      const companyItems: Array<[string, string]> = [
-        ['User', user.name],
-        ['Email', user.email],
-        ['Time', submittedAt]
-      ];
-      const clientBody = this.renderPlain('Sign-in Confirmed', clientItems);
-      const companyBody = this.renderPlain('User Login', companyItems);
-      const clientHtml = this.renderHtml('Sign-in Confirmed', clientItems);
-      const companyHtml = this.renderHtml('User Login', companyItems);
+      const clientBody = this.renderPlainSections('Sign-in Confirmed', 'You are now signed in to Wynqor.', [{ heading: 'Details', rows: [['User', user.name], ['Email', user.email], ['Time', submittedAt]] }]);
+      const companyBody = this.renderPlainSections('User Login', '', [{ heading: 'Details', rows: [['User', user.name], ['Email', user.email], ['Time', submittedAt]] }]);
+      const clientHtml = this.renderHtmlSections('Sign-in Confirmed', 'You are now signed in to Wynqor.', [{ heading: 'Details', rows: [['User', user.name], ['Email', user.email], ['Time', submittedAt]] }]);
+      const companyHtml = this.renderHtmlSections('User Login', '', [{ heading: 'Details', rows: [['User', user.name], ['Email', user.email], ['Time', submittedAt]] }]);
 
       const payload = {
         clientTo: user.email,
@@ -433,55 +481,20 @@ class EmailService {
         .join('\n');
       const clientSubject = `Payment Received - ${info.requestId}`;
       const companySubject = `Payment Success - ${info.requestId}`;
-      const clientBody =
-        `✅ PAYMENT SUCCESSFUL
-
-Request ID: ${info.requestId}
-Payment ID: ${info.paymentId}
-Method: ${info.method}
-Amount: ₹${info.amount.toFixed(2)}
-Time: ${when}
-
-${servicesList ? `Services:\n${servicesList}\n` : ''}`.trim();
-
-      const companyBody =
-        `💰 PAYMENT RECEIVED
-
-Request ID: ${info.requestId}
-Client: ${info.name || ''} <${info.email}>
-Payment ID: ${info.paymentId}
-Method: ${info.method}
-Amount: ₹${info.amount.toFixed(2)}
-Time: ${when}
-
-${servicesList ? `Services:\n${servicesList}\n` : ''}`.trim();
-
-      const clientHtml =
-        `<div style="font-family:Inter,system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif;padding:20px">
-          <h2 style="margin:0 0 12px;color:#0f172a">Payment Successful</h2>
-          <div style="color:#334155;font-size:14px;line-height:1.6">
-            <div><strong>Request ID:</strong> ${info.requestId}</div>
-            <div><strong>Payment ID:</strong> ${info.paymentId}</div>
-            <div><strong>Method:</strong> ${info.method}</div>
-            <div><strong>Amount:</strong> ₹${info.amount.toFixed(2)}</div>
-            <div><strong>Time:</strong> ${when}</div>
-            ${servicesList ? `<div style="margin-top:12px"><strong>Services:</strong><pre style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:8px">${servicesList}</pre></div>` : ''}
-          </div>
-        </div>`;
-
-      const companyHtml =
-        `<div style="font-family:Inter,system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif;padding:20px">
-          <h2 style="margin:0 0 12px;color:#0f172a">Payment Received</h2>
-          <div style="color:#334155;font-size:14px;line-height:1.6">
-            <div><strong>Request ID:</strong> ${info.requestId}</div>
-            <div><strong>Client:</strong> ${info.name || ''} &lt;${info.email}&gt;</div>
-            <div><strong>Payment ID:</strong> ${info.paymentId}</div>
-            <div><strong>Method:</strong> ${info.method}</div>
-            <div><strong>Amount:</strong> ₹${info.amount.toFixed(2)}</div>
-            <div><strong>Time:</strong> ${when}</div>
-            ${servicesList ? `<div style="margin-top:12px"><strong>Services:</strong><pre style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:8px">${servicesList}</pre></div>` : ''}
-          </div>
-        </div>`;
+      const clientBody = this.renderPlainSections(
+        'Payment Successful',
+        '',
+        [{ heading: 'Payment Summary', rows: [['Request ID', info.requestId], ['Payment ID', info.paymentId], ['Method', info.method], ['Amount', `₹${info.amount.toFixed(2)}`], ['Time', when]] }],
+        servicesList
+      );
+      const companyBody = this.renderPlainSections(
+        'Payment Received',
+        '',
+        [{ heading: 'Payment Summary', rows: [['Request ID', info.requestId], ['Client', `${info.name || ''} <${info.email}>`], ['Payment ID', info.paymentId], ['Method', info.method], ['Amount', `₹${info.amount.toFixed(2)}`], ['Time', when]] }],
+        servicesList
+      );
+      const clientHtml = this.renderHtmlSections('Payment Successful', '', [{ heading: 'Payment Summary', rows: [['Request ID', info.requestId], ['Payment ID', info.paymentId], ['Method', info.method], ['Amount', `₹${info.amount.toFixed(2)}`], ['Time', when]] }], servicesList);
+      const companyHtml = this.renderHtmlSections('Payment Received', '', [{ heading: 'Payment Summary', rows: [['Request ID', info.requestId], ['Client', `${info.name || ''} <${info.email}>`], ['Payment ID', info.paymentId], ['Method', info.method], ['Amount', `₹${info.amount.toFixed(2)}`], ['Time', when]] }], servicesList);
 
       const payload = {
         clientTo: info.email,

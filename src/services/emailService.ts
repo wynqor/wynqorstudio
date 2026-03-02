@@ -226,7 +226,7 @@ class EmailService {
           { heading: 'Request Details', rows: [['Request ID', emailData.requestId], ['Submitted', emailData.submittedAt]] },
           { heading: 'Your Information', rows: [['Full Name', emailData.fullName], ['Email', emailData.email], ['Phone', emailData.phone], ['Business', emailData.businessName]] },
           { heading: 'Project Details', rows: [['Description', emailData.description], ['Deadline', this.formatDeadline(emailData.deadline)], ['Budget', this.formatBudget(emailData.budget)], ['Notes', emailData.notes]] },
-          { heading: 'Delivery & Timeline', rows: [['Delivery Window', `${delivery.minDays}–${delivery.maxDays} days`], ['Suggested Date', delivery.suggestedDate]] },
+          { heading: 'Delivery & Timeline', rows: [['Delivery Window', this.formatWindow(delivery.minDays, delivery.maxDays)], ['Suggested Date', delivery.suggestedDate]] },
           { heading: 'Pricing Breakdown', rows: [['Subtotal', `₹${emailData.subtotal.toFixed(2)}`], ['Service Fee', `₹${emailData.serviceFee.toFixed(2)}`], ['Total', `₹${emailData.total.toFixed(2)}`]] }
         ],
         servicesList,
@@ -239,7 +239,7 @@ class EmailService {
           { heading: 'Request Details', rows: [['Request ID', emailData.requestId], ['Submitted', emailData.submittedAt]] },
           { heading: 'Client', rows: [['Name', emailData.fullName], ['Email', emailData.email], ['Phone', emailData.phone], ['Business', emailData.businessName]] },
           { heading: 'Project', rows: [['Description', emailData.description], ['Deadline', this.formatDeadline(emailData.deadline)], ['Budget', this.formatBudget(emailData.budget)], ['Notes', emailData.notes]] },
-          { heading: 'Delivery', rows: [['Window', `${delivery.minDays}–${delivery.maxDays} days`], ['Suggested Date', delivery.suggestedDate]] },
+          { heading: 'Delivery', rows: [['Window', this.formatWindow(delivery.minDays, delivery.maxDays)], ['Suggested Date', delivery.suggestedDate]] },
           { heading: 'Pricing', rows: [['Subtotal', `₹${emailData.subtotal.toFixed(2)}`], ['Service Fee', `₹${emailData.serviceFee.toFixed(2)}`], ['Total', `₹${emailData.total.toFixed(2)}`]] }
         ],
         servicesList
@@ -251,7 +251,7 @@ class EmailService {
           { heading: 'Request Details', rows: [['Request ID', emailData.requestId], ['Submitted', emailData.submittedAt]] },
           { heading: 'Your Information', rows: [['Full Name', emailData.fullName], ['Email', emailData.email], ['Phone', emailData.phone], ['Business', emailData.businessName]] },
           { heading: 'Project Details', rows: [['Description', emailData.description], ['Deadline', this.formatDeadline(emailData.deadline)], ['Budget', this.formatBudget(emailData.budget)], ['Notes', emailData.notes]] },
-          { heading: 'Delivery & Timeline', rows: [['Delivery Window', `${delivery.minDays}–${delivery.maxDays} days`], ['Suggested Date', delivery.suggestedDate]] },
+          { heading: 'Delivery & Timeline', rows: [['Delivery Window', this.formatWindow(delivery.minDays, delivery.maxDays)], ['Suggested Date', delivery.suggestedDate]] },
           { heading: 'Pricing Breakdown', rows: [['Subtotal', `₹${emailData.subtotal.toFixed(2)}`], ['Service Fee', `₹${emailData.serviceFee.toFixed(2)}`], ['Total', `₹${emailData.total.toFixed(2)}`]] }
         ],
         servicesList,
@@ -264,7 +264,7 @@ class EmailService {
           { heading: 'Request Details', rows: [['Request ID', emailData.requestId], ['Submitted', emailData.submittedAt]] },
           { heading: 'Client', rows: [['Name', emailData.fullName], ['Email', emailData.email], ['Phone', emailData.phone], ['Business', emailData.businessName]] },
           { heading: 'Project', rows: [['Description', emailData.description], ['Deadline', this.formatDeadline(emailData.deadline)], ['Budget', this.formatBudget(emailData.budget)], ['Notes', emailData.notes]] },
-          { heading: 'Delivery', rows: [['Window', `${delivery.minDays}–${delivery.maxDays} days`], ['Suggested Date', delivery.suggestedDate]] },
+          { heading: 'Delivery', rows: [['Window', this.formatWindow(delivery.minDays, delivery.maxDays)], ['Suggested Date', delivery.suggestedDate]] },
           { heading: 'Pricing', rows: [['Subtotal', `₹${emailData.subtotal.toFixed(2)}`], ['Service Fee', `₹${emailData.serviceFee.toFixed(2)}`], ['Total', `₹${emailData.total.toFixed(2)}`]] }
         ],
         servicesList
@@ -438,15 +438,15 @@ class EmailService {
 
   private computeDelivery(data: EmailData) {
     const parseRange = (duration?: string): { min: number; max: number } => {
-      const raw = (duration || '').split(' ')[0]; // "5–7" or "5"
+      const raw = (duration || '').trim();
       if (!raw) return { min: 0, max: 0 };
-      const parts = raw.split('–');
-      const min = parseInt(parts[0] || '0');
-      const max = parts[1] ? parseInt(parts[1]) : min;
-      return {
-        min: isNaN(min) ? 0 : min,
-        max: isNaN(max) ? (isNaN(min) ? 0 : min) : max
-      };
+      const nums = raw.match(/\d+/g) || [];
+      if (nums.length === 0) return { min: 0, max: 0 };
+      const a = parseInt(nums[0] || '0', 10);
+      const b = nums.length >= 2 ? parseInt(nums[1] || '0', 10) : a;
+      const min = isNaN(a) ? 0 : a;
+      const max = isNaN(b) ? min : b;
+      return { min, max: Math.max(min, max) };
     };
 
     const ranges = data.cartItems.map(i => parseRange(i.duration));
@@ -459,6 +459,13 @@ class EmailService {
     const suggestedDate = suggested.toLocaleDateString('en-IN', { year: 'numeric', month: 'long', day: 'numeric' });
     const deadlineText = this.formatDeadline(data.deadline);
     return { minDays, maxDays, suggestedDate, deadlineText };
+  }
+
+  private formatWindow(minDays: number, maxDays: number): string {
+    if (minDays === maxDays) {
+      return `${minDays} ${minDays === 1 ? 'Day' : 'Days'}`;
+    }
+    return `${minDays}–${maxDays} Days`;
   }
 
 

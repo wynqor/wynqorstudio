@@ -276,9 +276,7 @@ const ServiceDetails: React.FC<ServiceDetailsProps> = ({
                         </button>
                       </div>
                     </div>
-                    <p className="text-slate-600 leading-relaxed text-lg">
-                      {service.title} - Perfect for businesses looking to make a professional impression.
-                    </p>
+                    <p className="text-slate-600 leading-relaxed text-lg">{content.description}</p>
                   </div>
 
                   {/* Pricing Card */}

@@ -28,6 +28,27 @@ export interface EmailData {
 class EmailService {
   private readonly COMPANY_EMAIL = import.meta.env.VITE_COMPANY_EMAIL || 'wynqor@gmail.com';
 
+  private renderPlain(title: string, items: Array<[string, string]>, servicesList?: string): string {
+    const header = `${title}`.trim();
+    const lines = items.filter(([, v]) => v !== '' && v !== undefined && v !== null).map(([k, v]) => `${k}: ${v}`);
+    const servicesBlock = servicesList ? `\nServices:\n${servicesList}\n` : '';
+    return `${header}\n\n${lines.join('\n')}\n\n${servicesBlock}`.trim();
+  }
+
+  private renderHtml(title: string, items: Array<[string, string]>, servicesList?: string): string {
+    const fields = items
+      .filter(([, v]) => v !== '' && v !== undefined && v !== null)
+      .map(([k, v]) => `<div><strong>${k}:</strong> ${v}</div>`)
+      .join('');
+    const services = servicesList
+      ? `<div style="margin-top:12px"><strong>Services:</strong><pre style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:8px;white-space:pre-wrap">${servicesList}</pre></div>`
+      : '';
+    return `<div style="font-family:Inter,system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif;padding:20px">
+      <h2 style="margin:0 0 12px;color:#0f172a">${title}</h2>
+      <div style="color:#334155;font-size:14px;line-height:1.6">${fields}${services}</div>
+    </div>`;
+  }
+
   async sendCareerApplication(app: {
     name: string;
     email: string;
@@ -41,33 +62,33 @@ class EmailService {
       const submittedAt = new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' });
       const clientSubject = 'Application Received - Wynqor Careers';
       const companySubject = `New Career Application - ${app.name} (${app.area})`;
-      const clientBody =
-        `👋 Hi ${app.name},
-
-Thanks for applying to Wynqor!
-
-We have received your application${app.area ? ` for ${app.area}` : ''}.
-Submitted: ${submittedAt}
-
-Our team will review your profile and reach out if there is a match.
-
-© 2024 Wynqor Inc.`;
-      const companyBody =
-        `🧑‍💼 CAREER APPLICATION
-
-Name: ${app.name}
-Email: ${app.email}${app.phone ? `\nPhone: ${app.phone}` : ''}
-Area: ${app.area}${app.portfolio ? `\nPortfolio: ${app.portfolio}` : ''}${app.github ? `\nGitHub: ${app.github}` : ''}${app.note ? `\nNotes: ${app.note}` : ''}
-
-Submitted: ${submittedAt}
-`;
+      const clientItems: Array<[string, string]> = [
+        ['Application', app.area],
+        ['Submitted', submittedAt]
+      ];
+      const companyItems: Array<[string, string]> = [
+        ['Name', app.name],
+        ['Email', app.email],
+        ['Phone', app.phone || ''],
+        ['Area', app.area],
+        ['Portfolio', app.portfolio || ''],
+        ['GitHub', app.github || ''],
+        ['Notes', app.note || ''],
+        ['Submitted', submittedAt]
+      ];
+      const clientBody = this.renderPlain('Application Received', clientItems);
+      const companyBody = this.renderPlain('Career Application', companyItems);
+      const clientHtml = this.renderHtml('Application Received', clientItems);
+      const companyHtml = this.renderHtml('Career Application', companyItems);
       const payload = {
         clientTo: app.email,
         clientSubject,
         clientBody,
+        clientHtml,
         companyTo: this.COMPANY_EMAIL,
         companySubject,
         companyBody,
+        companyHtml,
       };
       const response = await fetch('/api/sendMail', {
         method: 'POST',
@@ -95,30 +116,32 @@ Submitted: ${submittedAt}
       const submittedAt = new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' });
       const clientSubject = 'Referral Submitted - Wynqor Careers';
       const companySubject = `New Referral - ${ref.candidateName} (by ${ref.referrerName})`;
-      const clientBody =
-        `👋 Hi ${ref.referrerName},
-
-Thanks for referring ${ref.candidateName} to Wynqor.
-Submitted: ${submittedAt}
-
-We will review their profile and reach out if there is a match.
-
-© 2024 Wynqor Inc.`;
-      const companyBody =
-        `👥 CAREER REFERRAL
-
-Referrer: ${ref.referrerName} <${ref.referrerEmail}>
-Candidate: ${ref.candidateName} <${ref.candidateEmail}>${ref.profileLink ? `\nProfile: ${ref.profileLink}` : ''}${ref.relation ? `\nRelation: ${ref.relation}` : ''}${ref.note ? `\nNotes: ${ref.note}` : ''}
-
-Submitted: ${submittedAt}
-`;
+      const clientItems: Array<[string, string]> = [
+        ['Referrer', `${ref.referrerName}`],
+        ['Candidate', `${ref.candidateName}`],
+        ['Submitted', submittedAt]
+      ];
+      const companyItems: Array<[string, string]> = [
+        ['Referrer', `${ref.referrerName} <${ref.referrerEmail}>`],
+        ['Candidate', `${ref.candidateName} <${ref.candidateEmail}>`],
+        ['Profile', ref.profileLink || ''],
+        ['Relation', ref.relation || ''],
+        ['Notes', ref.note || ''],
+        ['Submitted', submittedAt]
+      ];
+      const clientBody = this.renderPlain('Referral Submitted', clientItems);
+      const companyBody = this.renderPlain('Career Referral', companyItems);
+      const clientHtml = this.renderHtml('Referral Submitted', clientItems);
+      const companyHtml = this.renderHtml('Career Referral', companyItems);
       const payload = {
         clientTo: ref.referrerEmail,
         clientSubject,
         clientBody,
+        clientHtml,
         companyTo: this.COMPANY_EMAIL,
         companySubject,
         companyBody,
+        companyHtml,
       };
       const response = await fetch('/api/sendMail', {
         method: 'POST',
@@ -143,8 +166,43 @@ Submitted: ${submittedAt}
         console.log('📧 Preparing email payload for API...', emailData.requestId);
       }
 
-      const clientEmailContent = this.generateClientEmailContent(emailData);
-      const companyEmailContent = this.generateCompanyEmailContent(emailData);
+      const servicesList = this.formatServicesList(emailData.cartItems);
+      const delivery = this.computeDelivery(emailData);
+      const clientItems: Array<[string, string]> = [
+        ['Request ID', emailData.requestId],
+        ['Submitted', emailData.submittedAt],
+        ['Client', `${emailData.fullName} <${emailData.email}>`],
+        ['Phone', emailData.phone],
+        ['Business', emailData.businessName],
+        ['Description', emailData.description],
+        ['Deadline', this.formatDeadline(emailData.deadline)],
+        ['Budget', this.formatBudget(emailData.budget)],
+        ['Subtotal', `₹${emailData.subtotal.toFixed(2)}`],
+        ['Service Fee', `₹${emailData.serviceFee.toFixed(2)}`],
+        ['Total', `₹${emailData.total.toFixed(2)}`],
+        ['Delivery Window', `${delivery.minDays}–${delivery.maxDays} days`],
+        ['Suggested Date', delivery.suggestedDate]
+      ];
+      const companyItems: Array<[string, string]> = [
+        ['Request ID', emailData.requestId],
+        ['Submitted', emailData.submittedAt],
+        ['Client', `${emailData.fullName} <${emailData.email}>`],
+        ['Phone', emailData.phone],
+        ['Business', emailData.businessName],
+        ['Description', emailData.description],
+        ['Deadline', this.formatDeadline(emailData.deadline)],
+        ['Budget', this.formatBudget(emailData.budget)],
+        ['Subtotal', `₹${emailData.subtotal.toFixed(2)}`],
+        ['Service Fee', `₹${emailData.serviceFee.toFixed(2)}`],
+        ['Total', `₹${emailData.total.toFixed(2)}`],
+        ['Delivery Window', `${delivery.minDays}–${delivery.maxDays} days`],
+        ['Suggested Date', delivery.suggestedDate],
+        ['Notes', emailData.notes]
+      ];
+      const clientEmailContent = this.renderPlain('Request Received', clientItems, servicesList);
+      const companyEmailContent = this.renderPlain('New Service Request', companyItems, servicesList);
+      const clientHtml = this.renderHtml('Request Received', clientItems, servicesList);
+      const companyHtml = this.renderHtml('New Service Request', companyItems, servicesList);
 
       const attachments =
         emailData.files && emailData.files.length > 0
@@ -169,11 +227,13 @@ Submitted: ${submittedAt}
 
       const payload: Record<string, any> = {
         clientTo: emailData.email,
-        clientSubject: `Service Request Confirmation - ${emailData.requestId}`,
+        clientSubject: `Request Received - ${emailData.requestId}`,
         clientBody: clientEmailContent,
+        clientHtml,
         companyTo: this.COMPANY_EMAIL,
         companySubject: `New Service Request - ${emailData.requestId}`,
         companyBody: companyEmailContent,
+        companyHtml,
       };
       if (attachments.length > 0) {
         payload.attachments = attachments;
@@ -215,19 +275,29 @@ Submitted: ${submittedAt}
   async sendNewsletter(email: string): Promise<{ success: boolean; error?: string }> {
     try {
       const submittedAt = new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' });
-      const clientSubject = 'Welcome to Wynqor Newsletter';
+      const clientSubject = 'Newsletter Subscription Confirmed';
       const companySubject = 'New Newsletter Subscription';
-      const clientBody =
-        `🎉 Thanks for subscribing!\n\nYou're now part of the Wynqor newsletter.\n\nSubscribed: ${submittedAt}\n\nYou will receive updates on new services, offers and case studies.\n\n© 2024 Wynqor Inc.`;
-      const companyBody =
-        `🆕 Newsletter Subscription\n\nEmail: ${email}\nSubscribed: ${submittedAt}\n\n© 2024 Wynqor Inc.`;
+      const clientItems: Array<[string, string]> = [
+        ['Email', email],
+        ['Subscribed', submittedAt]
+      ];
+      const companyItems: Array<[string, string]> = [
+        ['Email', email],
+        ['Subscribed', submittedAt]
+      ];
+      const clientBody = this.renderPlain('Subscription Confirmed', clientItems);
+      const companyBody = this.renderPlain('Newsletter Subscription', companyItems);
+      const clientHtml = this.renderHtml('Subscription Confirmed', clientItems);
+      const companyHtml = this.renderHtml('Newsletter Subscription', companyItems);
       const payload = {
         clientTo: email,
         clientSubject,
         clientBody,
+        clientHtml,
         companyTo: this.COMPANY_EMAIL,
         companySubject,
         companyBody,
+        companyHtml,
       };
       const response = await fetch('/api/sendMail', {
         method: 'POST',
@@ -245,34 +315,32 @@ Submitted: ${submittedAt}
   async sendLoginNotification(user: { name: string; email: string }): Promise<{ success: boolean; error?: string }> {
     try {
       const submittedAt = new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' });
-      const clientSubject = `Welcome back, ${user.name}!`;
+      const clientSubject = `Sign-in Confirmed - ${user.name}`;
       const companySubject = `User Login - ${user.email}`;
-      const clientBody =
-        `👋 Hi ${user.name},
-
-You're now signed in to Wynqor.
-
-Signed in: ${submittedAt}
-
-If this wasn't you, please reply to this email immediately.
-
-© 2024 Wynqor Inc.`;
-      const companyBody =
-        `🔔 User Login Notification
-
-User: ${user.name}
-Email: ${user.email}
-Time: ${submittedAt}
-
-© 2024 Wynqor Inc.`;
+      const clientItems: Array<[string, string]> = [
+        ['User', user.name],
+        ['Email', user.email],
+        ['Time', submittedAt]
+      ];
+      const companyItems: Array<[string, string]> = [
+        ['User', user.name],
+        ['Email', user.email],
+        ['Time', submittedAt]
+      ];
+      const clientBody = this.renderPlain('Sign-in Confirmed', clientItems);
+      const companyBody = this.renderPlain('User Login', companyItems);
+      const clientHtml = this.renderHtml('Sign-in Confirmed', clientItems);
+      const companyHtml = this.renderHtml('User Login', companyItems);
 
       const payload = {
         clientTo: user.email,
         clientSubject,
         clientBody,
+        clientHtml,
         companyTo: this.COMPANY_EMAIL,
         companySubject,
         companyBody,
+        companyHtml,
       };
 
       const response = await fetch('/api/sendMail', {
@@ -345,131 +413,8 @@ Time: ${submittedAt}
     return { minDays, maxDays, suggestedDate, deadlineText };
   }
 
-  private generateClientEmailContent(data: EmailData): string {
-    const servicesList = this.formatServicesList(data.cartItems);
-    const delivery = this.computeDelivery(data);
-
-    return `🎉 YOUR REQUEST HAS BEEN SUBMITTED!
-
-Thank you for choosing Wynqor!
-
-✅ SUCCESS: Your service request has been received and our team will review it shortly.
-
-REQUEST ID: ${data.requestId}
-
-📋 REQUEST DETAILS
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Request ID: ${data.requestId}
-Submitted: ${data.submittedAt}
-
-👤 YOUR INFORMATION
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Full Name: ${data.fullName}
-Email Address: ${data.email}
-Phone Number: ${data.phone}${data.businessName ? `\nBusiness Name: ${data.businessName}` : ''}
-
-📝 PROJECT DETAILS
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Project Description: ${data.description}
-Deadline: ${this.formatDeadline(data.deadline)}
-Budget Range: ${this.formatBudget(data.budget)}
-
-🛒 SELECTED SERVICES
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-${servicesList}
-
-⏱ ESTIMATED DELIVERY
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Window: ${delivery.minDays}–${delivery.maxDays} days
-Suggested Delivery Date: ${delivery.suggestedDate}
-Target Deadline: ${delivery.deadlineText}
-
-💰 PRICING BREAKDOWN
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Subtotal: ₹${data.subtotal.toFixed(2)}
-Service Fee (5%): ₹${data.serviceFee.toFixed(2)}
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-TOTAL AMOUNT: ₹${data.total.toFixed(2)}
-
-⏰ WHAT'S NEXT?
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-1. Our team will review your request within 24 hours
-2. You'll receive a detailed proposal with timeline and pricing
-3. Once approved, we'll begin working on your project
-4. You'll receive regular updates throughout the process${data.notes ? `
-
-📌 ADDITIONAL NOTES
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-${data.notes}` : ''}
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-If you have any questions, please contact us at: ${this.COMPANY_EMAIL}
-
-© 2024 Wynqor Inc. All rights reserved.`.trim();
-  }
 
 
-  private generateCompanyEmailContent(data: EmailData): string {
-    const servicesList = this.formatServicesList(data.cartItems);
-    const delivery = this.computeDelivery(data);
-    return `🚀 NEW SERVICE REQUEST RECEIVED
-
-⚡ URGENT: Please review this request within 24 hours and send a detailed proposal to the client.
-
-REQUEST ID: ${data.requestId}
-
-📋 REQUEST INFORMATION
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Request ID: ${data.requestId}
-Submitted: ${data.submittedAt}
-
-👤 CLIENT DETAILS
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Full Name: ${data.fullName}
-Email Address: ${data.email}
-Phone Number: ${data.phone}${data.businessName ? `\nBusiness Name: ${data.businessName}` : ''}
-
-📝 PROJECT REQUIREMENTS
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Project Description: ${data.description}
-Deadline: ${this.formatDeadline(data.deadline)}
-Budget Range: ${this.formatBudget(data.budget)}${data.notes ? `\n\nAdditional Notes: ${data.notes}` : ''}
-
-🛒 REQUESTED SERVICES
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-${servicesList}
-
-⏱ ESTIMATED DELIVERY
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Window: ${delivery.minDays}–${delivery.maxDays} days
-Suggested Delivery Date: ${delivery.suggestedDate}
-Target Deadline: ${delivery.deadlineText}
-
-💰 FINANCIAL DETAILS
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Subtotal: ₹${data.subtotal.toFixed(2)}
-Service Fee (5%): ₹${data.serviceFee.toFixed(2)}
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-TOTAL ESTIMATE: ₹${data.total.toFixed(2)}
-
-🎯 QUICK ACTIONS
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-📧 Send Proposal: ${data.email}
-📞 Call Client: ${data.phone}
-
-📋 NEXT STEPS CHECKLIST
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-1. Review the project requirements carefully
-2. Prepare a detailed proposal with timeline and deliverables
-3. Send the proposal to the client via email
-4. Follow up if no response within 48 hours
-5. Update the request status in your dashboard
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Wynqor Service Request System
-This is an automated notification. Please respond to the client directly.
-© 2024 Wynqor Inc. All rights reserved.`.trim();
-  }
 
   async sendPaymentReceipt(info: {
     requestId: string;

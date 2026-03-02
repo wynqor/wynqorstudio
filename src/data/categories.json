@@ -1,0 +1,179 @@
+{
+  "categories": [
+    {
+      "id": "branding-identity",
+      "name": "Branding & Identity Design",
+      "icon": "branding_watermark",
+      "subservices": [
+        "Logo Design",
+        "Business Card Design",
+        "Letterhead Design",
+        "Brand Guidelines Creation",
+        "Social Profile Kit (Profile + Cover Banners)",
+        "Packaging Design (Box, Label, Bottle, etc.)",
+        "Merchandise Design (T-Shirts, Mugs, Caps, etc.)",
+        "Brand Naming / Tagline Creation",
+        "Corporate Stationery Kit (Envelopes, Notepads, Email Signatures)",
+        "3D Logo Mockups (Office Wall / Signboard Presentation)"
+      ]
+    },
+    {
+      "id": "poster-graphic",
+      "name": "Poster & Graphic Design",
+      "icon": "brush",
+      "subservices": [
+        "Social Media Posters (Instagram, Facebook, LinkedIn)",
+        "Event Invitations (Digital & Print)",
+        "Flyers / Brochures",
+        "Certificates / ID Cards",
+        "Print Design (Flex, Banner, Pamphlet)",
+        "Infographics",
+        "Magazine / Booklet Design",
+        "Restaurant Menu Design",
+        "Festival Campaign Templates (Diwali, Holi, Independence Day, etc.)",
+        "Political Campaign Posters / Election Material",
+        "Infographic Resume / CV Design"
+      ]
+    },
+    {
+      "id": "outdoor-advertising",
+      "name": "Outdoor Advertising & Media",
+      "icon": "campaign",
+      "subservices": [
+        "Billboard / Hoarding Design",
+        "Wallscape Advertising Design",
+        "Transit Ads (Bus, Auto, Metro Panels)",
+        "Digital Screen Ads (Mall, Airport, Cafe, Outdoor LED)",
+        "Event Backdrops & Stage Branding",
+        "Retail Branding (Shop Signage, Display Boards, Standees)",
+        "Shop Signboard / Glow Signage",
+        "Neon Signage Design",
+        "Mall / Retail Kiosk Branding",
+        "Vehicle Wrapping (Car/Van Full Body Ads)",
+        "Airport Lounge / Waiting Area Branding"
+      ]
+    },
+    {
+      "id": "website-development",
+      "name": "Website Design & Development",
+      "icon": "code",
+      "subservices": [
+        "Portfolio Websites",
+        "Business Websites",
+        "E-Commerce Websites",
+        "WordPress Development",
+        "Static/HTML Websites",
+        "Custom Web Applications",
+        "Domain & Hosting Setup",
+        "Website Maintenance / Updates",
+        "Landing Pages / Sales Funnels",
+        "Website Redesign / Revamp",
+        "Multi-vendor Marketplace Websites",
+        "Booking & Appointment Portals (Doctor, Salon, Hotel)",
+        "Learning Management Systems (LMS / Online Courses)",
+        "Membership / Subscription Websites"
+      ]
+    },
+    {
+      "id": "digital-marketing",
+      "name": "Digital Marketing",
+      "icon": "ads_click",
+      "subservices": [
+        "Search Engine Optimization (SEO)",
+        "Meta (Facebook/Instagram) Ads",
+        "Google Ads",
+        "Social Media Management",
+        "Email Campaigns (Mailchimp, Brevo, Zoho)",
+        "WhatsApp/Telegram Marketing",
+        "Influencer Marketing",
+        "Online Reputation Management",
+        "Analytics & Reporting",
+        "TikTok / Moj / Josh Ads Campaigns",
+        "Podcast Marketing",
+        "LinkedIn Lead Generation Campaigns",
+        "SMS Marketing",
+        "Chatbot Automation (Meta, WhatsApp, Website)"
+      ]
+    },
+    {
+      "id": "ui-ux-design",
+      "name": "UI/UX Design",
+      "icon": "layers",
+      "subservices": [
+        "Website UI Design",
+        "Mobile App UI",
+        "Dashboard / SaaS UI",
+        "Wireframing (Low & High Fidelity)",
+        "Prototype Walkthrough",
+        "User Journey Mapping",
+        "Design System / Component Library",
+        "Usability Testing",
+        "AR/VR UI Design",
+        "Smartwatch UI Design",
+        "Car Infotainment UI Design",
+        "Gamification-based UI/UX Elements"
+      ]
+    },
+    {
+      "id": "content-writing",
+      "name": "Content Writing",
+      "icon": "edit_note",
+      "subservices": [
+        "Website Copywriting",
+        "Blog Writing",
+        "Product Descriptions",
+        "Ad Copy / Slogans",
+        "Video Scripts (YouTube/Reels/Ads)",
+        "SEO Optimized Content",
+        "Technical/Research-Based Articles",
+        "Whitepapers / Case Studies",
+        "Press Releases",
+        "Social Media Captions & Hashtag Strategy",
+        "eBook Writing & Design",
+        "LinkedIn Ghostwriting (for professionals)",
+        "Podcast Scriptwriting",
+        "Brand Storytelling"
+      ]
+    },
+    {
+      "id": "video-animation",
+      "name": "Video Creation & Animation",
+      "icon": "movie_creation",
+      "subservices": [
+        "Promo Videos (Business, Offers)",
+        "Explainer Videos",
+        "Reels / Shorts Editing",
+        "Logo Animation / Intros",
+        "Voiceover (Multi-language)",
+        "Subtitle + Translation",
+        "Motion Posters",
+        "Product Demo Videos",
+        "2D/3D Animation",
+        "Corporate Presentation Videos",
+        "Corporate Documentary Videos",
+        "Wedding Invitation Animation",
+        "Festival Greetings Animation (New Year, Diwali, Eid, etc.)",
+        "360° Virtual Tours (Hotels, Real Estate, Showrooms)",
+        "AR Filters (Instagram, Snapchat, TikTok custom filters)"
+      ]
+    },
+    {
+      "id": "photography-media",
+      "name": "Photography & Creative Media",
+      "icon": "camera_alt",
+      "subservices": [
+        "Product Photography",
+        "Corporate Photoshoots",
+        "Event Coverage (Launch, Exhibition)",
+        "Food Photography",
+        "Lifestyle Photography",
+        "Drone Shoots",
+        "Model / Portfolio Shoots",
+        "Fashion Photography",
+        "Jewelry & Luxury Product Photography",
+        "Virtual Staging (for Real Estate)",
+        "360° Photography (Google Street View style)"
+      ]
+    }
+  ]
+}

@@ -1,11 +1,9 @@
+import siteData from './site.json';
+const base = (siteData as any);
 export const site = {
-  name: 'Wynqor',
-  companyEmail: (import.meta as any).env?.VITE_COMPANY_EMAIL || 'wynqor@gmail.com',
-  phone: '+91 87975 14393',
-  location: 'Remote-first • Global',
-  socials: {
-    linkedin: '#',
-    x: '#',
-    instagram: '#',
-  },
+  name: base.name as string,
+  companyEmail: (import.meta as any).env?.VITE_COMPANY_EMAIL || (base.companyEmail as string),
+  phone: base.phone as string,
+  location: base.location as string,
+  socials: base.socials as Record<string, string>,
 };

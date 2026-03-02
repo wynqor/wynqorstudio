@@ -1,0 +1,32 @@
+{
+  "jobs": [
+    {
+      "id": "senior-ui-ux-designer",
+      "title": "Senior UI/UX Designer",
+      "location": "Remote",
+      "type": "Full-time",
+      "description": "Lead product design across web and mobile. Own user flows, systems, and prototypes."
+    },
+    {
+      "id": "frontend-engineer-react",
+      "title": "Frontend Engineer (React)",
+      "location": "Remote",
+      "type": "Full-time",
+      "description": "Build high-performance UIs with React and modern tooling. Collaborate with design and backend."
+    },
+    {
+      "id": "brand-designer",
+      "title": "Brand Designer",
+      "location": "Remote",
+      "type": "Contract",
+      "description": "Create visual identities and brand systems for multi-channel experiences."
+    },
+    {
+      "id": "content-strategist",
+      "title": "Content Strategist",
+      "location": "Remote",
+      "type": "Contract",
+      "description": "Plan and orchestrate content that drives acquisition and activation."
+    }
+  ]
+}

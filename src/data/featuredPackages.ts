@@ -7,20 +7,5 @@ export interface FeaturedPackage {
   image?: string;
 }
 
-export const featuredPackages: FeaturedPackage[] = [
-  {
-    id: 'identity-branding',
-    tier: 'PREMIUM',
-    title: 'Identity & Branding',
-    description: 'Comprehensive identity creation for Series A startups. Includes logo system, guidelines, and pitch deck.',
-    cta: 'View Package',
-    image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDS2pay7_G5FbVSwFqT59q3veJlgFN-Z5RIsHyHQ8RtB-CwcDSyK8zkQ69AU7kDHpnzh292XMzhKtsb2f_QlWY9Ec0wSDgqh2BxdyXDmsCKwbmQbIsPqA8StlmqOGhUp_dw6xnQ4DSL2Hx0Wb8WeNTW8AKxLjDdg0etN1JpgTMnmYCe_aPdl89HzzETJPK6DbAN1dWTl0KXy6yM6PSAY-sv4eGetav2HxK_RAJqVBWI3LNLjJhar69Mav75vva4llB4IjJTOsAZ1HOX'
-  },
-  {
-    id: 'enterprise-web',
-    tier: 'ENTERPRISE',
-    title: 'Enterprise Web Solutions',
-    description: 'Scale your digital presence instantly. Full-stack development squads integrated into your workflow.',
-    cta: 'Book Consultation',
-  }
-];
+import featuredData from './featuredPackages.json';
+export const featuredPackages: FeaturedPackage[] = (featuredData as any).featuredPackages as FeaturedPackage[];

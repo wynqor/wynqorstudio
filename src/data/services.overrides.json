@@ -1,0 +1,3807 @@
+{
+  "services": [
+    {
+      "logo-design": {
+        "title": "Logo Design",
+        "category": "Branding & Identity Design",
+        "image": "https://example.com/logo-design.jpg",
+        "price": "₹1,099",
+        "deliveryTime": "2-3 Days",
+        "rating": 4.9,
+        "reviewCount": 1250,
+        "isBestseller": true,
+        "favorite": false,
+        "isShow": true,
+        "details": {
+          "description": "Professional minimalist logo design for strong brand recall. Create a memorable first impression with a custom-crafted logo that stands out.",
+          "whyChoose": "Minimalist, scalable and versatile across all media platforms. Get a unique identity that works everywhere.",
+          "process": [
+            "Discovery and brand brief analysis",
+            "Research & concept development",
+            "Initial concepts presentation",
+            "Feedback & unlimited revisions",
+            "Finalization and file preparation",
+            "Complete brand handover"
+          ],
+          "features": [
+            "3 Unique Concepts",
+            "Vector source files (AI, EPS, SVG)",
+            "3D mockup for presentation",
+            "Social media profile kit",
+            "High-res PNG & JPG",
+            "Print-ready files"
+          ],
+          "relatedServices": ["business-card-design", "brand-guidelines", "packaging-design"]
+        }
+      }
+    },
+    {
+      "business-card-design": {
+        "title": "Business Card Design",
+        "category": "Branding & Identity Design",
+        "image": "https://example.com/business-card.jpg",
+        "price": "₹499",
+        "deliveryTime": "1-2 Days",
+        "rating": 4.8,
+        "reviewCount": 850,
+        "isBestseller": false,
+        "favorite": false,
+        "isShow": true,
+        "details": {
+          "description": "Modern, double-sided business card design that leaves a lasting impression on your clients and partners.",
+          "whyChoose": "Print-ready designs with proper bleed and color settings. Stand out with premium finishes.",
+          "process": [
+            "Share your information & logo",
+            "Design concepts created",
+            "Review and feedback",
+            "Final print-ready files"
+          ],
+          "features": [
+            "Double-sided design",
+            "Print-ready PDF with bleed",
+            "Source editable file",
+            "Multiple format exports",
+            "Spot UV simulation",
+            "Premium finish mockups"
+          ],
+          "relatedServices": ["logo-design", "letterhead-design", "corporate-stationery"]
+        }
+      }
+    },
+    {
+      "letterhead-design": {
+        "title": "Letterhead Design",
+        "category": "Branding & Identity Design",
+        "image": "https://example.com/letterhead.jpg",
+        "price": "₹399",
+        "deliveryTime": "1-2 Days",
+        "rating": 4.7,
+        "reviewCount": 420,
+        "isBestseller": false,
+        "favorite": false,
+        "isShow": true,
+        "details": {
+          "description": "Professional A4 letterhead design that maintains brand consistency across all your official correspondence.",
+          "whyChoose": "Perfect for corporate communication with elegant layout and proper spacing.",
+          "process": [
+            "Brand guidelines review",
+            "Header and footer design",
+            "Content placement layout",
+            "Final approval and delivery"
+          ],
+          "features": [
+            "A4 size design",
+            "Word template included",
+            "Print-ready PDF",
+            "Editable source file",
+            "Digital version for emails",
+            "Brand color integration"
+          ],
+          "relatedServices": ["business-card-design", "corporate-stationery", "brand-guidelines"]
+        }
+      }
+    },
+    {
+      "brand-guidelines": {
+        "title": "Brand Guidelines Creation",
+        "category": "Branding & Identity Design",
+        "image": "https://example.com/brand-guidelines.jpg",
+        "price": "₹2,999",
+        "deliveryTime": "5-7 Days",
+        "rating": 5.0,
+        "reviewCount": 180,
+        "isBestseller": true,
+        "favorite": false,
+        "isShow": true,
+        "details": {
+          "description": "Comprehensive brand style guide that ensures consistent brand application across all touchpoints and media.",
+          "whyChoose": "Essential for businesses scaling their brand with multiple designers and marketing channels.",
+          "process": [
+            "Brand audit and analysis",
+            "Visual identity definition",
+            "Guidelines documentation",
+            "Usage examples creation",
+            "Final presentation PDF"
+          ],
+          "features": [
+            "Logo usage rules",
+            "Color palette specifications",
+            "Typography system",
+            "Brand voice guidelines",
+            "Stationery application",
+            "Digital & print examples"
+          ],
+          "relatedServices": ["logo-design", "social-profile-kit", "packaging-design"]
+        }
+      }
+    },
+    {
+      "social-profile-kit": {
+        "title": "Social Profile Kit",
+        "category": "Branding & Identity Design",
+        "image": "https://example.com/social-kit.jpg",
+        "price": "₹799",
+        "deliveryTime": "2-3 Days",
+        "rating": 4.9,
+        "reviewCount": 620,
+        "isBestseller": false,
+        "favorite": false,
+        "isShow": true,
+        "details": {
+          "description": "Complete social media profile package with matching profile picture and cover banners for all platforms.",
+          "whyChoose": "Consistent branding across Instagram, Facebook, LinkedIn, Twitter and YouTube.",
+          "process": [
+            "Platform requirements analysis",
+            "Banner and profile design",
+            "Mobile optimization check",
+            "Final file delivery"
+          ],
+          "features": [
+            "Profile picture design",
+            "Cover banners all platforms",
+            "Highlight icons (Instagram)",
+            "Social media kit mockup",
+            "Mobile & desktop optimized",
+            "Editable templates"
+          ],
+          "relatedServices": ["logo-design", "brand-guidelines", "social-media-posters"]
+        }
+      }
+    },
+    {
+      "packaging-design": {
+        "title": "Packaging Design",
+        "category": "Branding & Identity Design",
+        "image": "https://example.com/packaging.jpg",
+        "price": "₹1,999",
+        "deliveryTime": "3-5 Days",
+        "rating": 4.8,
+        "reviewCount": 340,
+        "isBestseller": true,
+        "favorite": false,
+        "isShow": true,
+        "details": {
+          "description": "Eye-catching packaging design for boxes, bottles, labels, and products that drives sales off the shelf.",
+          "whyChoose": "Expertise in dielines, structural design, and print production ready for manufacturing.",
+          "process": [
+            "Product & audience analysis",
+            "Dieline setup and structure",
+            "Design and visualization",
+            "3D mockup presentation",
+            "Print file preparation"
+          ],
+          "features": [
+            "Custom dieline creation",
+            "3D product mockups",
+            "Print-ready artwork",
+            "Barcode integration",
+            "Material specification",
+            "Multiple size variations"
+          ],
+          "relatedServices": ["logo-design", "brand-guidelines", "product-photography"]
+        }
+      }
+    },
+    {
+      "merchandise-design": {
+        "title": "Merchandise Design",
+        "category": "Branding & Identity Design",
+        "image": "https://example.com/merchandise.jpg",
+        "price": "₹1,499",
+        "deliveryTime": "3-5 Days",
+        "rating": 4.7,
+        "reviewCount": 210,
+        "isBestseller": false,
+        "favorite": false,
+        "isShow": true,
+        "details": {
+          "description": "Creative merchandise designs for T-shirts, mugs, caps, hoodies and promotional products.",
+          "whyChoose": "Print-ready artwork optimized for different printing techniques like screen printing and DTG.",
+          "process": [
+            "Product selection discussion",
+            "Concept sketches",
+            "Design development",
+            "Mockup visualization",
+            "Production file setup"
+          ],
+          "features": [
+            "T-shirt front/back design",
+            "Mug wrap design",
+            "Cap embroidery mockup",
+            "Print separation files",
+            "Multiple color variations",
+            "Product mockups included"
+          ],
+          "relatedServices": ["logo-design", "brand-guidelines", "print-design"]
+        }
+      }
+    },
+    {
+      "brand-naming": {
+        "title": "Brand Naming / Tagline Creation",
+        "category": "Branding & Identity Design",
+        "image": "https://example.com/brand-naming.jpg",
+        "price": "₹2,499",
+        "deliveryTime": "4-6 Days",
+        "rating": 4.9,
+        "reviewCount": 95,
+        "isBestseller": false,
+        "favorite": false,
+        "isShow": true,
+        "details": {
+          "description": "Strategic brand naming and tagline development with linguistic and market research for maximum impact.",
+          "whyChoose": "Names that tell your story, resonate with audience, and have domain availability checked.",
+          "process": [
+            "Brand strategy workshop",
+            "Brainstorming & ideation",
+            "Linguistic screening",
+            "Trademark availability check",
+            "Final recommendations"
+          ],
+          "features": [
+            "50+ name concepts",
+            "Domain availability check",
+            "Social handle verification",
+            "Tagline/slogan options",
+            "Name strategy rationale",
+            "Preference voting guide"
+          ],
+          "relatedServices": ["logo-design", "brand-guidelines", "content-writing"]
+        }
+      }
+    },
+    {
+      "corporate-stationery": {
+        "title": "Corporate Stationery Kit",
+        "category": "Branding & Identity Design",
+        "image": "https://example.com/stationery.jpg",
+        "price": "₹1,299",
+        "deliveryTime": "2-4 Days",
+        "rating": 4.8,
+        "reviewCount": 310,
+        "isBestseller": false,
+        "favorite": false,
+        "isShow": true,
+        "details": {
+          "description": "Complete corporate stationery set including envelopes, notepads, email signatures, and more.",
+          "whyChoose": "Unified brand experience across all professional communication materials.",
+          "process": [
+            "Brand identity integration",
+            "Each item custom design",
+            "Consistency check",
+            "Print and digital file prep"
+          ],
+          "features": [
+            "Business card",
+            "Letterhead",
+            "Envelope (DL & A4)",
+            "Notepad design",
+            "Email signature HTML",
+            "Thank you card"
+          ],
+          "relatedServices": ["business-card-design", "letterhead-design", "brand-guidelines"]
+        }
+      }
+    },
+    {
+      "3d-logo-mockups": {
+        "title": "3D Logo Mockups",
+        "category": "Branding & Identity Design",
+        "image": "https://example.com/3d-mockup.jpg",
+        "price": "₹599",
+        "deliveryTime": "1-2 Days",
+        "rating": 4.9,
+        "reviewCount": 440,
+        "isBestseller": true,
+        "favorite": false,
+        "isShow": true,
+        "details": {
+          "description": "Photorealistic 3D logo mockups for office walls, signboards, and premium brand presentations.",
+          "whyChoose": "Visualize your logo in real-world settings before investing in physical production.",
+          "process": [
+            "Logo file preparation",
+            "Scene selection",
+            "3D rendering",
+            "Final image delivery"
+          ],
+          "features": [
+            "Acrylic sign mockup",
+            "Neon sign effect",
+            "Office wall mockup",
+            "Billboard visualization",
+            "Metal/wood textures",
+            "Multiple lighting options"
+          ],
+          "relatedServices": ["logo-design", "packaging-design", "outdoor-advertising"]
+        }
+      }
+    },
+    {
+      "social-media-posters": {
+        "title": "Social Media Posters",
+        "category": "Poster & Graphic Design",
+        "image": "https://example.com/social-poster.jpg",
+        "price": "₹299",
+        "deliveryTime": "1-2 Days",
+        "rating": 4.8,
+        "reviewCount": 2150,
+        "isBestseller": true,
+        "favorite": false,
+        "isShow": true,
+        "details": {
+          "description": "Engaging social media graphics for Instagram, Facebook, LinkedIn that stop the scroll and drive engagement.",
+          "whyChoose": "Platform-optimized designs with trending aesthetics and high conversion focus.",
+          "process": [
+            "Content understanding",
+            "Template creation",
+            "Design & copy integration",
+            "Mobile preview",
+            "Final delivery"
+          ],
+          "features": [
+            "Instagram post & story",
+            "Facebook feed design",
+            "LinkedIn banner",
+            "Carousel design",
+            "Caption writing",
+            "Hashtag research"
+          ],
+          "relatedServices": ["social-profile-kit", "digital-marketing", "content-writing"]
+        }
+      }
+    },
+    {
+      "event-invitations": {
+        "title": "Event Invitations",
+        "category": "Poster & Graphic Design",
+        "image": "https://example.com/invitation.jpg",
+        "price": "₹399",
+        "deliveryTime": "1-2 Days",
+        "rating": 4.7,
+        "reviewCount": 580,
+        "isBestseller": false,
+        "favorite": false,
+        "isShow": true,
+        "details": {
+          "description": "Elegant digital and print invitations for weddings, corporate events, parties, and grand openings.",
+          "whyChoose": "Beautifully crafted invitations that set the tone for your special event.",
+          "process": [
+            "Event details collection",
+            "Theme and style selection",
+            "Design creation",
+            "RSVP integration",
+            "Digital & print delivery"
+          ],
+          "features": [
+            "Digital version (JPG/PNG)",
+            "Print-ready file",
+            "Animated GIF option",
+            "QR code for RSVP",
+            "Envelope design",
+            "Thank you card template"
+          ],
+          "relatedServices": ["print-design", "festival-templates", "video-animation"]
+        }
+      }
+    },
+    {
+      "flyers-brochures": {
+        "title": "Flyers / Brochures",
+        "category": "Poster & Graphic Design",
+        "image": "https://example.com/flyer.jpg",
+        "price": "₹599",
+        "deliveryTime": "2-3 Days",
+        "rating": 4.8,
+        "reviewCount": 1100,
+        "isBestseller": false,
+        "favorite": false,
+        "isShow": true,
+        "details": {
+          "description": "Professional flyer and brochure designs for businesses, events, products, and services.",
+          "whyChoose": "Print-ready designs with compelling layouts that communicate your message effectively.",
+          "process": [
+            "Content organization",
+            "Layout structure",
+            "Visual design",
+            "Review and revision",
+            "Print file preparation"
+          ],
+          "features": [
+            "Tri-fold/bifold options",
+            "Print-ready PDF",
+            "Source editable file",
+            "High-res images",
+            "Bleed and crop marks",
+            "Digital version included"
+          ],
+          "relatedServices": ["print-design", "catalog-design", "infographics"]
+        }
+      }
+    },
+    {
+      "certificates-id-cards": {
+        "title": "Certificates / ID Cards",
+        "category": "Poster & Graphic Design",
+        "image": "https://example.com/certificate.jpg",
+        "price": "₹349",
+        "deliveryTime": "1-2 Days",
+        "rating": 4.7,
+        "reviewCount": 380,
+        "isBestseller": false,
+        "favorite": false,
+        "isShow": true,
+        "details": {
+          "description": "Professional certificate templates and ID card designs with security features and branding.",
+          "whyChoose": "Customizable templates that can be used for bulk printing or individual use.",
+          "process": [
+            "Requirements analysis",
+            "Template design",
+            "Security element addition",
+            "Editable file creation",
+            "Final delivery"
+          ],
+          "features": [
+            "Certificate of achievement",
+            "Participation certificate",
+            "Employee ID card",
+            "Student ID card",
+            "Editable template (PSD/AI)",
+            "Barcode/QR integration"
+          ],
+          "relatedServices": ["print-design", "corporate-stationery", "brand-guidelines"]
+        }
+      }
+    },
+    {
+      "print-design": {
+        "title": "Print Design",
+        "category": "Poster & Graphic Design",
+        "image": "https://example.com/print-design.jpg",
+        "price": "₹449",
+        "deliveryTime": "2-3 Days",
+        "rating": 4.8,
+        "reviewCount": 720,
+        "isBestseller": false,
+        "favorite": false,
+        "isShow": true,
+        "details": {
+          "description": "High-quality print designs for flex, banners, pamphlets, and all offline marketing materials.",
+          "whyChoose": "Print-ready files with proper CMYK settings, bleed, and resolution for professional printing.",
+          "process": [
+            "Size and material selection",
+            "Design layout",
+            "Print check and proofing",
+            "Final file delivery"
+          ],
+          "features": [
+            "Banner (standee/hoarding)",
+            "Pamphlet design",
+            "Flex printing ready",
+            "CMYK color mode",
+            "300 DPI resolution",
+            "Bleed and crop marks"
+          ],
+          "relatedServices": ["flyers-brochures", "outdoor-advertising", "packaging-design"]
+        }
+      }
+    },
+    {
+      "infographics": {
+        "title": "Infographics",
+        "category": "Poster & Graphic Design",
+        "image": "https://example.com/infographic.jpg",
+        "price": "₹899",
+        "deliveryTime": "3-4 Days",
+        "rating": 4.9,
+        "reviewCount": 240,
+        "isBestseller": true,
+        "favorite": false,
+        "isShow": true,
+        "details": {
+          "description": "Data visualization and infographic designs that transform complex information into easy-to-understand visuals.",
+          "whyChoose": "Engaging storytelling through data with custom illustrations and charts.",
+          "process": [
+            "Data collection",
+            "Storyboarding",
+            "Visual design",
+            "Review and refinement",
+            "Final export"
+          ],
+          "features": [
+            "Custom icon creation",
+            "Data charts integration",
+            "Brand color palette",
+            "Illustrated elements",
+            "Multiple size options",
+            "Source editable file"
+          ],
+          "relatedServices": ["content-writing", "presentation-design", "social-media-posters"]
+        }
+      }
+    },
+    {
+      "magazine-booklet": {
+        "title": "Magazine / Booklet Design",
+        "category": "Poster & Graphic Design",
+        "image": "https://example.com/magazine.jpg",
+        "price": "₹2,499",
+        "deliveryTime": "5-7 Days",
+        "rating": 4.8,
+        "reviewCount": 120,
+        "isBestseller": false,
+        "favorite": false,
+        "isShow": true,
+        "details": {
+          "description": "Professional magazine and booklet layouts with engaging typography and visual hierarchy.",
+          "whyChoose": "Editorial design expertise for publications, annual reports, and company profiles.",
+          "process": [
+            "Content structuring",
+            "Grid and style setup",
+            "Page layout design",
+            "Cover design",
+            "Print preparation"
+          ],
+          "features": [
+            "Up to 20 pages design",
+            "Cover and back design",
+            "Master pages setup",
+            "Table of contents",
+            "Print-ready PDF",
+            "Interactive digital version"
+          ],
+          "relatedServices": ["print-design", "catalog-design", "content-writing"]
+        }
+      }
+    },
+    {
+      "restaurant-menu": {
+        "title": "Restaurant Menu Design",
+        "category": "Poster & Graphic Design",
+        "image": "https://example.com/menu.jpg",
+        "price": "₹699",
+        "deliveryTime": "2-3 Days",
+        "rating": 4.9,
+        "reviewCount": 860,
+        "isBestseller": true,
+        "favorite": false,
+        "isShow": true,
+        "details": {
+          "description": "Appetizing menu designs for restaurants, cafes, bars, and food trucks that enhance dining experience.",
+          "whyChoose": "Menu psychology and layout strategies to highlight profitable items and improve customer experience.",
+          "process": [
+            "Menu items categorization",
+            "Layout and pricing strategy",
+            "Food photography integration",
+            "Review and finalization",
+            "Print & digital delivery"
+          ],
+          "features": [
+            "Single/multi-page menu",
+            "Food icons and illustrations",
+            "Special section highlights",
+            "QR code for digital menu",
+            "Print-ready file",
+            "Social media version"
+          ],
+          "relatedServices": ["print-design", "packaging-design", "food-photography"]
+        }
+      }
+    },
+    {
+      "festival-templates": {
+        "title": "Festival Campaign Templates",
+        "category": "Poster & Graphic Design",
+        "image": "https://example.com/festival.jpg",
+        "price": "₹499",
+        "deliveryTime": "1-2 Days",
+        "rating": 4.7,
+        "reviewCount": 420,
+        "isBestseller": false,
+        "favorite": false,
+        "isShow": true,
+        "details": {
+          "description": "Ready-to-use festival campaign templates for Diwali, Holi, Christmas, Eid, New Year and more.",
+          "whyChoose": "Quick turnaround with culturally relevant designs that resonate with your audience.",
+          "process": [
+            "Festival selection",
+            "Theme customization",
+            "Message integration",
+            "Final design delivery"
+          ],
+          "features": [
+            "Social media posts (3)",
+            "Story templates",
+            "WhatsApp broadcast image",
+            "Editable Canva template",
+            "Print poster option",
+            "Wish card design"
+          ],
+          "relatedServices": ["social-media-posters", "event-invitations", "digital-marketing"]
+        }
+      }
+    },
+    {
+      "political-campaign": {
+        "title": "Political Campaign Posters",
+        "category": "Poster & Graphic Design",
+        "image": "https://example.com/political.jpg",
+        "price": "₹899",
+        "deliveryTime": "2-3 Days",
+        "rating": 4.8,
+        "reviewCount": 150,
+        "isBestseller": false,
+        "favorite": false,
+        "isShow": true,
+        "details": {
+          "description": "Impactful political campaign materials including posters, banners, and election merchandise.",
+          "whyChoose": "Designs that connect with voters and communicate your message effectively.",
+          "process": [
+            "Campaign message review",
+            "Visual identity setup",
+            "Multi-format design",
+            "Print file preparation"
+          ],
+          "features": [
+            "Poster design (multiple sizes)",
+            "Flex banner design",
+            "Brochure/leaflet",
+            "Social media campaign kit",
+            "Flag/badge design",
+            "Vehicle wrap graphics"
+          ],
+          "relatedServices": ["print-design", "outdoor-advertising", "merchandise-design"]
+        }
+      }
+    },
+    {
+      "infographic-resume": {
+        "title": "Infographic Resume / CV Design",
+        "category": "Poster & Graphic Design",
+        "image": "https://example.com/resume.jpg",
+        "price": "₹599",
+        "deliveryTime": "2-3 Days",
+        "rating": 4.9,
+        "reviewCount": 310,
+        "isBestseller": true,
+        "favorite": false,
+        "isShow": true,
+        "details": {
+          "description": "Creative infographic resume design that showcases your skills and experience visually.",
+          "whyChoose": "Stand out from other candidates with a professionally designed, ATS-friendly resume.",
+          "process": [
+            "Content analysis",
+            "Visual skill representation",
+            "Layout design",
+            "Review and refinement",
+            "Final file delivery"
+          ],
+          "features": [
+            "One-page infographic CV",
+            "Traditional format included",
+            "LinkedIn profile summary",
+            "Cover letter design",
+            "Editable source file",
+            "Print and digital versions"
+          ],
+          "relatedServices": ["infographics", "print-design", "content-writing"]
+        }
+      }
+    },
+    {
+      "billboard-hoarding": {
+        "title": "Billboard / Hoarding Design",
+        "category": "Outdoor Advertising & Media",
+        "image": "https://example.com/billboard.jpg",
+        "price": "₹1,299",
+        "deliveryTime": "2-3 Days",
+        "rating": 4.8,
+        "reviewCount": 220,
+        "isBestseller": true,
+        "favorite": false,
+        "isShow": true,
+        "details": {
+          "description": "High-impact billboard and hoarding designs optimized for quick reading at a distance.",
+          "whyChoose": "Expertise in large format design with minimal text and maximum visual impact.",
+          "process": [
+            "Location analysis",
+            "Message hierarchy",
+            "Visual design",
+            "View distance optimization",
+            "Print file preparation"
+          ],
+          "features": [
+            "Multiple size options",
+            "Day/night visibility check",
+            "Minimal text approach",
+            "Bold typography",
+            "Print-ready files",
+            "Location mockup included"
+          ],
+          "relatedServices": ["print-design", "outdoor-advertising", "digital-screen-ads"]
+        }
+      }
+    },
+    {
+      "wallscape-advertising": {
+        "title": "Wallscape Advertising Design",
+        "category": "Outdoor Advertising & Media",
+        "image": "https://example.com/wallscape.jpg",
+        "price": "₹1,499",
+        "deliveryTime": "3-4 Days",
+        "rating": 4.7,
+        "reviewCount": 80,
+        "isBestseller": false,
+        "favorite": false,
+        "isShow": true,
+        "details": {
+          "description": "Large-scale wallscape and mural designs that transform buildings into brand statements.",
+          "whyChoose": "Creative use of architectural elements to create memorable outdoor advertising.",
+          "process": [
+            "Wall dimensions and features",
+            "Concept development",
+            "Design integration",
+            "Perspective preview",
+            "Production file setup"
+          ],
+          "features": [
+            "Building facade integration",
+            "Architectural feature use",
+            "3D building mockup",
+            "Day/night visualization",
+            "Multiple angle views",
+            "Installation guidelines"
+          ],
+          "relatedServices": ["billboard-hoarding", "outdoor-advertising", "3d-logo-mockups"]
+        }
+      }
+    },
+    {
+      "transit-ads": {
+        "title": "Transit Ads Design",
+        "category": "Outdoor Advertising & Media",
+        "image": "https://example.com/transit.jpg",
+        "price": "₹899",
+        "deliveryTime": "2-3 Days",
+        "rating": 4.8,
+        "reviewCount": 140,
+        "isBestseller": false,
+        "favorite": false,
+        "isShow": true,
+        "details": {
+          "description": "Eye-catching transit advertisements for buses, auto-rickshaws, and metro panels.",
+          "whyChoose": "Mobile advertising that reaches thousands of commuters daily with high recall value.",
+          "process": [
+            "Vehicle type selection",
+            "Wrap area planning",
+            "Design creation",
+            "Vehicle mockup",
+            "Print file preparation"
+          ],
+          "features": [
+            "Bus wrap design",
+            "Auto-rickshaw branding",
+            "Metro panel design",
+            "Cab top display",
+            "Station platform ads",
+            "Photorealistic mockups"
+          ],
+          "relatedServices": ["vehicle-wrapping", "outdoor-advertising", "print-design"]
+        }
+      }
+    },
+    {
+      "digital-screen-ads": {
+        "title": "Digital Screen Ads",
+        "category": "Outdoor Advertising & Media",
+        "image": "https://example.com/digital-screen.jpg",
+        "price": "₹699",
+        "deliveryTime": "1-2 Days",
+        "rating": 4.9,
+        "reviewCount": 190,
+        "isBestseller": false,
+        "favorite": false,
+        "isShow": true,
+        "details": {
+          "description": "Digital out-of-home (DOOH) ads for malls, airports, cafes, and outdoor LED screens.",
+          "whyChoose": "Optimized for digital displays with motion graphics options and high brightness settings.",
+          "process": [
+            "Screen specifications",
+            "Static or motion design",
+            "Animation (optional)",
+            "Format optimization",
+            "Final file delivery"
+          ],
+          "features": [
+            "Static screen design",
+            "Motion graphics option",
+            "Loop optimization",
+            "Multiple aspect ratios",
+            "Mall kiosk ready",
+            "Airport lounge format"
+          ],
+          "relatedServices": ["outdoor-advertising", "video-animation", "retail-branding"]
+        }
+      }
+    },
+    {
+      "event-backdrops": {
+        "title": "Event Backdrops & Stage Branding",
+        "category": "Outdoor Advertising & Media",
+        "image": "https://example.com/backdrop.jpg",
+        "price": "₹1,199",
+        "deliveryTime": "2-3 Days",
+        "rating": 4.8,
+        "reviewCount": 160,
+        "isBestseller": true,
+        "favorite": false,
+        "isShow": true,
+        "details": {
+          "description": "Professional stage backdrops and event branding for conferences, weddings, and exhibitions.",
+          "whyChoose": "Create Instagram-worthy moments with stunning stage designs and branded photo opportunities.",
+          "process": [
+            "Event type analysis",
+            "Stage dimensions",
+            "Backdrop concept",
+            "Branding integration",
+            "Production file preparation"
+          ],
+          "features": [
+            "Main stage backdrop",
+            "Speaker podium design",
+            "Photo booth step & repeat",
+            "Entrance branding",
+            "LED wall graphics",
+            "Floor graphics"
+          ],
+          "relatedServices": ["print-design", "event-invitations", "corporate-presentation"]
+        }
+      }
+    },
+    {
+      "retail-branding": {
+        "title": "Retail Branding",
+        "category": "Outdoor Advertising & Media",
+        "image": "https://example.com/retail.jpg",
+        "price": "₹1,599",
+        "deliveryTime": "3-4 Days",
+        "rating": 4.7,
+        "reviewCount": 110,
+        "isBestseller": false,
+        "favorite": false,
+        "isShow": true,
+        "details": {
+          "description": "Complete retail branding solutions including shop signage, display boards, and in-store graphics.",
+          "whyChoose": "Create a cohesive shopping experience from storefront to checkout counter.",
+          "process": [
+            "Store audit",
+            "Brand integration",
+            "Signage design",
+            "Display layout",
+            "Production files"
+          ],
+          "features": [
+            "Shop signage",
+            "Window displays",
+            "In-store posters",
+            "Price tags and displays",
+            "Counter branding",
+            "Wayfinding signage"
+          ],
+          "relatedServices": ["shop-signboard", "packaging-design", "print-design"]
+        }
+      }
+    },
+    {
+      "shop-signboard": {
+        "title": "Shop Signboard / Glow Signage",
+        "category": "Outdoor Advertising & Media",
+        "image": "https://example.com/signboard.jpg",
+        "price": "₹799",
+        "deliveryTime": "2-3 Days",
+        "rating": 4.9,
+        "reviewCount": 380,
+        "isBestseller": true,
+        "favorite": false,
+        "isShow": true,
+        "details": {
+          "description": "Attractive shop signboard and glow signage designs that attract customers day and night.",
+          "whyChoose": "Designs optimized for various materials like acrylic, metal, and illuminated signs.",
+          "process": [
+            "Shop front analysis",
+            "Signage concept",
+            "Material consideration",
+            "Night view mockup",
+            "Production file"
+          ],
+          "features": [
+            "Acrylic sign design",
+            "Lightbox sign",
+            "Neon sign effect",
+            "3D letter design",
+            "Day/night mockups",
+            "Fabrication guidelines"
+          ],
+          "relatedServices": ["retail-branding", "3d-logo-mockups", "outdoor-advertising"]
+        }
+      }
+    },
+    {
+      "neon-signage": {
+        "title": "Neon Signage Design",
+        "category": "Outdoor Advertising & Media",
+        "image": "https://example.com/neon.jpg",
+        "price": "₹699",
+        "deliveryTime": "2-3 Days",
+        "rating": 4.8,
+        "reviewCount": 210,
+        "isBestseller": false,
+        "favorite": false,
+        "isShow": true,
+        "details": {
+          "description": "Custom neon sign designs for businesses, home decor, and events with realistic glow effects.",
+          "whyChoose": "Vintage and modern neon aesthetics that create Instagrammable moments.",
+          "process": [
+            "Quote/message selection",
+            "Font and style design",
+            "Tube layout planning",
+            "Color selection",
+            "Final design delivery"
+          ],
+          "features": [
+            "Custom typography",
+            "Glass tube simulation",
+            "Backer board design",
+            "Day/night mockups",
+            "Installation guide",
+            "Multiple color options"
+          ],
+          "relatedServices": ["shop-signboard", "event-backdrops", "merchandise-design"]
+        }
+      }
+    },
+    {
+      "mall-kiosk": {
+        "title": "Mall / Retail Kiosk Branding",
+        "category": "Outdoor Advertising & Media",
+        "image": "https://example.com/kiosk.jpg",
+        "price": "₹1,899",
+        "deliveryTime": "4-5 Days",
+        "rating": 4.7,
+        "reviewCount": 60,
+        "isBestseller": false,
+        "favorite": false,
+        "isShow": true,
+        "details": {
+          "description": "Complete branding for mall kiosks and retail pop-ups that attract foot traffic.",
+          "whyChoose": "Maximize small spaces with impactful branding that stands out in busy malls.",
+          "process": [
+            "Kiosk dimensions",
+            "Brand integration",
+            "3D visualization",
+            "Graphic panel design",
+            "Production files"
+          ],
+          "features": [
+            "Kiosk facade design",
+            "Counter branding",
+            "Backlit panels",
+            "Product displays",
+            "Brochure holders",
+            "3D kiosk mockup"
+          ],
+          "relatedServices": ["retail-branding", "shop-signboard", "print-design"]
+        }
+      }
+    },
+    {
+      "vehicle-wrapping": {
+        "title": "Vehicle Wrapping Design",
+        "category": "Outdoor Advertising & Media",
+        "image": "https://example.com/vehicle-wrap.jpg",
+        "price": "₹1,999",
+        "deliveryTime": "3-4 Days",
+        "rating": 4.9,
+        "reviewCount": 170,
+        "isBestseller": true,
+        "favorite": false,
+        "isShow": true,
+        "details": {
+          "description": "Full vehicle wrap designs for cars, vans, and trucks that turn your fleet into moving billboards.",
+          "whyChoose": "Maximize brand exposure with designs that consider vehicle curves and visibility.",
+          "process": [
+            "Vehicle template acquisition",
+            "Design concept",
+            "Wrap layout planning",
+            "3D vehicle mockup",
+            "Print file preparation"
+          ],
+          "features": [
+            "Full/partial wrap design",
+            "Vehicle template matching",
+            "Window perforation",
+            "Contour cutting lines",
+            "Multiple angle mockups",
+            "Installation diagram"
+          ],
+          "relatedServices": ["transit-ads", "outdoor-advertising", "print-design"]
+        }
+      }
+    },
+    {
+      "airport-branding": {
+        "title": "Airport Lounge / Waiting Area Branding",
+        "category": "Outdoor Advertising & Media",
+        "image": "https://example.com/airport.jpg",
+        "price": "₹2,299",
+        "deliveryTime": "4-5 Days",
+        "rating": 4.8,
+        "reviewCount": 40,
+        "isBestseller": false,
+        "favorite": false,
+        "isShow": true,
+        "details": {
+          "description": "Premium branding for airport lounges and waiting areas targeting high-net-worth travelers.",
+          "whyChoose": "Sophisticated designs that enhance the premium travel experience.",
+          "process": [
+            "Space analysis",
+            "Premium material selection",
+            "Design concept",
+            "3D visualization",
+            "Production files"
+          ],
+          "features": [
+            "Lounge wall branding",
+            "Digital screen ads",
+            "Floor graphics",
+            "Furniture branding",
+            "Welcome signage",
+            "Premium mockups"
+          ],
+          "relatedServices": ["digital-screen-ads", "retail-branding", "corporate-stationery"]
+        }
+      }
+    },
+    {
+      "portfolio-websites": {
+        "title": "Portfolio Websites",
+        "category": "Website Design & Development",
+        "image": "https://example.com/portfolio-site.jpg",
+        "price": "₹4,999",
+        "deliveryTime": "5-7 Days",
+        "rating": 4.9,
+        "reviewCount": 210,
+        "isBestseller": true,
+        "favorite": false,
+        "isShow": true,
+        "details": {
+          "description": "Stunning portfolio websites for photographers, designers, artists, and creative professionals.",
+          "whyChoose": "Showcase your work beautifully with custom galleries and smooth animations.",
+          "process": [
+            "Requirements gathering",
+            "Design mockup",
+            "Development",
+            "Content upload",
+            "Testing & launch"
+          ],
+          "features": [
+            "Custom design",
+            "Image gallery",
+            "Mobile responsive",
+            "Contact form",
+            "Social media integration",
+            "Basic SEO setup"
+          ],
+          "relatedServices": ["ui-ux-design", "web-development", "content-writing"]
+        }
+      }
+    },
+    {
+      "business-websites": {
+        "title": "Business Websites",
+        "category": "Website Design & Development",
+        "image": "https://example.com/business-site.jpg",
+        "price": "₹7,999",
+        "deliveryTime": "7-10 Days",
+        "rating": 4.8,
+        "reviewCount": 340,
+        "isBestseller": false,
+        "favorite": false,
+        "isShow": true,
+        "details": {
+          "description": "Professional business websites that establish credibility and generate leads for your company.",
+          "whyChoose": "Clean, conversion-focused design with clear calls-to-action and service showcases.",
+          "process": [
+            "Business analysis",
+            "Sitemap creation",
+            "Design and development",
+            "Content integration",
+            "Testing and launch"
+          ],
+          "features": [
+            "Up to 5 pages",
+            "Contact form",
+            "Google Maps integration",
+            "Mobile responsive",
+            "Basic SEO",
+            "Social media links"
+          ],
+          "relatedServices": ["portfolio-websites", "landing-pages", "digital-marketing"]
+        }
+      }
+    },
+    {
+      "ecommerce-websites": {
+        "title": "E-Commerce Websites",
+        "category": "Website Design & Development",
+        "image": "https://example.com/ecommerce.jpg",
+        "price": "₹14,999",
+        "deliveryTime": "12-15 Days",
+        "rating": 4.8,
+        "reviewCount": 190,
+        "isBestseller": true,
+        "favorite": false,
+        "isShow": true,
+        "details": {
+          "description": "Full-featured e-commerce websites with product management, shopping cart, and payment gateway.",
+          "whyChoose": "Sell online 24/7 with a store that looks great and converts visitors to customers.",
+          "process": [
+            "Product catalog review",
+            "Store design",
+            "Development",
+            "Payment integration",
+            "Testing and launch"
+          ],
+          "features": [
+            "Product listings",
+            "Shopping cart",
+            "Payment gateway",
+            "Order management",
+            "Inventory tracking",
+            "Customer accounts"
+          ],
+          "relatedServices": ["web-development", "ui-ux-design", "digital-marketing"]
+        }
+      }
+    },
+    {
+      "wordpress-development": {
+        "title": "WordPress Development",
+        "category": "Website Design & Development",
+        "image": "https://example.com/wordpress.jpg",
+        "price": "₹6,999",
+        "deliveryTime": "5-7 Days",
+        "rating": 4.9,
+        "reviewCount": 560,
+        "isBestseller": true,
+        "favorite": false,
+        "isShow": true,
+        "details": {
+          "description": "Custom WordPress website development with easy-to-use admin panel for content updates.",
+          "whyChoose": "Manage your own content with no technical skills required.",
+          "process": [
+            "Theme selection/customization",
+            "Plugin setup",
+            "Content migration",
+            "Training session",
+            "Launch"
+          ],
+          "features": [
+            "Custom WordPress theme",
+            "Responsive design",
+            "SEO optimization",
+            "Contact forms",
+            "Blog setup",
+            "Security plugins"
+          ],
+          "relatedServices": ["business-websites", "ecommerce-websites", "website-maintenance"]
+        }
+      }
+    },
+    {
+      "static-html": {
+        "title": "Static/HTML Websites",
+        "category": "Website Design & Development",
+        "image": "https://example.com/html-site.jpg",
+        "price": "₹3,999",
+        "deliveryTime": "4-5 Days",
+        "rating": 4.7,
+        "reviewCount": 230,
+        "isBestseller": false,
+        "favorite": false,
+        "isShow": true,
+        "details": {
+          "description": "Fast-loading static HTML/CSS websites perfect for small businesses and landing pages.",
+          "whyChoose": "Lightweight, secure, and blazing fast websites with no database required.",
+          "process": [
+            "Design finalization",
+            "HTML/CSS coding",
+            "Cross-browser testing",
+            "Mobile optimization",
+            "Delivery"
+          ],
+          "features": [
+            "Hand-coded HTML/CSS",
+            "Mobile responsive",
+            "Fast loading speed",
+            "Contact form",
+            "Social media links",
+            "Google Analytics ready"
+          ],
+          "relatedServices": ["landing-pages", "portfolio-websites", "website-maintenance"]
+        }
+      }
+    },
+    {
+      "custom-web-apps": {
+        "title": "Custom Web Applications",
+        "category": "Website Design & Development",
+        "image": "https://example.com/web-app.jpg",
+        "price": "₹29,999",
+        "deliveryTime": "20-25 Days",
+        "rating": 4.9,
+        "reviewCount": 45,
+        "isBestseller": false,
+        "favorite": false,
+        "isShow": true,
+        "details": {
+          "description": "Bespoke web applications tailored to your specific business processes and requirements.",
+          "whyChoose": "Scalable solutions built with modern frameworks that grow with your business.",
+          "process": [
+            "Requirement analysis",
+            "Architecture design",
+            "Development sprints",
+            "Testing",
+            "Deployment"
+          ],
+          "features": [
+            "Custom functionality",
+            "Database design",
+            "User authentication",
+            "Admin dashboard",
+            "API integration",
+            "Scalable architecture"
+          ],
+          "relatedServices": ["web-development", "ui-ux-design", "database-management"]
+        }
+      }
+    },
+    {
+      "domain-hosting": {
+        "title": "Domain & Hosting Setup",
+        "category": "Website Design & Development",
+        "image": "https://example.com/domain-hosting.jpg",
+        "price": "₹999",
+        "deliveryTime": "1-2 Days",
+        "rating": 4.8,
+        "reviewCount": 320,
+        "isBestseller": false,
+        "favorite": false,
+        "isShow": true,
+        "details": {
+          "description": "Complete domain registration and hosting setup service with email configuration.",
+          "whyChoose": "Stress-free technical setup so you can focus on your business.",
+          "process": [
+            "Domain availability check",
+            "Hosting plan selection",
+            "Setup and configuration",
+            "Email account creation",
+            "Handover"
+          ],
+          "features": [
+            "Domain registration",
+            "Hosting configuration",
+            "Business email setup",
+            "SSL certificate",
+            "DNS management",
+            "1-year support"
+          ],
+          "relatedServices": ["website-maintenance", "web-development", "security-setup"]
+        }
+      }
+    },
+    {
+      "website-maintenance": {
+        "title": "Website Maintenance / Updates",
+        "category": "Website Design & Development",
+        "image": "https://example.com/maintenance.jpg",
+        "price": "₹1,999/month",
+        "deliveryTime": "Monthly",
+        "rating": 4.9,
+        "reviewCount": 180,
+        "isBestseller": true,
+        "favorite": false,
+        "isShow": true,
+        "details": {
+          "description": "Regular website maintenance, security updates, backups, and content updates.",
+          "whyChoose": "Keep your website secure, up-to-date, and performing at its best.",
+          "process": [
+            "Monthly backup",
+            "Update check",
+            "Content updates",
+            "Security scan",
+            "Performance report"
+          ],
+          "features": [
+            "Monthly backups",
+            "WordPress/core updates",
+            "Plugin/theme updates",
+            "Security monitoring",
+            "Content updates (2 hours)",
+            "Uptime monitoring"
+          ],
+          "relatedServices": ["web-development", "security-setup", "seo-services"]
+        }
+      }
+    },
+    {
+      "landing-pages": {
+        "title": "Landing Pages / Sales Funnels",
+        "category": "Website Design & Development",
+        "image": "https://example.com/landing-page.jpg",
+        "price": "₹3,499",
+        "deliveryTime": "3-4 Days",
+        "rating": 4.9,
+        "reviewCount": 430,
+        "isBestseller": true,
+        "favorite": false,
+        "isShow": true,
+        "details": {
+          "description": "High-converting landing pages and sales funnels designed to capture leads and drive sales.",
+          "whyChoose": "Conversion-focused design with A/B testing and analytics integration.",
+          "process": [
+            "Goal definition",
+            "Copy and design",
+            "Development",
+            "A/B testing setup",
+            "Launch"
+          ],
+          "features": [
+            "Single page focus",
+            "Lead capture form",
+            "Call-to-action buttons",
+            "Mobile optimized",
+            "A/B testing ready",
+            "Analytics integration"
+          ],
+          "relatedServices": ["digital-marketing", "ui-ux-design", "content-writing"]
+        }
+      }
+    },
+    {
+      "website-redesign": {
+        "title": "Website Redesign / Revamp",
+        "category": "Website Design & Development",
+        "image": "https://example.com/redesign.jpg",
+        "price": "₹9,999",
+        "deliveryTime": "8-10 Days",
+        "rating": 4.8,
+        "reviewCount": 120,
+        "isBestseller": false,
+        "favorite": false,
+        "isShow": true,
+        "details": {
+          "description": "Complete website redesign with modern UI, improved UX, and better performance.",
+          "whyChoose": "Give your existing website a fresh new look without losing content and SEO value.",
+          "process": [
+            "Current site audit",
+            "Redesign strategy",
+            "New design mockup",
+            "Development",
+            "SEO preservation",
+            "Launch"
+          ],
+          "features": [
+            "Modern UI refresh",
+            "UX improvement",
+            "Mobile optimization",
+            "Speed optimization",
+            "SEO preservation",
+            "Content migration"
+          ],
+          "relatedServices": ["web-development", "ui-ux-design", "seo-services"]
+        }
+      }
+    },
+    {
+      "multivendor-marketplace": {
+        "title": "Multi-vendor Marketplace Websites",
+        "category": "Website Design & Development",
+        "image": "https://example.com/marketplace.jpg",
+        "price": "₹34,999",
+        "deliveryTime": "25-30 Days",
+        "rating": 4.7,
+        "reviewCount": 25,
+        "isBestseller": false,
+        "favorite": false,
+        "isShow": true,
+        "details": {
+          "description": "Multi-vendor marketplace platform where multiple sellers can list and sell products.",
+          "whyChoose": "Build your own Amazon-style marketplace with commission management.",
+          "process": [
+            "Business model analysis",
+            "Platform selection",
+            "Customization",
+            "Vendor dashboard",
+            "Testing and launch"
+          ],
+          "features": [
+            "Vendor registration",
+            "Product listing by vendors",
+            "Commission system",
+            "Vendor dashboard",
+            "Admin panel",
+            "Payment splitting"
+          ],
+          "relatedServices": ["ecommerce-websites", "web-development", "payment-integration"]
+        }
+      }
+    },
+    {
+      "booking-portals": {
+        "title": "Booking & Appointment Portals",
+        "category": "Website Design & Development",
+        "image": "https://example.com/booking.jpg",
+        "price": "₹12,999",
+        "deliveryTime": "10-12 Days",
+        "rating": 4.9,
+        "reviewCount": 85,
+        "isBestseller": true,
+        "favorite": false,
+        "isShow": true,
+        "details": {
+          "description": "Online booking and appointment systems for doctors, salons, hotels, and services.",
+          "whyChoose": "Automate your appointment scheduling and reduce no-shows with reminders.",
+          "process": [
+            "Booking flow design",
+            "Calendar integration",
+            "Payment setup",
+            "Notification system",
+            "Testing"
+          ],
+          "features": [
+            "Online calendar",
+            "Automated reminders",
+            "Payment integration",
+            "Staff management",
+            "Customer database",
+            "Booking reports"
+          ],
+          "relatedServices": ["ecommerce-websites", "web-development", "digital-marketing"]
+        }
+      }
+    },
+    {
+      "learning-management": {
+        "title": "Learning Management Systems",
+        "category": "Website Design & Development",
+        "image": "https://example.com/lms.jpg",
+        "price": "₹24,999",
+        "deliveryTime": "18-20 Days",
+        "rating": 4.8,
+        "reviewCount": 35,
+        "isBestseller": false,
+        "favorite": false,
+        "isShow": true,
+        "details": {
+          "description": "Complete learning management system for online courses, training programs, and education.",
+          "whyChoose": "Monetize your expertise with a full-featured online course platform.",
+          "process": [
+            "Course structure",
+            "LMS platform setup",
+            "Customization",
+            "Content upload",
+            "Testing and launch"
+          ],
+          "features": [
+            "Course management",
+            "Student registration",
+            "Quiz and assessments",
+            "Certificates",
+            "Payment gateway",
+            "Progress tracking"
+          ],
+          "relatedServices": ["ecommerce-websites", "web-development", "content-writing"]
+        }
+      }
+    },
+    {
+      "membership-websites": {
+        "title": "Membership / Subscription Websites",
+        "category": "Website Design & Development",
+        "image": "https://example.com/membership.jpg",
+        "price": "₹16,999",
+        "deliveryTime": "12-14 Days",
+        "rating": 4.8,
+        "reviewCount": 55,
+        "isBestseller": false,
+        "favorite": false,
+        "isShow": true,
+        "details": {
+          "description": "Membership sites with recurring subscriptions, gated content, and member management.",
+          "whyChoose": "Build a recurring revenue stream with exclusive content for paying members.",
+          "process": [
+            "Membership tiers definition",
+            "Platform setup",
+            "Payment integration",
+            "Content restriction",
+            "Launch"
+          ],
+          "features": [
+            "Multiple membership tiers",
+            "Recurring payments",
+            "Content restriction",
+            "Member directory",
+            "Community features",
+            "Member analytics"
+          ],
+          "relatedServices": ["ecommerce-websites", "web-development", "digital-marketing"]
+        }
+      }
+    },
+    {
+      "seo-services": {
+        "title": "Search Engine Optimization (SEO)",
+        "category": "Digital Marketing",
+        "image": "https://example.com/seo.jpg",
+        "price": "₹5,999/month",
+        "deliveryTime": "Monthly",
+        "rating": 4.8,
+        "reviewCount": 210,
+        "isBestseller": true,
+        "favorite": false,
+        "isShow": true,
+        "details": {
+          "description": "Complete SEO services to improve your website ranking on Google and drive organic traffic.",
+          "whyChoose": "Data-driven SEO strategies that deliver measurable results and ROI.",
+          "process": [
+            "Site audit",
+            "Keyword research",
+            "On-page optimization",
+            "Content strategy",
+            "Link building",
+            "Monthly reporting"
+          ],
+          "features": [
+            "Technical SEO audit",
+            "Keyword research",
+            "On-page optimization",
+            "Content recommendations",
+            "Link building",
+            "Monthly performance reports"
+          ],
+          "relatedServices": ["content-writing", "google-ads", "analytics-reporting"]
+        }
+      }
+    },
+    {
+      "meta-ads": {
+        "title": "Meta (Facebook/Instagram) Ads",
+        "category": "Digital Marketing",
+        "image": "https://example.com/meta-ads.jpg",
+        "price": "₹3,999",
+        "deliveryTime": "3-4 Days",
+        "rating": 4.9,
+        "reviewCount": 340,
+        "isBestseller": true,
+        "favorite": false,
+        "isShow": true,
+        "details": {
+          "description": "High-converting Facebook and Instagram ad campaigns with creative and audience targeting.",
+          "whyChoose": "Reach your ideal customers with precisely targeted social media advertising.",
+          "process": [
+            "Audience research",
+            "Ad creative design",
+            "Campaign setup",
+            "Optimization",
+            "Performance tracking"
+          ],
+          "features": [
+            "Audience targeting",
+            "Ad creative design",
+            "Campaign management",
+            "A/B testing",
+            "Conversion tracking",
+            "Weekly optimization"
+          ],
+          "relatedServices": ["social-media-posters", "digital-marketing", "analytics-reporting"]
+        }
+      }
+    },
+    {
+      "google-ads": {
+        "title": "Google Ads",
+        "category": "Digital Marketing",
+        "image": "https://example.com/google-ads.jpg",
+        "price": "₹4,499",
+        "deliveryTime": "3-4 Days",
+        "rating": 4.8,
+        "reviewCount": 180,
+        "isBestseller": false,
+        "favorite": false,
+        "isShow": true,
+        "details": {
+          "description": "Google Ads campaign management including search, display, and shopping campaigns.",
+          "whyChoose": "Capture high-intent customers actively searching for your products or services.",
+          "process": [
+            "Keyword research",
+            "Campaign structure",
+            "Ad copy creation",
+            "Bid management",
+            "Performance tracking"
+          ],
+          "features": [
+            "Search campaigns",
+            "Display network",
+            "Shopping ads",
+            "Keyword research",
+            "Ad copywriting",
+            "Conversion tracking"
+          ],
+          "relatedServices": ["seo-services", "digital-marketing", "analytics-reporting"]
+        }
+      }
+    },
+    {
+      "social-media-management": {
+        "title": "Social Media Management",
+        "category": "Digital Marketing",
+        "image": "https://example.com/social-management.jpg",
+        "price": "₹6,999/month",
+        "deliveryTime": "Monthly",
+        "rating": 4.7,
+        "reviewCount": 150,
+        "isBestseller": true,
+        "favorite": false,
+        "isShow": true,
+        "details": {
+          "description": "Complete social media management including content creation, posting, and engagement.",
+          "whyChoose": "Build your brand presence on social media without the daily time commitment.",
+          "process": [
+            "Content calendar",
+            "Post creation",
+            "Scheduling",
+            "Engagement",
+            "Monthly reporting"
+          ],
+          "features": [
+            "Content calendar",
+            "Daily posting",
+            "Community management",
+            "Hashtag strategy",
+            "Growth tracking",
+            "Monthly reports"
+          ],
+          "relatedServices": ["social-media-posters", "content-writing", "meta-ads"]
+        }
+      }
+    },
+    {
+      "email-campaigns": {
+        "title": "Email Campaigns",
+        "category": "Digital Marketing",
+        "image": "https://example.com/email.jpg",
+        "price": "₹2,999",
+        "deliveryTime": "3-4 Days",
+        "rating": 4.8,
+        "reviewCount": 120,
+        "isBestseller": false,
+        "favorite": false,
+        "isShow": true,
+        "details": {
+          "description": "Email marketing campaigns on Mailchimp, Brevo, Zoho with newsletter design and automation.",
+          "whyChoose": "Nurture leads and retain customers with targeted email communications.",
+          "process": [
+            "Strategy development",
+            "Email design",
+            "List segmentation",
+            "Campaign setup",
+            "Performance tracking"
+          ],
+          "features": [
+            "Email template design",
+            "Newsletter creation",
+            "Automation setup",
+            "List management",
+            "A/B testing",
+            "Open/click tracking"
+          ],
+          "relatedServices": ["content-writing", "digital-marketing", "analytics-reporting"]
+        }
+      }
+    },
+    {
+      "whatsapp-marketing": {
+        "title": "WhatsApp/Telegram Marketing",
+        "category": "Digital Marketing",
+        "image": "https://example.com/whatsapp.jpg",
+        "price": "₹1,999",
+        "deliveryTime": "2-3 Days",
+        "rating": 4.7,
+        "reviewCount": 210,
+        "isBestseller": false,
+        "favorite": false,
+        "isShow": true,
+        "details": {
+          "description": "Broadcast marketing campaigns on WhatsApp and Telegram with high open rates.",
+          "whyChoose": "Direct communication channel with 98% open rates within minutes.",
+          "process": [
+            "Campaign planning",
+            "Message creation",
+            "Media preparation",
+            "Broadcast setup",
+            "Response tracking"
+          ],
+          "features": [
+            "Broadcast messages",
+            "Image/video sharing",
+            "Group management",
+            "Automated replies",
+            "Click tracking",
+            "Opt-out management"
+          ],
+          "relatedServices": ["digital-marketing", "content-writing", "chatbot-automation"]
+        }
+      }
+    },
+    {
+      "influencer-marketing": {
+        "title": "Influencer Marketing",
+        "category": "Digital Marketing",
+        "image": "https://example.com/influencer.jpg",
+        "price": "₹4,999",
+        "deliveryTime": "5-7 Days",
+        "rating": 4.6,
+        "reviewCount": 45,
+        "isBestseller": false,
+        "favorite": false,
+        "isShow": true,
+        "details": {
+          "description": "Influencer marketing campaign management including outreach and collaboration.",
+          "whyChoose": "Leverage trusted voices to reach new audiences and build credibility.",
+          "process": [
+            "Influencer research",
+            "Outreach",
+            "Campaign coordination",
+            "Content review",
+            "Performance tracking"
+          ],
+          "features": [
+            "Influencer identification",
+            "Outreach management",
+            "Campaign brief creation",
+            "Content approval",
+            "Performance tracking",
+            "ROI analysis"
+          ],
+          "relatedServices": ["digital-marketing", "social-media-management", "meta-ads"]
+        }
+      }
+    },
+    {
+      "reputation-management": {
+        "title": "Online Reputation Management",
+        "category": "Digital Marketing",
+        "image": "https://example.com/reputation.jpg",
+        "price": "₹5,999/month",
+        "deliveryTime": "Monthly",
+        "rating": 4.8,
+        "reviewCount": 60,
+        "isBestseller": false,
+        "favorite": false,
+        "isShow": true,
+        "details": {
+          "description": "Protect and enhance your online reputation through review management and content strategy.",
+          "whyChoose": "Build trust with potential customers through positive online presence.",
+          "process": [
+            "Audit current reputation",
+            "Review management",
+            "Content creation",
+            "Monitoring",
+            "Reporting"
+          ],
+          "features": [
+            "Review monitoring",
+            "Review response",
+            "Negative review mitigation",
+            "Positive content creation",
+            "Brand mention tracking",
+            "Monthly reputation report"
+          ],
+          "relatedServices": ["seo-services", "content-writing", "social-media-management"]
+        }
+      }
+    },
+    {
+      "analytics-reporting": {
+        "title": "Analytics & Reporting",
+        "category": "Digital Marketing",
+        "image": "https://example.com/analytics.jpg",
+        "price": "₹2,499",
+        "deliveryTime": "2-3 Days",
+        "rating": 4.9,
+        "reviewCount": 85,
+        "isBestseller": false,
+        "favorite": false,
+        "isShow": true,
+        "details": {
+          "description": "Comprehensive analytics setup and reporting to track and improve marketing performance.",
+          "whyChoose": "Data-driven decisions with clear insights into what's working.",
+          "process": [
+            "Goal definition",
+            "Tracking setup",
+            "Dashboard creation",
+            "Data analysis",
+            "Report delivery"
+          ],
+          "features": [
+            "Google Analytics setup",
+            "Conversion tracking",
+            "Custom dashboard",
+            "Monthly reports",
+            "KPI tracking",
+            "Actionable insights"
+          ],
+          "relatedServices": ["seo-services", "meta-ads", "google-ads"]
+        }
+      }
+    },
+    {
+      "tiktok-ads": {
+        "title": "TikTok / Moj / Josh Ads",
+        "category": "Digital Marketing",
+        "image": "https://example.com/tiktok-ads.jpg",
+        "price": "₹3,499",
+        "deliveryTime": "3-4 Days",
+        "rating": 4.8,
+        "reviewCount": 110,
+        "isBestseller": true,
+        "favorite": false,
+        "isShow": true,
+        "details": {
+          "description": "Short-form video advertising on TikTok and Indian platforms like Moj and Josh.",
+          "whyChoose": "Reach Gen Z and millennials with trending video content that converts.",
+          "process": [
+            "Audience analysis",
+            "Ad creative strategy",
+            "Campaign setup",
+            "Optimization",
+            "Performance tracking"
+          ],
+          "features": [
+            "Ad creative design",
+            "Audience targeting",
+            "Campaign management",
+            "Hashtag strategy",
+            "Trend integration",
+            "Performance reporting"
+          ],
+          "relatedServices": ["video-animation", "digital-marketing", "meta-ads"]
+        }
+      }
+    },
+    {
+      "podcast-marketing": {
+        "title": "Podcast Marketing",
+        "category": "Digital Marketing",
+        "image": "https://example.com/podcast.jpg",
+        "price": "₹3,999",
+        "deliveryTime": "4-5 Days",
+        "rating": 4.7,
+        "reviewCount": 30,
+        "isBestseller": false,
+        "favorite": false,
+        "isShow": true,
+        "details": {
+          "description": "Podcast marketing services including promotion, guest outreach, and audience growth.",
+          "whyChoose": "Tap into the growing podcast audience with targeted promotion strategies.",
+          "process": [
+            "Podcast audit",
+            "Promotion strategy",
+            "Guest outreach",
+            "Social promotion",
+            "Growth tracking"
+          ],
+          "features": [
+            "Podcast distribution",
+            "Episode promotion",
+            "Guest booking",
+            "Social media promotion",
+            "Listener engagement",
+            "Growth analytics"
+          ],
+          "relatedServices": ["digital-marketing", "social-media-management", "content-writing"]
+        }
+      }
+    },
+    {
+      "linkedin-lead-gen": {
+        "title": "LinkedIn Lead Generation",
+        "category": "Digital Marketing",
+        "image": "https://example.com/linkedin.jpg",
+        "price": "₹4,499",
+        "deliveryTime": "5-6 Days",
+        "rating": 4.9,
+        "reviewCount": 140,
+        "isBestseller": true,
+        "favorite": false,
+        "isShow": true,
+        "details": {
+          "description": "B2B lead generation campaigns on LinkedIn targeting decision-makers in your industry.",
+          "whyChoose": "Connect with the right professionals and generate qualified B2B leads.",
+          "process": [
+            "Target audience definition",
+            "Profile optimization",
+            "Outreach campaign",
+            "Engagement tracking",
+            "Lead delivery"
+          ],
+          "features": [
+            "Target audience research",
+            "Profile optimization",
+            "Connection requests",
+            "Personalized messaging",
+            "Follow-up sequences",
+            "Lead list delivery"
+          ],
+          "relatedServices": ["digital-marketing", "content-writing", "email-campaigns"]
+        }
+      }
+    },
+    {
+      "sms-marketing": {
+        "title": "SMS Marketing",
+        "category": "Digital Marketing",
+        "image": "https://example.com/sms.jpg",
+        "price": "₹1,499",
+        "deliveryTime": "2-3 Days",
+        "rating": 4.7,
+        "reviewCount": 95,
+        "isBestseller": false,
+        "favorite": false,
+        "isShow": true,
+        "details": {
+          "description": "SMS marketing campaigns with high open rates for promotions, alerts, and updates.",
+          "whyChoose": "Instant delivery with 98% open rates within minutes of sending.",
+          "process": [
+            "Campaign strategy",
+            "Message creation",
+            "Contact list management",
+            "Campaign sending",
+            "Response tracking"
+          ],
+          "features": [
+            "Bulk SMS sending",
+            "Personalized messages",
+            "Link shortener",
+            "Opt-out management",
+            "Delivery reports",
+            "Scheduled campaigns"
+          ],
+          "relatedServices": ["digital-marketing", "whatsapp-marketing", "email-campaigns"]
+        }
+      }
+    },
+    {
+      "chatbot-automation": {
+        "title": "Chatbot Automation",
+        "category": "Digital Marketing",
+        "image": "https://example.com/chatbot.jpg",
+        "price": "₹5,999",
+        "deliveryTime": "5-7 Days",
+        "rating": 4.8,
+        "reviewCount": 70,
+        "isBestseller": false,
+        "favorite": false,
+        "isShow": true,
+        "details": {
+          "description": "AI-powered chatbot automation for Meta, WhatsApp, and websites to engage customers 24/7.",
+          "whyChoose": "Automate customer support and lead qualification while providing instant responses.",
+          "process": [
+            "Use case identification",
+            "Flow design",
+            "Bot building",
+            "Integration",
+            "Testing and launch"
+          ],
+          "features": [
+            "WhatsApp chatbot",
+            "Facebook Messenger bot",
+            "Website chatbot",
+            "Lead qualification",
+            "FAQ automation",
+            "Analytics dashboard"
+          ],
+          "relatedServices": ["digital-marketing", "whatsapp-marketing", "web-development"]
+        }
+      }
+    },
+    {
+      "website-ui-design": {
+        "title": "Website UI Design",
+        "category": "UI/UX Design",
+        "image": "https://example.com/ui-design.jpg",
+        "price": "₹5,999",
+        "deliveryTime": "4-5 Days",
+        "rating": 4.9,
+        "reviewCount": 230,
+        "isBestseller": true,
+        "favorite": false,
+        "isShow": true,
+        "details": {
+          "description": "Modern, conversion-focused website UI design with attention to detail and user experience.",
+          "whyChoose": "Beautiful interfaces that guide users naturally toward desired actions.",
+          "process": [
+            "Requirements gathering",
+            "Wireframing",
+            "Visual design",
+            "Interactive prototype",
+            "Developer handoff"
+          ],
+          "features": [
+            "Homepage design",
+            "Inner pages design",
+            "Mobile responsive",
+            "Interactive prototype",
+            "Component library",
+            "Developer assets"
+          ],
+          "relatedServices": ["ui-ux-design", "web-development", "wireframing"]
+        }
+      }
+    },
+    {
+      "mobile-app-ui": {
+        "title": "Mobile App UI",
+        "category": "UI/UX Design",
+        "image": "https://example.com/mobile-ui.jpg",
+        "price": "₹7,999",
+        "deliveryTime": "5-6 Days",
+        "rating": 4.8,
+        "reviewCount": 120,
+        "isBestseller": false,
+        "favorite": false,
+        "isShow": true,
+        "details": {
+          "description": "iOS and Android app interface design with platform-specific guidelines and gestures.",
+          "whyChoose": "Native-feeling designs that users already know how to use.",
+          "process": [
+            "App flow mapping",
+            "Wireframing",
+            "UI design",
+            "Prototype",
+            "Developer handoff"
+          ],
+          "features": [
+            "iOS and Android designs",
+            "Onboarding screens",
+            "Main app screens",
+            "Interactive prototype",
+            "Asset export",
+            "Design guidelines"
+          ],
+          "relatedServices": ["ui-ux-design", "website-ui-design", "prototype-walkthrough"]
+        }
+      }
+    },
+    {
+      "dashboard-ui": {
+        "title": "Dashboard / SaaS UI",
+        "category": "UI/UX Design",
+        "image": "https://example.com/dashboard.jpg",
+        "price": "₹8,999",
+        "deliveryTime": "6-7 Days",
+        "rating": 4.9,
+        "reviewCount": 85,
+        "isBestseller": true,
+        "favorite": false,
+        "isShow": true,
+        "details": {
+          "description": "Complex dashboard and SaaS application interfaces with data visualization and analytics.",
+          "whyChoose": "Make complex data easy to understand with intuitive dashboard layouts.",
+          "process": [
+            "User flow analysis",
+            "Information architecture",
+            "Wireframing",
+            "Visual design",
+            "Interactive prototype"
+          ],
+          "features": [
+            "Analytics dashboard",
+            "Data visualization",
+            "Charts and graphs",
+            "Dark/light mode",
+            "Interactive prototype",
+            "Component library"
+          ],
+          "relatedServices": ["ui-ux-design", "website-ui-design", "wireframing"]
+        }
+      }
+    },
+    {
+      "wireframing": {
+        "title": "Wireframing",
+        "category": "UI/UX Design",
+        "image": "https://example.com/wireframing.jpg",
+        "price": "₹2,999",
+        "deliveryTime": "2-3 Days",
+        "rating": 4.8,
+        "reviewCount": 160,
+        "isBestseller": false,
+        "favorite": false,
+        "isShow": true,
+        "details": {
+          "description": "Low and high-fidelity wireframes that map out user flows and information architecture.",
+          "whyChoose": "Validate your product structure before investing in high-fidelity design.",
+          "process": [
+            "User flow mapping",
+            "Sketches",
+            "Low-fi wireframes",
+            "High-fi wireframes",
+            "Feedback integration"
+          ],
+          "features": [
+            "User flow diagrams",
+            "Low-fidelity wireframes",
+            "High-fidelity wireframes",
+            "Interactive clickthrough",
+            "Annotations",
+            "Revision cycles"
+          ],
+          "relatedServices": ["ui-ux-design", "website-ui-design", "prototype-walkthrough"]
+        }
+      }
+    },
+    {
+      "prototype-walkthrough": {
+        "title": "Prototype Walkthrough",
+        "category": "UI/UX Design",
+        "image": "https://example.com/prototype.jpg",
+        "price": "₹3,499",
+        "deliveryTime": "2-3 Days",
+        "rating": 4.9,
+        "reviewCount": 95,
+        "isBestseller": false,
+        "favorite": false,
+        "isShow": true,
+        "details": {
+          "description": "Interactive prototypes with clickable elements to simulate real user experience.",
+          "whyChoose": "Test user flows and gather feedback before development starts.",
+          "process": [
+            "Design import",
+            "Interaction mapping",
+            "Animation addition",
+            "Prototype building",
+            "Shareable link"
+          ],
+          "features": [
+            "Clickable prototype",
+            "Transitions",
+            "Micro-interactions",
+            "Mobile/desktop view",
+            "Shareable link",
+            "User testing ready"
+          ],
+          "relatedServices": ["ui-ux-design", "wireframing", "usability-testing"]
+        }
+      }
+    },
+    {
+      "user-journey": {
+        "title": "User Journey Mapping",
+        "category": "UI/UX Design",
+        "image": "https://example.com/user-journey.jpg",
+        "price": "₹3,999",
+        "deliveryTime": "3-4 Days",
+        "rating": 4.8,
+        "reviewCount": 45,
+        "isBestseller": false,
+        "favorite": false,
+        "isShow": true,
+        "details": {
+          "description": "Visual user journey maps that identify pain points and opportunities in user experience.",
+          "whyChoose": "Understand your users' emotions and motivations throughout their journey.",
+          "process": [
+            "User research review",
+            "Persona creation",
+            "Journey mapping",
+            "Pain point identification",
+            "Opportunity definition"
+          ],
+          "features": [
+            "User personas",
+            "Touchpoint mapping",
+            "Emotion curve",
+            "Pain point analysis",
+            "Opportunity areas",
+            "Presentation deck"
+          ],
+          "relatedServices": ["ui-ux-design", "wireframing", "usability-testing"]
+        }
+      }
+    },
+    {
+      "design-system": {
+        "title": "Design System / Component Library",
+        "category": "UI/UX Design",
+        "image": "https://example.com/design-system.jpg",
+        "price": "₹12,999",
+        "deliveryTime": "8-10 Days",
+        "rating": 5.0,
+        "reviewCount": 30,
+        "isBestseller": true,
+        "favorite": false,
+        "isShow": true,
+        "details": {
+          "description": "Comprehensive design system with reusable components, styles, and guidelines for product teams.",
+          "whyChoose": "Scale your product faster with consistent, reusable components.",
+          "process": [
+            "Design audit",
+            "Component identification",
+            "Style guide creation",
+            "Component library",
+            "Documentation"
+          ],
+          "features": [
+            "Color system",
+            "Typography scale",
+            "Icon library",
+            "Button components",
+            "Form elements",
+            "Component documentation"
+          ],
+          "relatedServices": ["ui-ux-design", "website-ui-design", "brand-guidelines"]
+        }
+      }
+    },
+    {
+      "usability-testing": {
+        "title": "Usability Testing",
+        "category": "UI/UX Design",
+        "image": "https://example.com/usability.jpg",
+        "price": "₹4,499",
+        "deliveryTime": "4-5 Days",
+        "rating": 4.7,
+        "reviewCount": 25,
+        "isBestseller": false,
+        "favorite": false,
+        "isShow": true,
+        "details": {
+          "description": "Remote usability testing with real users to identify issues and validate designs.",
+          "whyChoose": "Fix problems before they cost you users and revenue.",
+          "process": [
+            "Test plan creation",
+            "Participant recruitment",
+            "Test facilitation",
+            "Analysis",
+            "Recommendations"
+          ],
+          "features": [
+            "Test plan",
+            "5 participant sessions",
+            "Session recordings",
+            "Issue identification",
+            "Priority recommendations",
+            "Final report"
+          ],
+          "relatedServices": ["ui-ux-design", "prototype-walkthrough", "user-journey"]
+        }
+      }
+    },
+    {
+      "ar-vr-ui": {
+        "title": "AR/VR UI Design",
+        "category": "UI/UX Design",
+        "image": "https://example.com/arvr.jpg",
+        "price": "₹14,999",
+        "deliveryTime": "7-10 Days",
+        "rating": 4.9,
+        "reviewCount": 15,
+        "isBestseller": false,
+        "favorite": false,
+        "isShow": true,
+        "details": {
+          "description": "Spatial interfaces for augmented and virtual reality applications with 3D interactions.",
+          "whyChoose": "Design for the next generation of computing with immersive experiences.",
+          "process": [
+            "Experience definition",
+            "Spatial mapping",
+            "UI placement",
+            "Interaction design",
+            "Prototype"
+          ],
+          "features": [
+            "Spatial UI design",
+            "3D interaction design",
+            "Gaze/gesture controls",
+            "Environment integration",
+            "Spatial audio cues",
+            "AR/VR prototype"
+          ],
+          "relatedServices": ["ui-ux-design", "mobile-app-ui", "3d-animation"]
+        }
+      }
+    },
+    {
+      "smartwatch-ui": {
+        "title": "Smartwatch UI Design",
+        "category": "UI/UX Design",
+        "image": "https://example.com/smartwatch.jpg",
+        "price": "₹6,999",
+        "deliveryTime": "4-5 Days",
+        "rating": 4.8,
+        "reviewCount": 20,
+        "isBestseller": false,
+        "favorite": false,
+        "isShow": true,
+        "details": {
+          "description": "Wearable UI designs for smartwatches with glanceable information and quick interactions.",
+          "whyChoose": "Design for the wrist with context-aware and time-saving interactions.",
+          "process": [
+            "Use case definition",
+            "Glance hierarchy",
+            "UI design",
+            "Interaction design",
+            "Prototype"
+          ],
+          "features": [
+            "Watch face design",
+            "App screens",
+            "Notification design",
+            "Complications",
+            "Gesture controls",
+            "Dark mode optimized"
+          ],
+          "relatedServices": ["ui-ux-design", "mobile-app-ui", "ar-vr-ui"]
+        }
+      }
+    },
+    {
+      "car-infotainment": {
+        "title": "Car Infotainment UI Design",
+        "category": "UI/UX Design",
+        "image": "https://example.com/car-ui.jpg",
+        "price": "₹11,999",
+        "deliveryTime": "6-8 Days",
+        "rating": 4.7,
+        "reviewCount": 12,
+        "isBestseller": false,
+        "favorite": false,
+        "isShow": true,
+        "details": {
+          "description": "Automotive infotainment interfaces designed for safety, glanceability, and driver focus.",
+          "whyChoose": "Create safer in-car experiences with minimal distraction designs.",
+          "process": [
+            "Driver context analysis",
+            "Information hierarchy",
+            "UI design",
+            "Night mode design",
+            "Prototype"
+          ],
+          "features": [
+            "Home screen",
+            "Navigation UI",
+            "Media controls",
+            "Climate controls",
+            "Phone integration",
+            "Day/night modes"
+          ],
+          "relatedServices": ["ui-ux-design", "dashboard-ui", "prototype-walkthrough"]
+        }
+      }
+    },
+    {
+      "gamification-ui": {
+        "title": "Gamification-based UI/UX",
+        "category": "UI/UX Design",
+        "image": "https://example.com/gamification.jpg",
+        "price": "₹8,999",
+        "deliveryTime": "5-7 Days",
+        "rating": 4.9,
+        "reviewCount": 35,
+        "isBestseller": false,
+        "favorite": false,
+        "isShow": true,
+        "details": {
+          "description": "Engaging UI designs with gamification elements like points, badges, leaderboards, and challenges.",
+          "whyChoose": "Increase user engagement and retention through game mechanics.",
+          "process": [
+            "Engagement goals",
+            "Mechanic selection",
+            "UI design",
+            "Progress tracking",
+            "Prototype"
+          ],
+          "features": [
+            "Points system design",
+            "Badges/achievements",
+            "Leaderboards",
+            "Progress bars",
+            "Challenges/quests",
+            "Reward animations"
+          ],
+          "relatedServices": ["ui-ux-design", "dashboard-ui", "mobile-app-ui"]
+        }
+      }
+    },
+    {
+      "website-copywriting": {
+        "title": "Website Copywriting",
+        "category": "Content Writing",
+        "image": "https://example.com/web-copy.jpg",
+        "price": "₹2,499",
+        "deliveryTime": "2-3 Days",
+        "rating": 4.9,
+        "reviewCount": 280,
+        "isBestseller": true,
+        "favorite": false,
+        "isShow": true,
+        "details": {
+          "description": "Persuasive website copy that tells your brand story and converts visitors to customers.",
+          "whyChoose": "Words that sell - SEO-optimized copy that speaks directly to your audience.",
+          "process": [
+            "Brand voice alignment",
+            "Page-by-page writing",
+            "SEO integration",
+            "Review and revision",
+            "Final delivery"
+          ],
+          "features": [
+            "Homepage copy",
+            "About page",
+            "Service/product pages",
+            "SEO keyword integration",
+            "Call-to-action writing",
+            "Meta descriptions"
+          ],
+          "relatedServices": ["content-writing", "seo-services", "brand-guidelines"]
+        }
+      }
+    },
+    {
+      "blog-writing": {
+        "title": "Blog Writing",
+        "category": "Content Writing",
+        "image": "https://example.com/blog.jpg",
+        "price": "₹999",
+        "deliveryTime": "1-2 Days",
+        "rating": 4.8,
+        "reviewCount": 520,
+        "isBestseller": false,
+        "favorite": false,
+        "isShow": true,
+        "details": {
+          "description": "SEO-optimized blog posts that establish authority and drive organic traffic.",
+          "whyChoose": "Engaging, well-researched content that keeps readers coming back.",
+          "process": [
+            "Topic research",
+            "Outline creation",
+            "Writing",
+            "SEO optimization",
+            "Image sourcing"
+          ],
+          "features": [
+            "500-1000 words",
+            "SEO optimization",
+            "Headings structure",
+            "Internal linking",
+            "Featured image",
+            "Keyword research"
+          ],
+          "relatedServices": ["content-writing", "seo-services", "website-copywriting"]
+        }
+      }
+    },
+    {
+      "product-descriptions": {
+        "title": "Product Descriptions",
+        "category": "Content Writing",
+        "image": "https://example.com/product-desc.jpg",
+        "price": "₹499",
+        "deliveryTime": "1-2 Days",
+        "rating": 4.8,
+        "reviewCount": 430,
+        "isBestseller": true,
+        "favorite": false,
+        "isShow": true,
+        "details": {
+          "description": "Compelling product descriptions that highlight features, benefits, and drive sales.",
+          "whyChoose": "Descriptions that reduce returns by setting accurate expectations.",
+          "process": [
+            "Product analysis",
+            "Benefit identification",
+            "Description writing",
+            "SEO optimization",
+            "Bulk discount available"
+          ],
+          "features": [
+            "Feature-benefit format",
+            "SEO keywords",
+            "Persuasive tone",
+            "Technical specs",
+            "Bulk order available",
+            "10 products minimum"
+          ],
+          "relatedServices": ["content-writing", "ecommerce-websites", "seo-services"]
+        }
+      }
+    },
+    {
+      "ad-copy": {
+        "title": "Ad Copy / Slogans",
+        "category": "Content Writing",
+        "image": "https://example.com/ad-copy.jpg",
+        "price": "₹799",
+        "deliveryTime": "1-2 Days",
+        "rating": 4.9,
+        "reviewCount": 380,
+        "isBestseller": false,
+        "favorite": false,
+        "isShow": true,
+        "details": {
+          "description": "High-converting ad copy and memorable slogans for Google, Facebook, and print campaigns.",
+          "whyChoose": "Words that stop the scroll and drive clicks and conversions.",
+          "process": [
+            "Campaign goal analysis",
+            "Audience research",
+            "Copy creation",
+            "A/B variations",
+            "Final delivery"
+          ],
+          "features": [
+            "Headline options",
+            "Body copy",
+            "Call-to-action",
+            "Slogan/tagline ideas",
+            "A/B test variations",
+            "Platform optimization"
+          ],
+          "relatedServices": ["content-writing", "digital-marketing", "brand-naming"]
+        }
+      }
+    },
+    {
+      "video-scripts": {
+        "title": "Video Scripts",
+        "category": "Content Writing",
+        "image": "https://example.com/video-script.jpg",
+        "price": "₹1,499",
+        "deliveryTime": "2-3 Days",
+        "rating": 4.8,
+        "reviewCount": 210,
+        "isBestseller": false,
+        "favorite": false,
+        "isShow": true,
+        "details": {
+          "description": "Engaging video scripts for YouTube, Reels, ads, and corporate videos.",
+          "whyChoose": "Scripts optimized for spoken word with hooks that keep viewers watching.",
+          "process": [
+            "Video goal definition",
+            "Script structure",
+            "Writing",
+            "Timing adjustment",
+            "Revisions"
+          ],
+          "features": [
+            "60-second script",
+            "Hook and retention",
+            "Call-to-action",
+            "Visual cues",
+            "Timing marks",
+            "Multiple formats"
+          ],
+          "relatedServices": ["content-writing", "video-animation", "promo-videos"]
+        }
+      }
+    },
+    {
+      "seo-content": {
+        "title": "SEO Optimized Content",
+        "category": "Content Writing",
+        "image": "https://example.com/seo-content.jpg",
+        "price": "₹1,199",
+        "deliveryTime": "1-2 Days",
+        "rating": 4.9,
+        "reviewCount": 320,
+        "isBestseller": true,
+        "favorite": false,
+        "isShow": true,
+        "details": {
+          "description": "Content written specifically to rank on search engines and drive organic traffic.",
+          "whyChoose": "Balance of readability and SEO with proper keyword density and structure.",
+          "process": [
+            "Keyword research",
+            "Content outline",
+            "Writing",
+            "On-page SEO",
+            "Internal linking"
+          ],
+          "features": [
+            "Target keyword focus",
+            "LSI keywords",
+            "Meta description",
+            "Header optimization",
+            "Image alt text",
+            "Readability check"
+          ],
+          "relatedServices": ["content-writing", "seo-services", "blog-writing"]
+        }
+      }
+    },
+    {
+      "technical-content": {
+        "title": "Technical/Research Articles",
+        "category": "Content Writing",
+        "image": "https://example.com/technical.jpg",
+        "price": "₹2,999",
+        "deliveryTime": "3-4 Days",
+        "rating": 4.8,
+        "reviewCount": 75,
+        "isBestseller": false,
+        "favorite": false,
+        "isShow": true,
+        "details": {
+          "description": "In-depth technical articles, research papers, and industry analysis with citations.",
+          "whyChoose": "Authority-building content backed by research and expert insights.",
+          "process": [
+            "Topic research",
+            "Source gathering",
+            "Article writing",
+            "Citation formatting",
+            "Review"
+          ],
+          "features": [
+            "In-depth research",
+            "Industry terminology",
+            "Data visualization",
+            "Citation formatting",
+            "Peer-review ready",
+            "Technical accuracy"
+          ],
+          "relatedServices": ["content-writing", "whitepapers", "seo-content"]
+        }
+      }
+    },
+    {
+      "whitepapers": {
+        "title": "Whitepapers / Case Studies",
+        "category": "Content Writing",
+        "image": "https://example.com/whitepaper.jpg",
+        "price": "₹4,999",
+        "deliveryTime": "5-6 Days",
+        "rating": 4.9,
+        "reviewCount": 45,
+        "isBestseller": false,
+        "favorite": false,
+        "isShow": true,
+        "details": {
+          "description": "Professional whitepapers and case studies that establish thought leadership.",
+          "whyChoose": "Convert technical expertise into lead-generating content assets.",
+          "process": [
+            "Topic definition",
+            "Research",
+            "Writing",
+            "Design integration",
+            "PDF formatting"
+          ],
+          "features": [
+            "Executive summary",
+            "Problem-solution format",
+            "Data and statistics",
+            "Client success story",
+            "Call-to-action",
+            "PDF design included"
+          ],
+          "relatedServices": ["content-writing", "technical-content", "print-design"]
+        }
+      }
+    },
+    {
+      "press-releases": {
+        "title": "Press Releases",
+        "category": "Content Writing",
+        "image": "https://example.com/press-release.jpg",
+        "price": "₹1,799",
+        "deliveryTime": "1-2 Days",
+        "rating": 4.7,
+        "reviewCount": 140,
+        "isBestseller": false,
+        "favorite": false,
+        "isShow": true,
+        "details": {
+          "description": "Professional press releases formatted for newswire distribution and media pickup.",
+          "whyChoose": "Newsworthy announcements that get noticed by journalists and editors.",
+          "process": [
+            "Announcement details",
+            "Press release writing",
+            "Media list targeting",
+            "Distribution ready",
+            "Final delivery"
+          ],
+          "features": [
+            "AP style formatting",
+            "Headline options",
+            "Quote inclusion",
+            "Boilerplate",
+            "Media contact info",
+            "Distribution guide"
+          ],
+          "relatedServices": ["content-writing", "digital-marketing", "reputation-management"]
+        }
+      }
+    },
+    {
+      "social-captions": {
+        "title": "Social Media Captions",
+        "category": "Content Writing",
+        "image": "https://example.com/captions.jpg",
+        "price": "₹499",
+        "deliveryTime": "1-2 Days",
+        "rating": 4.9,
+        "reviewCount": 650,
+        "isBestseller": true,
+        "favorite": false,
+        "isShow": true,
+        "details": {
+          "description": "Engaging social media captions and hashtag strategy for all platforms.",
+          "whyChoose": "Captions that drive engagement, comments, and shares.",
+          "process": [
+            "Content review",
+            "Caption writing",
+            "Hashtag research",
+            "Platform optimization",
+            "Monthly calendar"
+          ],
+          "features": [
+            "30 captions",
+            "Emoji usage",
+            "Call-to-action",
+            "Hashtag sets",
+            "Platform-specific",
+            "Content calendar"
+          ],
+          "relatedServices": ["content-writing", "social-media-management", "digital-marketing"]
+        }
+      }
+    },
+    {
+      "ebook-writing": {
+        "title": "eBook Writing & Design",
+        "category": "Content Writing",
+        "image": "https://example.com/ebook.jpg",
+        "price": "₹5,999",
+        "deliveryTime": "7-8 Days",
+        "rating": 4.8,
+        "reviewCount": 55,
+        "isBestseller": true,
+        "favorite": false,
+        "isShow": true,
+        "details": {
+          "description": "Complete eBook writing and design service from concept to final PDF.",
+          "whyChoose": "Lead magnets that build your email list and establish authority.",
+          "process": [
+            "Topic selection",
+            "Outline creation",
+            "Writing",
+            "Design and layout",
+            "PDF export"
+          ],
+          "features": [
+            "10-20 pages",
+            "Professional writing",
+            "Cover design",
+            "Interior layout",
+            "Images and graphics",
+            "PDF delivery"
+          ],
+          "relatedServices": ["content-writing", "print-design", "infographics"]
+        }
+      }
+    },
+    {
+      "linkedin-ghostwriting": {
+        "title": "LinkedIn Ghostwriting",
+        "category": "Content Writing",
+        "image": "https://example.com/linkedin-ghost.jpg",
+        "price": "₹3,999/month",
+        "deliveryTime": "Monthly",
+        "rating": 4.9,
+        "reviewCount": 85,
+        "isBestseller": false,
+        "favorite": false,
+        "isShow": true,
+        "details": {
+          "description": "LinkedIn content creation to build your professional brand and thought leadership.",
+          "whyChoose": "Grow your network and establish authority without spending hours writing.",
+          "process": [
+            "Topic brainstorming",
+            "Post writing",
+            "Engagement strategy",
+            "Scheduling",
+            "Performance tracking"
+          ],
+          "features": [
+            "4 posts per week",
+            "Professional tone",
+            "Engagement hooks",
+            "Hashtag strategy",
+            "Content calendar",
+            "Analytics tracking"
+          ],
+          "relatedServices": ["content-writing", "linkedin-lead-gen", "social-media-management"]
+        }
+      }
+    },
+    {
+      "podcast-scriptwriting": {
+        "title": "Podcast Scriptwriting",
+        "category": "Content Writing",
+        "image": "https://example.com/podcast-script.jpg",
+        "price": "₹1,999",
+        "deliveryTime": "2-3 Days",
+        "rating": 4.7,
+        "reviewCount": 40,
+        "isBestseller": false,
+        "favorite": false,
+        "isShow": true,
+        "details": {
+          "description": "Professional podcast scripts with intros, segments, and engaging content.",
+          "whyChoose": "Keep your podcast engaging and on-track with well-structured scripts.",
+          "process": [
+            "Topic discussion",
+            "Script structure",
+            "Writing",
+            "Timing adjustment",
+            "Final script"
+          ],
+          "features": [
+            "Intro and outro",
+            "Segment breakdown",
+            "Interview questions",
+            "Ad integration",
+            "Timing marks",
+            "30-60 minute episodes"
+          ],
+          "relatedServices": ["content-writing", "podcast-marketing", "video-scripts"]
+        }
+      }
+    },
+    {
+      "brand-storytelling": {
+        "title": "Brand Storytelling",
+        "category": "Content Writing",
+        "image": "https://example.com/brand-story.jpg",
+        "price": "₹2,999",
+        "deliveryTime": "3-4 Days",
+        "rating": 4.9,
+        "reviewCount": 65,
+        "isBestseller": true,
+        "favorite": false,
+        "isShow": true,
+        "details": {
+          "description": "Compelling brand stories that connect emotionally with your audience.",
+          "whyChoose": "Stand out in a crowded market with authentic storytelling.",
+          "process": [
+            "Brand discovery",
+            "Story development",
+            "Writing",
+            "Review and refine",
+            "Multi-format delivery"
+          ],
+          "features": [
+            "Brand origin story",
+            "Mission and vision",
+            "Customer journey",
+            "About page content",
+            "Elevator pitch",
+            "Marketing copy"
+          ],
+          "relatedServices": ["content-writing", "brand-guidelines", "website-copywriting"]
+        }
+      }
+    },
+    {
+      "promo-videos": {
+        "title": "Promo Videos",
+        "category": "Video Creation & Animation",
+        "image": "https://example.com/promo-video.jpg",
+        "price": "₹2,999",
+        "deliveryTime": "3-4 Days",
+        "rating": 4.9,
+        "reviewCount": 240,
+        "isBestseller": true,
+        "favorite": false,
+        "isShow": true,
+        "details": {
+          "description": "High-impact promotional videos for businesses, offers, and product launches.",
+          "whyChoose": "Capture attention quickly with professional editing and storytelling.",
+          "process": [
+            "Script review",
+            "Asset collection",
+            "Video editing",
+            "Music and effects",
+            "Final export"
+          ],
+          "features": [
+            "30-60 seconds",
+            "Professional editing",
+            "Background music",
+            "Text animations",
+            "Voiceover option",
+            "Social media optimized"
+          ],
+          "relatedServices": ["video-animation", "ad-copy", "digital-marketing"]
+        }
+      }
+    },
+    {
+      "explainer-videos": {
+        "title": "Explainer Videos",
+        "category": "Video Creation & Animation",
+        "image": "https://example.com/explainer.jpg",
+        "price": "₹4,999",
+        "deliveryTime": "5-6 Days",
+        "rating": 4.8,
+        "reviewCount": 180,
+        "isBestseller": false,
+        "favorite": false,
+        "isShow": true,
+        "details": {
+          "description": "Animated explainer videos that simplify complex ideas and products.",
+          "whyChoose": "Increase conversion rates by clearly explaining your value proposition.",
+          "process": [
+            "Script development",
+            "Storyboarding",
+            "Illustration",
+            "Animation",
+            "Voiceover & sound"
+          ],
+          "features": [
+            "60-90 seconds",
+            "2D animation",
+            "Custom illustrations",
+            "Professional voiceover",
+            "Background music",
+            "Brand integration"
+          ],
+          "relatedServices": ["video-animation", "2d-3d-animation", "video-scripts"]
+        }
+      }
+    },
+    {
+      "reels-editing": {
+        "title": "Reels / Shorts Editing",
+        "category": "Video Creation & Animation",
+        "image": "https://example.com/reels.jpg",
+        "price": "₹999",
+        "deliveryTime": "1-2 Days",
+        "rating": 4.9,
+        "reviewCount": 890,
+        "isBestseller": true,
+        "favorite": false,
+        "isShow": true,
+        "details": {
+          "description": "Trendy Reels and YouTube Shorts editing with transitions, effects, and captions.",
+          "whyChoose": "Viral-ready short-form content optimized for each platform.",
+          "process": [
+            "Raw footage review",
+            "Trend analysis",
+            "Editing",
+            "Caption addition",
+            "Platform optimization"
+          ],
+          "features": [
+            "15-60 seconds",
+            "Trending transitions",
+            "Captions/subtitles",
+            "Background music",
+            "Effects and filters",
+            "Multiple aspect ratios"
+          ],
+          "relatedServices": ["video-animation", "social-media-posters", "digital-marketing"]
+        }
+      }
+    },
+    {
+      "logo-animation": {
+        "title": "Logo Animation / Intros",
+        "category": "Video Creation & Animation",
+        "image": "https://example.com/logo-animation.jpg",
+        "price": "₹1,499",
+        "deliveryTime": "2-3 Days",
+        "rating": 4.8,
+        "reviewCount": 320,
+        "isBestseller": false,
+        "favorite": false,
+        "isShow": true,
+        "details": {
+          "description": "Dynamic logo animations and video intros that grab attention immediately.",
+          "whyChoose": "Make your brand memorable with animated reveals and intros.",
+          "process": [
+            "Logo review",
+            "Animation style selection",
+            "Animation creation",
+            "Sound addition",
+            "Final delivery"
+          ],
+          "features": [
+            "5-10 second intro",
+            "3D or 2D animation",
+            "Custom transitions",
+            "Sound effects",
+            "Multiple formats",
+            "Loop option"
+          ],
+          "relatedServices": ["logo-design", "video-animation", "promo-videos"]
+        }
+      }
+    },
+    {
+      "voiceover": {
+        "title": "Voiceover (Multi-language)",
+        "category": "Video Creation & Animation",
+        "image": "https://example.com/voiceover.jpg",
+        "price": "₹1,299",
+        "deliveryTime": "2-3 Days",
+        "rating": 4.9,
+        "reviewCount": 210,
+        "isBestseller": true,
+        "favorite": false,
+        "isShow": true,
+        "details": {
+          "description": "Professional voiceover in multiple languages for videos, ads, and presentations.",
+          "whyChoose": "Studio-quality recordings with professional voice artists.",
+          "process": [
+            "Script review",
+            "Voice talent selection",
+            "Recording",
+            "Editing",
+            "Delivery"
+          ],
+          "features": [
+            "60-90 seconds",
+            "Male/female options",
+            "Multi-language available",
+            "Studio quality",
+            "Background music",
+            "Revision included"
+          ],
+          "relatedServices": ["video-animation", "explainer-videos", "ad-copy"]
+        }
+      }
+    },
+    {
+      "subtitles": {
+        "title": "Subtitle + Translation",
+        "category": "Video Creation & Animation",
+        "image": "https://example.com/subtitles.jpg",
+        "price": "₹499",
+        "deliveryTime": "1-2 Days",
+        "rating": 4.8,
+        "reviewCount": 420,
+        "isBestseller": false,
+        "favorite": false,
+        "isShow": true,
+        "details": {
+          "description": "Accurate subtitles and translation services for videos in multiple languages.",
+          "whyChoose": "Reach global audiences with professional subtitling and translation.",
+          "process": [
+            "Video transcription",
+            "Translation (if needed)",
+            "Subtitle timing",
+            "Format export",
+            "Delivery"
+          ],
+          "features": [
+            "SRT file creation",
+            "Hard/soft subtitles",
+            "Multi-language",
+            "Timing sync",
+            "10+ languages",
+            "Same-day delivery"
+          ],
+          "relatedServices": ["video-animation", "voiceover", "content-writing"]
+        }
+      }
+    },
+    {
+      "motion-posters": {
+        "title": "Motion Posters",
+        "category": "Video Creation & Animation",
+        "image": "https://example.com/motion-poster.jpg",
+        "price": "₹1,799",
+        "deliveryTime": "2-3 Days",
+        "rating": 4.7,
+        "reviewCount": 95,
+        "isBestseller": false,
+        "favorite": false,
+        "isShow": true,
+        "details": {
+          "description": "Animated movie-style posters with subtle motion and effects.",
+          "whyChoose": "Stand out on social media with eye-catching motion graphics.",
+          "process": [
+            "Poster design",
+            "Motion planning",
+            "Animation",
+            "Effects addition",
+            "Final export"
+          ],
+          "features": [
+            "5-10 second loop",
+            "Subtle animations",
+            "Parallax effects",
+            "Particle effects",
+            "Social media ready",
+            "Multiple formats"
+          ],
+          "relatedServices": ["video-animation", "poster-graphic-design", "social-media-posters"]
+        }
+      }
+    },
+    {
+      "product-demo": {
+        "title": "Product Demo Videos",
+        "category": "Video Creation & Animation",
+        "image": "https://example.com/product-demo.jpg",
+        "price": "₹3,499",
+        "deliveryTime": "4-5 Days",
+        "rating": 4.9,
+        "reviewCount": 120,
+        "isBestseller": false,
+        "favorite": false,
+        "isShow": true,
+        "details": {
+          "description": "Clear and engaging product demonstration videos that highlight features and benefits.",
+          "whyChoose": "Reduce support questions and increase conversions with product demos.",
+          "process": [
+            "Product analysis",
+            "Script writing",
+            "Screen recording",
+            "Editing",
+            "Voiceover"
+          ],
+          "features": [
+            "Screen recording",
+            "Step-by-step demo",
+            "Feature highlights",
+            "Voiceover",
+            "Call-to-action",
+            "Multiple platforms"
+          ],
+          "relatedServices": ["video-animation", "explainer-videos", "product-photography"]
+        }
+      }
+    },
+    {
+      "2d-3d-animation": {
+        "title": "2D/3D Animation",
+        "category": "Video Creation & Animation",
+        "image": "https://example.com/2d3d-animation.jpg",
+        "price": "₹6,999",
+        "deliveryTime": "7-10 Days",
+        "rating": 4.8,
+        "reviewCount": 75,
+        "isBestseller": true,
+        "favorite": false,
+        "isShow": true,
+        "details": {
+          "description": "Professional 2D and 3D animations for marketing, education, and entertainment.",
+          "whyChoose": "Bring your ideas to life with high-quality character and object animation.",
+          "process": [
+            "Concept development",
+            "Storyboarding",
+            "Modeling/rigging",
+            "Animation",
+            "Rendering"
+          ],
+          "features": [
+            "30-60 seconds",
+            "2D character animation",
+            "3D modeling",
+            "Texturing and lighting",
+            "Rendering",
+            "Sound design"
+          ],
+          "relatedServices": ["video-animation", "explainer-videos", "ar-vr-ui"]
+        }
+      }
+    },
+    {
+      "corporate-presentation": {
+        "title": "Corporate Presentation Videos",
+        "category": "Video Creation & Animation",
+        "image": "https://example.com/corp-presentation.jpg",
+        "price": "₹4,499",
+        "deliveryTime": "4-6 Days",
+        "rating": 4.7,
+        "reviewCount": 55,
+        "isBestseller": false,
+        "favorite": false,
+        "isShow": true,
+        "details": {
+          "description": "Professional corporate presentation videos for investor pitches, annual reports, and training.",
+          "whyChoose": "Impress stakeholders with polished, brand-aligned video presentations.",
+          "process": [
+            "Content review",
+            "Script writing",
+            "Visual creation",
+            "Animation",
+            "Voiceover"
+          ],
+          "features": [
+            "2-3 minutes",
+            "Corporate branding",
+            "Data visualization",
+            "Professional voiceover",
+            "Background music",
+            "Multiple formats"
+          ],
+          "relatedServices": ["video-animation", "corporate-documentary", "print-design"]
+        }
+      }
+    },
+    {
+      "corporate-documentary": {
+        "title": "Corporate Documentary Videos",
+        "category": "Video Creation & Animation",
+        "image": "https://example.com/documentary.jpg",
+        "price": "₹8,999",
+        "deliveryTime": "10-12 Days",
+        "rating": 4.9,
+        "reviewCount": 25,
+        "isBestseller": false,
+        "favorite": false,
+        "isShow": true,
+        "details": {
+          "description": "Documentary-style videos telling your company story, culture, and impact.",
+          "whyChoose": "Build emotional connections with audiences through authentic storytelling.",
+          "process": [
+            "Interview planning",
+            "Footage collection",
+            "Editing",
+            "Narration",
+            "Final production"
+          ],
+          "features": [
+            "5-10 minutes",
+            "Interview editing",
+            "B-roll integration",
+            "Narrative structure",
+            "Background score",
+            "Color grading"
+          ],
+          "relatedServices": ["video-animation", "corporate-presentation", "photography"]
+        }
+      }
+    },
+    {
+      "wedding-animation": {
+        "title": "Wedding Invitation Animation",
+        "category": "Video Creation & Animation",
+        "image": "https://example.com/wedding-animation.jpg",
+        "price": "₹2,499",
+        "deliveryTime": "3-4 Days",
+        "rating": 4.9,
+        "reviewCount": 140,
+        "isBestseller": true,
+        "favorite": false,
+        "isShow": true,
+        "details": {
+          "description": "Beautiful animated wedding invitations that guests will love to share.",
+          "whyChoose": "Modern, shareable invites that stand out from traditional paper cards.",
+          "process": [
+            "Couple details",
+            "Theme selection",
+            "Animation creation",
+            "Music addition",
+            "Final delivery"
+          ],
+          "features": [
+            "30-60 seconds",
+            "Custom illustrations",
+            "Romantic music",
+            "Event details",
+            "RSVP integration",
+            "Social media ready"
+          ],
+          "relatedServices": ["video-animation", "event-invitations", "motion-posters"]
+        }
+      }
+    },
+    {
+      "festival-animation": {
+        "title": "Festival Greetings Animation",
+        "category": "Video Creation & Animation",
+        "image": "https://example.com/festival-animation.jpg",
+        "price": "₹1,299",
+        "deliveryTime": "2-3 Days",
+        "rating": 4.8,
+        "reviewCount": 210,
+        "isBestseller": false,
+        "favorite": false,
+        "isShow": true,
+        "details": {
+          "description": "Festive animated greeting videos for New Year, Diwali, Eid, Christmas, and more.",
+          "whyChoose": "Engage customers during festivals with branded, shareable greetings.",
+          "process": [
+            "Festival selection",
+            "Message creation",
+            "Animation",
+            "Music addition",
+            "Export"
+          ],
+          "features": [
+            "15-30 seconds",
+            "Festival-themed",
+            "Brand logo inclusion",
+            "Background music",
+            "WhatsApp ready",
+            "Social media optimized"
+          ],
+          "relatedServices": ["video-animation", "festival-templates", "digital-marketing"]
+        }
+      }
+    },
+    {
+      "virtual-tours": {
+        "title": "360° Virtual Tours",
+        "category": "Video Creation & Animation",
+        "image": "https://example.com/virtual-tour.jpg",
+        "price": "₹5,999",
+        "deliveryTime": "5-7 Days",
+        "rating": 4.8,
+        "reviewCount": 35,
+        "isBestseller": false,
+        "favorite": false,
+        "isShow": true,
+        "details": {
+          "description": "Interactive 360° virtual tours for hotels, real estate, showrooms, and venues.",
+          "whyChoose": "Let customers explore spaces remotely with immersive experiences.",
+          "process": [
+            "Location photography",
+            "360° stitching",
+            "Hotspot creation",
+            "Navigation setup",
+            "Embedding"
+          ],
+          "features": [
+            "10-20 panoramas",
+            "Hotspot navigation",
+            "Floor plans",
+            "Info popups",
+            "Embeddable player",
+            "Mobile compatible"
+          ],
+          "relatedServices": ["photography", "video-animation", "ar-vr-ui"]
+        }
+      }
+    },
+    {
+      "ar-filters": {
+        "title": "AR Filters (Instagram, Snapchat)",
+        "category": "Video Creation & Animation",
+        "image": "https://example.com/ar-filters.jpg",
+        "price": "₹4,499",
+        "deliveryTime": "4-5 Days",
+        "rating": 4.9,
+        "reviewCount": 45,
+        "isBestseller": true,
+        "favorite": false,
+        "isShow": true,
+        "details": {
+          "description": "Custom AR filters for Instagram, Snapchat, and TikTok to boost brand engagement.",
+          "whyChoose": "User-generated content through fun, branded face filters and effects.",
+          "process": [
+            "Concept development",
+            "Effect design",
+            "Development",
+            "Testing",
+            "Publishing"
+          ],
+          "features": [
+            "Face filters",
+            "World effects",
+            "Interactive elements",
+            "Brand integration",
+            "Multi-platform",
+            "Analytics tracking"
+          ],
+          "relatedServices": ["video-animation", "ar-vr-ui", "digital-marketing"]
+        }
+      }
+    },
+    {
+      "product-photography": {
+        "title": "Product Photography",
+        "category": "Photography & Creative Media",
+        "image": "https://example.com/product-photo.jpg",
+        "price": "₹1,999",
+        "deliveryTime": "2-3 Days",
+        "rating": 4.9,
+        "reviewCount": 380,
+        "isBestseller": true,
+        "favorite": false,
+        "isShow": true,
+        "details": {
+          "description": "High-quality product photography for e-commerce, catalogs, and advertising.",
+          "whyChoose": "Professional lighting and composition that makes products look their best.",
+          "process": [
+            "Product arrival",
+            "Setup and lighting",
+            "Shooting",
+            "Editing",
+            "Delivery"
+          ],
+          "features": [
+            "10-20 images",
+            "White background",
+            "Lifestyle option",
+            "Color correction",
+            "Retouching",
+            "Multiple angles"
+          ],
+          "relatedServices": ["packaging-design", "ecommerce-websites", "food-photography"]
+        }
+      }
+    },
+    {
+      "corporate-photoshoot": {
+        "title": "Corporate Photoshoots",
+        "category": "Photography & Creative Media",
+        "image": "https://example.com/corporate-photo.jpg",
+        "price": "₹3,999",
+        "deliveryTime": "3-4 Days",
+        "rating": 4.8,
+        "reviewCount": 120,
+        "isBestseller": false,
+        "favorite": false,
+        "isShow": true,
+        "details": {
+          "description": "Professional corporate photography including headshots, team photos, and office environment.",
+          "whyChoose": "Consistent, professional imagery for your website, LinkedIn, and marketing.",
+          "process": [
+            "Pre-shoot consultation",
+            "On-location shooting",
+            "Editing",
+            "Gallery delivery",
+            "Print ready"
+          ],
+          "features": [
+            "Headshots",
+            "Team photos",
+            "Office environment",
+            "Candid moments",
+            "Edited hi-res files",
+            "Print release"
+          ],
+          "relatedServices": ["photography", "website-ui-design", "linkedin-ghostwriting"]
+        }
+      }
+    },
+    {
+      "event-coverage": {
+        "title": "Event Coverage",
+        "category": "Photography & Creative Media",
+        "image": "https://example.com/event-coverage.jpg",
+        "price": "₹5,999",
+        "deliveryTime": "3-4 Days",
+        "rating": 4.7,
+        "reviewCount": 85,
+        "isBestseller": false,
+        "favorite": false,
+        "isShow": true,
+        "details": {
+          "description": "Professional photography for product launches, exhibitions, conferences, and brand events.",
+          "whyChoose": "Capture key moments and create content for post-event marketing.",
+          "process": [
+            "Event schedule review",
+            "On-site photography",
+            "Quick previews",
+            "Full editing",
+            "Online gallery"
+          ],
+          "features": [
+            "2-3 hours coverage",
+            "Key moments capture",
+            "Speaker/guest photos",
+            "Venue shots",
+            "Edited images",
+            "Online gallery"
+          ],
+          "relatedServices": ["photography", "corporate-photoshoot", "video-animation"]
+        }
+      }
+    },
+    {
+      "food-photography": {
+        "title": "Food Photography",
+        "category": "Photography & Creative Media",
+        "image": "https://example.com/food-photo.jpg",
+        "price": "₹2,499",
+        "deliveryTime": "2-3 Days",
+        "rating": 4.9,
+        "reviewCount": 210,
+        "isBestseller": true,
+        "favorite": false,
+        "isShow": true,
+        "details": {
+          "description": "Appetizing food photography for restaurants, menus, and food delivery platforms.",
+          "whyChoose": "Make your dishes look irresistible with expert styling and lighting.",
+          "process": [
+            "Food preparation",
+            "Styling",
+            "Shooting",
+            "Editing",
+            "Delivery"
+          ],
+          "features": [
+            "10-15 dishes",
+            "Styling props",
+            "Multiple angles",
+            "Color enhancement",
+            "Menu-ready",
+            "Social media optimized"
+          ],
+          "relatedServices": ["photography", "restaurant-menu", "product-photography"]
+        }
+      }
+    },
+    {
+      "lifestyle-photography": {
+        "title": "Lifestyle Photography",
+        "category": "Photography & Creative Media",
+        "image": "https://example.com/lifestyle.jpg",
+        "price": "₹3,499",
+        "deliveryTime": "3-4 Days",
+        "rating": 4.8,
+        "reviewCount": 95,
+        "isBestseller": false,
+        "favorite": false,
+        "isShow": true,
+        "details": {
+          "description": "Authentic lifestyle photography showing products and services in real-life situations.",
+          "whyChoose": "Connect with customers through relatable, aspirational imagery.",
+          "process": [
+            "Concept development",
+            "Location scouting",
+            "Model coordination",
+            "Shooting",
+            "Editing"
+          ],
+          "features": [
+            "Real-life settings",
+            "Model inclusion",
+            "Natural lighting",
+            "Candid moments",
+            "Brand integration",
+            "Edited hi-res files"
+          ],
+          "relatedServices": ["photography", "product-photography", "social-media-posters"]
+        }
+      }
+    },
+    {
+      "drone-shoots": {
+        "title": "Drone Shoots",
+        "category": "Photography & Creative Media",
+        "image": "https://example.com/drone.jpg",
+        "price": "₹4,999",
+        "deliveryTime": "2-3 Days",
+        "rating": 4.8,
+        "reviewCount": 45,
+        "isBestseller": false,
+        "favorite": false,
+        "isShow": true,
+        "details": {
+          "description": "Aerial photography and videography for real estate, events, and landscapes.",
+          "whyChoose": "Stunning perspectives that showcase scale and context.",
+          "process": [
+            "Location assessment",
+            "Flight planning",
+            "Aerial shooting",
+            "Editing",
+            "Delivery"
+          ],
+          "features": [
+            "30 min flight time",
+            "4K video",
+            "High-res photos",
+            "Aerial panoramas",
+            "Stabilized footage",
+            "Edited final files"
+          ],
+          "relatedServices": ["photography", "virtual-tours", "real-estate-photography"]
+        }
+      }
+    },
+    {
+      "model-portfolio": {
+        "title": "Model / Portfolio Shoots",
+        "category": "Photography & Creative Media",
+        "image": "https://example.com/model-portfolio.jpg",
+        "price": "₹4,499",
+        "deliveryTime": "3-4 Days",
+        "rating": 4.9,
+        "reviewCount": 65,
+        "isBestseller": false,
+        "favorite": false,
+        "isShow": true,
+        "details": {
+          "description": "Professional portfolio shoots for models, actors, and talent with multiple looks.",
+          "whyChoose": "Stand out to agencies and casting directors with high-quality portfolio images.",
+          "process": [
+            "Portfolio planning",
+            "Multiple outfit changes",
+            "Shooting",
+            "Retouching",
+            "Digital delivery"
+          ],
+          "features": [
+            "2-3 hour session",
+            "Multiple looks",
+            "Indoor/outdoor options",
+            "Professional retouching",
+            "20-30 final images",
+            "Print release"
+          ],
+          "relatedServices": ["photography", "fashion-photography", "beauty-retouching"]
+        }
+      }
+    },
+    {
+      "fashion-photography": {
+        "title": "Fashion Photography",
+        "category": "Photography & Creative Media",
+        "image": "https://example.com/fashion.jpg",
+        "price": "₹5,999",
+        "deliveryTime": "4-5 Days",
+        "rating": 4.8,
+        "reviewCount": 35,
+        "isBestseller": false,
+        "favorite": false,
+        "isShow": true,
+        "details": {
+          "description": "High-end fashion photography for brands, designers, and lookbooks.",
+          "whyChoose": "Editorial-quality images that elevate your fashion brand.",
+          "process": [
+            "Creative direction",
+            "Styling coordination",
+            "Shooting",
+            "Retouching",
+            "Lookbook layout"
+          ],
+          "features": [
+            "Professional models",
+            "Styling and makeup",
+            "Multiple locations",
+            "Editorial retouching",
+            "Lookbook ready",
+            "Print and digital"
+          ],
+          "relatedServices": ["photography", "model-portfolio", "magazine-booklet"]
+        }
+      }
+    },
+    {
+      "jewelry-photography": {
+        "title": "Jewelry & Luxury Photography",
+        "category": "Photography & Creative Media",
+        "image": "https://example.com/jewelry.jpg",
+        "price": "₹3,999",
+        "deliveryTime": "3-4 Days",
+        "rating": 4.9,
+        "reviewCount": 55,
+        "isBestseller": true,
+        "favorite": false,
+        "isShow": true,
+        "details": {
+          "description": "Specialized photography for jewelry and luxury products with macro detail shots.",
+          "whyChoose": "Capture the sparkle and craftsmanship with expert lighting techniques.",
+          "process": [
+            "Product inspection",
+            "Macro setup",
+            "Lighting adjustment",
+            "Shooting",
+            "Retouching"
+          ],
+          "features": [
+            "Macro detail shots",
+            "Sparkle enhancement",
+            "White background",
+            "Lifestyle options",
+            "Clipping path",
+            "E-commerce ready"
+          ],
+          "relatedServices": ["photography", "product-photography", "packaging-design"]
+        }
+      }
+    },
+    {
+      "virtual-staging": {
+        "title": "Virtual Staging",
+        "category": "Photography & Creative Media",
+        "image": "https://example.com/virtual-staging.jpg",
+        "price": "₹699",
+        "deliveryTime": "1-2 Days",
+        "rating": 4.8,
+        "reviewCount": 140,
+        "isBestseller": true,
+        "favorite": false,
+        "isShow": true,
+        "details": {
+          "description": "Virtual staging for real estate photos to help buyers visualize furnished spaces.",
+          "whyChoose": "Sell properties faster with beautifully furnished digital staging.",
+          "process": [
+            "Room photos",
+            "Furniture selection",
+            "Digital placement",
+            "Lighting matching",
+            "Final image"
+          ],
+          "features": [
+            "Furniture addition",
+            "Decor and accessories",
+            "Multiple style options",
+            "Photorealistic quality",
+            "Quick turnaround",
+            "Before/after comparison"
+          ],
+          "relatedServices": ["photography", "real-estate-photography", "virtual-tours"]
+        }
+      }
+    },
+    {
+      "360-photography": {
+        "title": "360° Photography",
+        "category": "Photography & Creative Media",
+        "image": "https://example.com/360-photo.jpg",
+        "price": "₹2,999",
+        "deliveryTime": "2-3 Days",
+        "rating": 4.7,
+        "reviewCount": 40,
+        "isBestseller": false,
+        "favorite": false,
+        "isShow": true,
+        "details": {
+          "description": "360° product and space photography for interactive online viewing.",
+          "whyChoose": "Give customers a complete view with spin photography and panoramas.",
+          "process": [
+            "Setup",
+            "360° capture",
+            "Stitching",
+            "Interactive creation",
+            "Embedding"
+          ],
+          "features": [
+            "360° product spins",
+            "Panoramic views",
+            "Interactive viewer",
+            "E-commerce ready",
+            "Mobile compatible",
+            "Embed code included"
+          ],
+          "relatedServices": ["photography", "virtual-tours", "product-photography"]
+        }
+      }
+    }
+  ]
+}

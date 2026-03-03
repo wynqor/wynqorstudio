@@ -116,7 +116,7 @@ class EmailService {
                 ${logoTag}
               </td>
               <td style="vertical-align:middle;white-space:nowrap">
-                <div style="font-family:Inter,system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif;font-size:24px;font-weight:800;color:#0f172a;letter-spacing:.2px;line-height:40px">
+                <div style="font-family:Inter,system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif;font-size:24px;font-weight:700;color:#0f172a;letter-spacing:.2px;line-height:40px">
                   ${this.COMPANY_NAME}<span style="color:${this.PRIMARY_COLOR};font-size:28px;display:inline-block;line-height:40px;margin-left:2px">.</span>
                 </div>
               </td>

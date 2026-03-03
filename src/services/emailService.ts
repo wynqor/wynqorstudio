@@ -49,8 +49,9 @@ class EmailService {
       .filter(Boolean)
       .join('\n\n');
     const servicesBlock = servicesList ? `\n\nSelected Services\n──────────────────\n${servicesList}` : '';
+    const signatureBlock = `\n\nRegards,\nWynqor Team\n${this.COMPANY_EMAIL}`;
     const footerBlock = footer ? `\n\n${footer}` : '';
-    return `${header}\n\n${introBlock}${secBlocks}${servicesBlock}${footerBlock}`.trim();
+    return `${header}\n\n${introBlock}${secBlocks}${servicesBlock}${signatureBlock}${footerBlock}`.trim();
   }
 
   private renderHtmlSections(
@@ -64,31 +65,78 @@ class EmailService {
       .map((sec) => {
         const rows = sec.rows
           .filter(([, v]) => v !== '' && v !== undefined && v !== null)
-          .map(([k, v]) => `<div style="margin:2px 0"><span style="color:#0f172a;font-weight:600">${k}:</span> <span style="color:#334155">${v}</span></div>`)
+          .map(
+            ([k, v]) =>
+              `<div style="margin:2px 0"><span style="color:#0f172a;font-weight:600">${k}:</span> <span style="color:#334155">${v}</span></div>`
+          )
           .join('');
         if (!rows) return '';
         return `<div style="margin:16px 0">
           <div style="color:#0f172a;font-weight:700;margin:0 0 8px">${sec.heading}</div>
-          <div style="border:1px solid #e2e8f0;border-radius:8px;padding:12px;background:#fff">${rows}</div>
+          <div style="border:1px solid #e5e7eb;border-radius:10px;padding:12px;background:#ffffff">${rows}</div>
         </div>`;
       })
       .filter(Boolean)
       .join('');
-    const introBlock = intro ? `<p style="color:#334155">${intro}</p>` : '';
+    const introBlock = intro ? `<p style="color:#334155;line-height:1.6;margin:0 0 16px">${intro}</p>` : '';
     const services = servicesList
       ? `<div style="margin:16px 0">
           <div style="color:#0f172a;font-weight:700;margin:0 0 8px">Selected Services</div>
-          <pre style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:12px;white-space:pre-wrap;color:#334155">${servicesList}</pre>
+          <pre style="background:#f8fafc;border:1px solid #e5e7eb;border-radius:10px;padding:12px;white-space:pre-wrap;color:#334155;margin:0;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace">${servicesList}</pre>
         </div>`
       : '';
-    const footerBlock = footer ? `<p style="color:#64748b;font-size:12px;margin-top:16px">${footer}</p>` : '';
-    return `<div style="font-family:Inter,system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif;padding:20px">
-      <h2 style="margin:0 0 12px;color:#0f172a">${title}</h2>
-      ${introBlock}
-      ${secBlocks}
-      ${services}
-      ${footerBlock}
-    </div>`;
+    const computedFooter =
+      footer ||
+      `This is an automated message from Wynqor. For assistance, contact us at ${this.COMPANY_EMAIL}.`;
+    const year = new Date().getFullYear();
+    const preheader = intro
+      ? `<div style="display:none;max-height:0;overflow:hidden;opacity:0;color:transparent;height:0;visibility:hidden">${intro}</div>`
+      : '';
+    return `<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>${title} - Wynqor</title>
+</head>
+<body style="margin:0;padding:0;background-color:#f6f9fc;">
+  ${preheader}
+  <center style="width:100%;background:#f6f9fc;">
+    <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="background:#f6f9fc;">
+      <tr>
+        <td align="center" style="padding:24px 16px;">
+          <table role="presentation" width="600" cellspacing="0" cellpadding="0" border="0" style="width:600px;max-width:100%;">
+            <tr>
+              <td style="padding:8px 0 16px 0;text-align:center;">
+                <div style="font-family:Inter,system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif;font-size:22px;font-weight:700;color:#0f172a;">
+                  Wynqor
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td style="background:#ffffff;border:1px solid #e5e7eb;border-radius:12px;padding:24px;">
+                <div style="font-family:Inter,system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif;color:#0f172a;">
+                  <h1 style="margin:0 0 12px 0;font-size:20px;line-height:1.4;color:#0f172a;">${title}</h1>
+                  ${introBlock}
+                  ${secBlocks}
+                  ${services}
+                  <p style="color:#334155;line-height:1.6;margin:16px 0 0 0;">Regards,<br><strong>Wynqor Team</strong><br><a href="mailto:${this.COMPANY_EMAIL}" style="color:#2563eb;text-decoration:none">${this.COMPANY_EMAIL}</a></p>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td style="padding:12px 0;text-align:center;color:#64748b;font-size:12px;font-family:Inter,system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif;">
+                <div style="margin:4px 0;">${computedFooter}</div>
+                <div style="margin:4px 0;">© ${year} Wynqor</div>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+  </center>
+</body>
+</html>`;
   }
 
   async sendCareerApplication(app: {
@@ -106,7 +154,7 @@ class EmailService {
       const companySubject = `New Career Application - ${app.name} (${app.area})`;
       const clientBody = this.renderPlainSections(
         'Application Received',
-        `Thanks for applying to Wynqor.`,
+        `Thank you for applying to Wynqor. We have received your application.`,
         [
           { heading: 'Application', rows: [['Role/Area', app.area], ['Submitted', submittedAt]] }
         ]
@@ -120,7 +168,7 @@ class EmailService {
           { heading: 'Meta', rows: [['Submitted', submittedAt]] }
         ]
       );
-      const clientHtml = this.renderHtmlSections('Application Received', `Thanks for applying to Wynqor.`, [{ heading: 'Application', rows: [['Role/Area', app.area], ['Submitted', submittedAt]] }]);
+      const clientHtml = this.renderHtmlSections('Application Received', `Thank you for applying to Wynqor. We have received your application.`, [{ heading: 'Application', rows: [['Role/Area', app.area], ['Submitted', submittedAt]] }]);
       const companyHtml = this.renderHtmlSections('Career Application', '', [
         { heading: 'Candidate', rows: [['Name', app.name], ['Email', app.email], ['Phone', app.phone || '']] },
         { heading: 'Details', rows: [['Area', app.area], ['Portfolio', app.portfolio || ''], ['GitHub', app.github || ''], ['Notes', app.note || '']] },
@@ -164,7 +212,7 @@ class EmailService {
       const companySubject = `New Referral - ${ref.candidateName} (by ${ref.referrerName})`;
       const clientBody = this.renderPlainSections(
         'Referral Submitted',
-        `Thanks for referring ${ref.candidateName} to Wynqor.`,
+        `Thank you for referring ${ref.candidateName} to Wynqor. We have received your referral.`,
         [{ heading: 'Summary', rows: [['Referrer', ref.referrerName], ['Candidate', ref.candidateName], ['Submitted', submittedAt]] }]
       );
       const companyBody = this.renderPlainSections(
@@ -177,7 +225,7 @@ class EmailService {
           { heading: 'Meta', rows: [['Submitted', submittedAt]] }
         ]
       );
-      const clientHtml = this.renderHtmlSections('Referral Submitted', `Thanks for referring ${ref.candidateName} to Wynqor.`, [{ heading: 'Summary', rows: [['Referrer', ref.referrerName], ['Candidate', ref.candidateName], ['Submitted', submittedAt]] }]);
+      const clientHtml = this.renderHtmlSections('Referral Submitted', `Thank you for referring ${ref.candidateName} to Wynqor. We have received your referral.`, [{ heading: 'Summary', rows: [['Referrer', ref.referrerName], ['Candidate', ref.candidateName], ['Submitted', submittedAt]] }]);
       const companyHtml = this.renderHtmlSections('Career Referral', '', [
         { heading: 'Referrer', rows: [['Name', ref.referrerName], ['Email', ref.referrerEmail]] },
         { heading: 'Candidate', rows: [['Name', ref.candidateName], ['Email', ref.candidateEmail], ['Profile', ref.profileLink || '']] },
@@ -221,7 +269,7 @@ class EmailService {
       const delivery = this.computeDelivery(emailData);
       const clientEmailContent = this.renderPlainSections(
         'Request Received',
-        'Thank you for choosing Wynqor. Your request has been received.',
+        'Thank you for contacting Wynqor. We have received your request and will get back to you shortly.',
         [
           { heading: 'Request Details', rows: [['Request ID', emailData.requestId], ['Submitted', emailData.submittedAt]] },
           { heading: 'Your Information', rows: [['Full Name', emailData.fullName], ['Email', emailData.email], ['Phone', emailData.phone], ['Business', emailData.businessName]] },
@@ -234,7 +282,7 @@ class EmailService {
       );
       const companyEmailContent = this.renderPlainSections(
         'New Service Request',
-        'Please review and respond within 24 hours.',
+        'A new client request has been submitted. Please review and respond within 24 hours.',
         [
           { heading: 'Request Details', rows: [['Request ID', emailData.requestId], ['Submitted', emailData.submittedAt]] },
           { heading: 'Client', rows: [['Name', emailData.fullName], ['Email', emailData.email], ['Phone', emailData.phone], ['Business', emailData.businessName]] },
@@ -246,7 +294,7 @@ class EmailService {
       );
       const clientHtml = this.renderHtmlSections(
         'Request Received',
-        'Thank you for choosing Wynqor. Your request has been received.',
+        'Thank you for contacting Wynqor. We have received your request and will get back to you shortly.',
         [
           { heading: 'Request Details', rows: [['Request ID', emailData.requestId], ['Submitted', emailData.submittedAt]] },
           { heading: 'Your Information', rows: [['Full Name', emailData.fullName], ['Email', emailData.email], ['Phone', emailData.phone], ['Business', emailData.businessName]] },
@@ -259,7 +307,7 @@ class EmailService {
       );
       const companyHtml = this.renderHtmlSections(
         'New Service Request',
-        'Please review and respond within 24 hours.',
+        'A new client request has been submitted. Please review and respond within 24 hours.',
         [
           { heading: 'Request Details', rows: [['Request ID', emailData.requestId], ['Submitted', emailData.submittedAt]] },
           { heading: 'Client', rows: [['Name', emailData.fullName], ['Email', emailData.email], ['Phone', emailData.phone], ['Business', emailData.businessName]] },
@@ -343,9 +391,9 @@ class EmailService {
       const submittedAt = new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' });
       const clientSubject = 'Subscription Confirmed';
       const companySubject = 'New Newsletter Subscription';
-      const clientBody = this.renderPlainSections('Subscription Confirmed', 'You will receive updates on new services, offers and case studies.', [{ heading: 'Details', rows: [['Email', email], ['Subscribed', submittedAt]] }]);
+      const clientBody = this.renderPlainSections('Subscription Confirmed', 'You are now subscribed to Wynqor updates. You will receive news on services, offers, and case studies.', [{ heading: 'Details', rows: [['Email', email], ['Subscribed', submittedAt]] }]);
       const companyBody = this.renderPlainSections('Newsletter Subscription', '', [{ heading: 'Details', rows: [['Email', email], ['Subscribed', submittedAt]] }]);
-      const clientHtml = this.renderHtmlSections('Subscription Confirmed', 'You will receive updates on new services, offers and case studies.', [{ heading: 'Details', rows: [['Email', email], ['Subscribed', submittedAt]] }]);
+      const clientHtml = this.renderHtmlSections('Subscription Confirmed', 'You are now subscribed to Wynqor updates. You will receive news on services, offers, and case studies.', [{ heading: 'Details', rows: [['Email', email], ['Subscribed', submittedAt]] }]);
       const companyHtml = this.renderHtmlSections('Newsletter Subscription', '', [{ heading: 'Details', rows: [['Email', email], ['Subscribed', submittedAt]] }]);
       const payload = {
         clientTo: email,
@@ -375,9 +423,9 @@ class EmailService {
       const submittedAt = new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' });
       const clientSubject = `Sign-in Confirmed`;
       const companySubject = `User Login - ${user.email}`;
-      const clientBody = this.renderPlainSections('Sign-in Confirmed', 'You are now signed in to Wynqor.', [{ heading: 'Details', rows: [['User', user.name], ['Email', user.email], ['Time', submittedAt]] }]);
+      const clientBody = this.renderPlainSections('Sign-in Confirmed', 'A sign-in to your Wynqor account was detected. If this was not you, please contact support immediately.', [{ heading: 'Details', rows: [['User', user.name], ['Email', user.email], ['Time', submittedAt]] }]);
       const companyBody = this.renderPlainSections('User Login', '', [{ heading: 'Details', rows: [['User', user.name], ['Email', user.email], ['Time', submittedAt]] }]);
-      const clientHtml = this.renderHtmlSections('Sign-in Confirmed', 'You are now signed in to Wynqor.', [{ heading: 'Details', rows: [['User', user.name], ['Email', user.email], ['Time', submittedAt]] }]);
+      const clientHtml = this.renderHtmlSections('Sign-in Confirmed', 'A sign-in to your Wynqor account was detected. If this was not you, please contact support immediately.', [{ heading: 'Details', rows: [['User', user.name], ['Email', user.email], ['Time', submittedAt]] }]);
       const companyHtml = this.renderHtmlSections('User Login', '', [{ heading: 'Details', rows: [['User', user.name], ['Email', user.email], ['Time', submittedAt]] }]);
 
       const payload = {
@@ -490,7 +538,7 @@ class EmailService {
       const companySubject = `Payment Success - ${info.requestId}`;
       const clientBody = this.renderPlainSections(
         'Payment Successful',
-        '',
+        'We have received your payment. Please find the summary below.',
         [{ heading: 'Payment Summary', rows: [['Request ID', info.requestId], ['Payment ID', info.paymentId], ['Method', info.method], ['Amount', `₹${info.amount.toFixed(2)}`], ['Time', when]] }],
         servicesList
       );
@@ -500,7 +548,7 @@ class EmailService {
         [{ heading: 'Payment Summary', rows: [['Request ID', info.requestId], ['Client', `${info.name || ''} <${info.email}>`], ['Payment ID', info.paymentId], ['Method', info.method], ['Amount', `₹${info.amount.toFixed(2)}`], ['Time', when]] }],
         servicesList
       );
-      const clientHtml = this.renderHtmlSections('Payment Successful', '', [{ heading: 'Payment Summary', rows: [['Request ID', info.requestId], ['Payment ID', info.paymentId], ['Method', info.method], ['Amount', `₹${info.amount.toFixed(2)}`], ['Time', when]] }], servicesList);
+      const clientHtml = this.renderHtmlSections('Payment Successful', 'We have received your payment. Please find the summary below.', [{ heading: 'Payment Summary', rows: [['Request ID', info.requestId], ['Payment ID', info.paymentId], ['Method', info.method], ['Amount', `₹${info.amount.toFixed(2)}`], ['Time', when]] }], servicesList);
       const companyHtml = this.renderHtmlSections('Payment Received', '', [{ heading: 'Payment Summary', rows: [['Request ID', info.requestId], ['Client', `${info.name || ''} <${info.email}>`], ['Payment ID', info.paymentId], ['Method', info.method], ['Amount', `₹${info.amount.toFixed(2)}`], ['Time', when]] }], servicesList);
 
       const payload = {

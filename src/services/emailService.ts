@@ -32,6 +32,7 @@ class EmailService {
   private readonly COMPANY_PHONE = site.phone || '';
   private readonly COMPANY_SITE = (import.meta as any).env?.VITE_COMPANY_SITE || '';
   private readonly LOGO_URL = (import.meta as any).env?.VITE_COMPANY_LOGO_URL || '';
+  private readonly PRIMARY_COLOR = (import.meta as any).env?.VITE_PRIMARY_COLOR || '#456a48';
 
   private renderPlainSections(
     title: string,
@@ -101,7 +102,7 @@ class EmailService {
       ? `<div style="display:none;max-height:0;overflow:hidden;opacity:0;color:transparent;height:0;visibility:hidden">${intro}</div>`
       : '';
     const logo = this.LOGO_URL
-      ? `<img src="${this.LOGO_URL}" alt="${this.COMPANY_NAME}" width="120" height="36" style="display:block;margin:0 auto;max-width:100%;height:auto;border:0;outline:none;text-decoration:none" />`
+      ? `<img src="${this.LOGO_URL}" alt="${this.COMPANY_NAME}" width="140" height="40" style="display:block;margin:0 auto;max-width:100%;height:auto;border:0;outline:none;text-decoration:none" />`
       : `<div style="font-family:Inter,system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif;font-size:22px;font-weight:700;color:#0f172a;">${this.COMPANY_NAME}</div>`;
     const brand = this.COMPANY_SITE
       ? `<a href="${this.COMPANY_SITE}" target="_blank" rel="noopener" style="text-decoration:none;color:inherit">${logo}</a>`
@@ -109,7 +110,7 @@ class EmailService {
     const cta = this.COMPANY_SITE
       ? `<tr>
             <td style="padding-top:12px">
-              <a href="${this.COMPANY_SITE}" target="_blank" rel="noopener" style="display:inline-block;background:#2563eb;color:#ffffff;text-decoration:none;padding:10px 16px;border-radius:8px;font-family:Inter,system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif;font-weight:600;">Visit ${this.COMPANY_NAME}</a>
+              <a href="${this.COMPANY_SITE}" target="_blank" rel="noopener" style="display:inline-block;background:${this.PRIMARY_COLOR};color:#ffffff;text-decoration:none;padding:10px 16px;border-radius:8px;font-family:Inter,system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif;font-weight:600;">Visit ${this.COMPANY_NAME}</a>
             </td>
          </tr>`
       : '';
@@ -139,6 +140,9 @@ class EmailService {
               </td>
             </tr>
             <tr>
+              <td style="height:4px;background:${this.PRIMARY_COLOR};border-radius:999px;"></td>
+            </tr>
+            <tr>
               <td style="background:#ffffff;border:1px solid #e5e7eb;border-radius:12px;padding:24px;">
                 <div style="font-family:Inter,system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif;color:#0f172a;">
                   <h1 style="margin:0 0 12px 0;font-size:20px;line-height:1.4;color:#0f172a;">${title}</h1>
@@ -152,7 +156,7 @@ class EmailService {
                         <div style="color:#334155;line-height:1.6;">
                           Regards,<br>
                           <strong>${this.COMPANY_NAME} Team</strong>
-                          <div style="margin:6px 0;"><a href="mailto:${this.COMPANY_EMAIL}" style="color:#2563eb;text-decoration:none">${this.COMPANY_EMAIL}</a></div>
+                          <div style="margin:6px 0;"><a href="mailto:${this.COMPANY_EMAIL}" style="color:${this.PRIMARY_COLOR};text-decoration:none">${this.COMPANY_EMAIL}</a></div>
                           ${phoneLine}
                           ${siteLine}
                         </div>

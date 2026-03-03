@@ -5,8 +5,7 @@ import rateLimit from 'express-rate-limit';
 import helmet from 'helmet';
 import multer from 'multer';
 import nodemailer from 'nodemailer';
-import fs from 'fs';
-import path from 'path';
+// Removed inline logo attachments; emails will reference a public logo URL instead.
 
 dotenv.config();
 
@@ -116,21 +115,6 @@ app.post('/api/sendMail', upload.array('files', 5), async (req, res) => {
       : [];
     const finalAttachments = [...uploadedFiles, ...jsonAttachments];
 
-    // Inline brand logo (cid) so emails can reference "cid:brand-logo"
-    let brandLogoAttachment = null;
-    try {
-      const logoFile = path.resolve(process.cwd(), 'src/images/logo1.jpeg');
-      if (fs.existsSync(logoFile)) {
-        const logoBuf = fs.readFileSync(logoFile);
-        brandLogoAttachment = {
-          filename: 'logo1.jpeg',
-          content: logoBuf,
-          cid: 'brand-logo',
-          contentType: 'image/jpeg',
-        };
-      }
-    } catch {}
-
     // Send client confirmation (no attachments)
     const clientMail = {
       from: fromAddress,
@@ -138,7 +122,6 @@ app.post('/api/sendMail', upload.array('files', 5), async (req, res) => {
       subject: clientSubject,
       text: clientBody,
       html: clientHtml,
-      attachments: brandLogoAttachment ? [brandLogoAttachment] : undefined,
     };
     await transporter.sendMail(clientMail);
 
@@ -149,7 +132,7 @@ app.post('/api/sendMail', upload.array('files', 5), async (req, res) => {
       subject: companySubject,
       text: companyBody,
       html: companyHtml,
-      attachments: brandLogoAttachment ? [brandLogoAttachment, ...finalAttachments] : finalAttachments,
+      attachments: finalAttachments,
     };
     await transporter.sendMail(companyMail);
 

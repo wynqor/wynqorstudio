@@ -1,5 +1,6 @@
 import { CartItem } from '../context/CartContext';
 import { site } from '../data/site'; 
+import emailLogo from '../images/logo1.jpeg';
 
 export interface EmailData {
   // Client information
@@ -101,12 +102,15 @@ class EmailService {
     const preheader = intro
       ? `<div style="display:none;max-height:0;overflow:hidden;opacity:0;color:transparent;height:0;visibility:hidden">${intro}</div>`
       : '';
-    const logoTag =
-      this.LOGO_URL
-        ? `<img src="${this.LOGO_URL}" alt="${this.COMPANY_NAME}" width="36" height="36" style="display:block;border-radius:8px;max-width:100%;height:auto;border:0;outline:none;text-decoration:none" />`
-        : `<img src="cid:brand-logo" alt="${this.COMPANY_NAME}" width="36" height="36" style="display:block;border-radius:8px;max-width:100%;height:auto;border:0;outline:none;text-decoration:none" />`;
+    const computedLogoUrl =
+      this.LOGO_URL ||
+      (typeof window !== 'undefined' ? new URL(emailLogo, window.location.origin).href : '');
+    const logoTag = computedLogoUrl
+      ? `<img src="${computedLogoUrl}" alt="${this.COMPANY_NAME}" width="36" height="36" style="display:block;border-radius:8px;max-width:100%;height:auto;border:0;outline:none;text-decoration:none" />`
+      : '';
     const brandContent =
-      `<table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin:0 auto">
+      logoTag
+        ? `<table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin:0">
             <tr>
               <td style="padding-right:10px;vertical-align:middle">
                 ${logoTag}
@@ -115,7 +119,8 @@ class EmailService {
                 <div style="font-family:Inter,system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif;font-size:20px;font-weight:800;color:#0f172a;letter-spacing:.2px">${this.COMPANY_NAME}</div>
               </td>
             </tr>
-         </table>`;
+           </table>`
+        : `<div style="font-family:Inter,system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif;font-size:22px;font-weight:800;color:#0f172a;">${this.COMPANY_NAME}</div>`;
     const brand = this.COMPANY_SITE
       ? `<a href="${this.COMPANY_SITE}" target="_blank" rel="noopener" style="text-decoration:none;color:inherit">${brandContent}</a>`
       : brandContent;
@@ -147,7 +152,7 @@ class EmailService {
         <td align="center" style="padding:24px 16px;">
           <table role="presentation" width="600" cellspacing="0" cellpadding="0" border="0" style="width:600px;max-width:100%;">
             <tr>
-              <td style="padding:8px 0 16px 0;text-align:center;">
+              <td style="padding:8px 0 16px 0;text-align:left;">
                 ${brand}
               </td>
             </tr>

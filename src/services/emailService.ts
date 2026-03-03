@@ -101,12 +101,24 @@ class EmailService {
     const preheader = intro
       ? `<div style="display:none;max-height:0;overflow:hidden;opacity:0;color:transparent;height:0;visibility:hidden">${intro}</div>`
       : '';
-    const logo = this.LOGO_URL
-      ? `<img src="${this.LOGO_URL}" alt="${this.COMPANY_NAME}" width="140" height="40" style="display:block;margin:0 auto;max-width:100%;height:auto;border:0;outline:none;text-decoration:none" />`
-      : `<div style="font-family:Inter,system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif;font-size:22px;font-weight:700;color:#0f172a;">${this.COMPANY_NAME}</div>`;
+    const logoTag =
+      this.LOGO_URL
+        ? `<img src="${this.LOGO_URL}" alt="${this.COMPANY_NAME}" width="36" height="36" style="display:block;border-radius:8px;max-width:100%;height:auto;border:0;outline:none;text-decoration:none" />`
+        : `<img src="cid:brand-logo" alt="${this.COMPANY_NAME}" width="36" height="36" style="display:block;border-radius:8px;max-width:100%;height:auto;border:0;outline:none;text-decoration:none" />`;
+    const brandContent =
+      `<table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin:0 auto">
+            <tr>
+              <td style="padding-right:10px;vertical-align:middle">
+                ${logoTag}
+              </td>
+              <td style="vertical-align:middle">
+                <div style="font-family:Inter,system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif;font-size:20px;font-weight:800;color:#0f172a;letter-spacing:.2px">${this.COMPANY_NAME}</div>
+              </td>
+            </tr>
+         </table>`;
     const brand = this.COMPANY_SITE
-      ? `<a href="${this.COMPANY_SITE}" target="_blank" rel="noopener" style="text-decoration:none;color:inherit">${logo}</a>`
-      : logo;
+      ? `<a href="${this.COMPANY_SITE}" target="_blank" rel="noopener" style="text-decoration:none;color:inherit">${brandContent}</a>`
+      : brandContent;
     const cta = this.COMPANY_SITE
       ? `<tr>
             <td style="padding-top:12px">

@@ -5,6 +5,8 @@ import rateLimit from 'express-rate-limit';
 import helmet from 'helmet';
 import multer from 'multer';
 import nodemailer from 'nodemailer';
+import fs from 'fs';
+import path from 'path';
 
 dotenv.config();
 
@@ -114,24 +116,42 @@ app.post('/api/sendMail', upload.array('files', 5), async (req, res) => {
       : [];
     const finalAttachments = [...uploadedFiles, ...jsonAttachments];
 
+    // Inline brand logo (cid) so emails can reference "cid:brand-logo"
+    let brandLogoAttachment = null;
+    try {
+      const logoFile = path.resolve(process.cwd(), 'src/images/logo1.jpeg');
+      if (fs.existsSync(logoFile)) {
+        const logoBuf = fs.readFileSync(logoFile);
+        brandLogoAttachment = {
+          filename: 'logo1.jpeg',
+          content: logoBuf,
+          cid: 'brand-logo',
+          contentType: 'image/jpeg',
+        };
+      }
+    } catch {}
+
     // Send client confirmation (no attachments)
-    await transporter.sendMail({
+    const clientMail = {
       from: fromAddress,
       to: clientTo,
       subject: clientSubject,
       text: clientBody,
       html: clientHtml,
-    });
+      attachments: brandLogoAttachment ? [brandLogoAttachment] : undefined,
+    };
+    await transporter.sendMail(clientMail);
 
     // Send company notification (with attachments)
-    await transporter.sendMail({
+    const companyMail = {
       from: fromAddress,
       to: companyAddress,
       subject: companySubject,
       text: companyBody,
       html: companyHtml,
-      attachments: finalAttachments,
-    });
+      attachments: brandLogoAttachment ? [brandLogoAttachment, ...finalAttachments] : finalAttachments,
+    };
+    await transporter.sendMail(companyMail);
 
     return res.json({ success: true });
   } catch (err) {

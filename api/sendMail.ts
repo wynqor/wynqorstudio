@@ -1,5 +1,7 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 import nodemailer from 'nodemailer';
+import fs from 'fs';
+import path from 'path';
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   if (req.method !== 'POST') {
@@ -56,12 +58,28 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
           }))
       : [];
 
+    // Inline brand logo (cid) for email template
+    let brandLogoAttachment: any = null;
+    try {
+      const logoFile = path.resolve(process.cwd(), 'src/images/logo1.jpeg');
+      if (fs.existsSync(logoFile)) {
+        const logoBuf = fs.readFileSync(logoFile);
+        brandLogoAttachment = {
+          filename: 'logo1.jpeg',
+          content: logoBuf,
+          cid: 'brand-logo',
+          contentType: 'image/jpeg',
+        };
+      }
+    } catch {}
+
     await transporter.sendMail({
       from: fromAddress,
       to: clientTo,
       subject: clientSubject,
       text: clientBody,
       html: clientHtml,
+      attachments: brandLogoAttachment ? [brandLogoAttachment] : undefined,
     });
 
     await transporter.sendMail({
@@ -70,7 +88,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       subject: companySubject,
       text: companyBody,
       html: companyHtml,
-      attachments: jsonAttachments,
+      attachments: brandLogoAttachment ? [brandLogoAttachment, ...jsonAttachments] : jsonAttachments,
     });
 
     return res.json({ success: true });

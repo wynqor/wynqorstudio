@@ -71,7 +71,9 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
           contentType: 'image/jpeg',
         };
       }
-    } catch {}
+    } catch (e) {
+      brandLogoAttachment = null;
+    }
 
     await transporter.sendMail({
       from: fromAddress,

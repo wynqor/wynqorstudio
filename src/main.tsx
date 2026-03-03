@@ -6,16 +6,14 @@ import logo from './images/logo1.jpeg'
 
 // Ensure favicon uses the app logo (works in dev and build)
 (() => {
-  try {
-    let link = document.querySelector("link[rel='icon']") as HTMLLinkElement | null
-    if (!link) {
-      link = document.createElement('link')
-      link.rel = 'icon'
-      document.head.appendChild(link)
-    }
-    link.type = 'image/png'
-    link.href = logo
-  } catch {}
+  let link = document.querySelector("link[rel='icon']") as HTMLLinkElement | null
+  if (!link) {
+    link = document.createElement('link')
+    link.rel = 'icon'
+    document.head.appendChild(link)
+  }
+  link.type = 'image/png'
+  link.href = logo
 })()
 
 ReactDOM.createRoot(document.getElementById('root')!).render(

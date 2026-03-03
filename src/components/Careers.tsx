@@ -3,6 +3,7 @@ import Header from './Header';
 import Footer from './Footer';
 import { jobs } from '../data/jobs';
 import { emailService } from '../services/emailService';
+import { useToast } from './ToastProvider';
 
 interface PageProps {
   onHomeClick?: () => void;
@@ -29,6 +30,7 @@ const Careers: React.FC<PageProps> = ({ onHomeClick, onLoginClick, onSearch, onC
   const [refData, setRefData] = React.useState({ referrerName: '', referrerEmail: '', candidateName: '', candidateEmail: '', profileLink: '', relation: '', note: '' });
   const [submitState, setSubmitState] = React.useState<{ ok?: boolean; err?: string }>({});
   const hiringOpen = false;
+  const { addToast } = useToast();
 
   const handleApplySubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -48,8 +50,11 @@ const Careers: React.FC<PageProps> = ({ onHomeClick, onLoginClick, onSearch, onC
     });
     setSubmitState(res.success ? { ok: true } : { err: res.error || 'Failed to submit.' });
     if (res.success) {
+      addToast({ type: 'success', title: 'Application Submitted', message: 'We have received your application.' });
       setApplyData({ name: '', email: '', phone: '', area: 'Design', portfolio: '', github: '', note: '' });
       setShowApply(false);
+    } else {
+      addToast({ type: 'error', title: 'Submission Failed', message: res.error || 'Please try again.' });
     }
   };
 
@@ -71,8 +76,11 @@ const Careers: React.FC<PageProps> = ({ onHomeClick, onLoginClick, onSearch, onC
     });
     setSubmitState(res.success ? { ok: true } : { err: res.error || 'Failed to submit.' });
     if (res.success) {
+      addToast({ type: 'success', title: 'Referral Submitted', message: 'Thanks for referring a candidate.' });
       setRefData({ referrerName: '', referrerEmail: '', candidateName: '', candidateEmail: '', profileLink: '', relation: '', note: '' });
       setShowReferral(false);
+    } else {
+      addToast({ type: 'error', title: 'Submission Failed', message: res.error || 'Please try again.' });
     }
   };
   return (

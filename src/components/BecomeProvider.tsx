@@ -1,13 +1,15 @@
 import { useState } from 'react';
 import Header from './Header';
 import Footer from './Footer';
+import { emailService } from '../services/emailService';
+import { useToast } from './ToastProvider';
 
 interface BecomeProviderProps {
   onHomeClick?: () => void;
   onLoginClick?: () => void;
   onSearch?: (query: string) => void;
   onCartClick?: () => void;
-  onUserClick?: () => void;
+  onUserClick?: () => void; 
   onAboutClick?: () => void;
   onCareersClick?: () => void;
   onBlogClick?: () => void;
@@ -26,6 +28,7 @@ const BecomeProvider = ({ onHomeClick, onLoginClick, onSearch, onCartClick, onUs
   const [notes, setNotes] = useState('');
   const [files, setFiles] = useState<File[]>([]);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const { addToast } = useToast();
 
   const MAX_TOTAL_UPLOAD_MB = 4.5;
   const totalRawBytes = files.reduce((sum, f) => sum + f.size, 0);
@@ -49,78 +52,32 @@ const BecomeProvider = ({ onHomeClick, onLoginClick, onSearch, onCartClick, onUs
     if (!isFormValid) return;
     setIsSubmitting(true);
     try {
-      const requestId = `PROV-${Date.now().toString().slice(-6).toUpperCase()}-${Math.random().toString(36).substr(2, 4).toUpperCase()}`;
-      const submittedAt = new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' });
-      const clientBody =
-        `🎉 Application Received
-
-Thank you for applying to become a Wynqor provider.
-
-Application ID: ${requestId}
-Submitted: ${submittedAt}
-
-We will review your skills and portfolio and get back to you within 48 hours.`;
-      const companyBody =
-        `🚀 NEW PROVIDER APPLICATION
-
-ID: ${requestId}
-Submitted: ${submittedAt}
-
-Name: ${fullName}
-Email: ${email}
-Phone: ${phone}
-Country: ${country}
-Skills: ${skills}
-Portfolio: ${portfolio || 'N/A'}
-Notes: ${notes || 'N/A'}`;
-
-      // prepare attachments
-      const attachments =
-        files.length > 0
-          ? await Promise.all(
-              files.map(
-                (file) =>
-                  new Promise<{ filename: string; content: string; contentType: string }>((resolve) => {
-                    const reader = new FileReader();
-                    reader.onload = () => {
-                      const result = reader.result as string;
-                      const base64 = result.split(',')[1] || '';
-                      resolve({ filename: file.name, content: base64, contentType: file.type });
-                    };
-                    reader.onerror = () => {
-                      resolve({ filename: file.name, content: '', contentType: file.type });
-                    };
-                    reader.readAsDataURL(file);
-                  })
-              )
-            )
-          : [];
-
-      const payload: Record<string, any> = {
-        clientTo: email,
-        clientSubject: 'Wynqor Provider Application Received',
-        clientBody,
-        companyTo: (import.meta.env.VITE_COMPANY_EMAIL || 'wynqor@gmail.com'),
-        companySubject: `New Provider Application - ${fullName}`,
-        companyBody,
-        attachments: attachments.length > 0 ? attachments : undefined,
-      };
-
-      const response = await fetch('/api/sendMail', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload),
+      const res = await emailService.sendProviderApplication({
+        fullName,
+        email,
+        phone,
+        country,
+        skills,
+        portfolio,
+        notes,
+        files
       });
-      const result = await response.json().catch(() => null);
-      if (response.ok && result?.success) {
-        setFiles([]);
+      if (res.success) {
+        addToast({ type: 'success', title: 'Application Submitted', message: 'We have received your provider application.' });
+        // Reset full form
+        setFullName('');
+        setEmail('');
+        setPhone('');
+        setSkills('');
+        setPortfolio('');
+        setCountry('');
         setNotes('');
-        alert('Your application has been submitted successfully.');
+        setFiles([]);
       } else {
-        alert(result?.error || 'Failed to submit application.');
+        addToast({ type: 'error', title: 'Submission Failed', message: res.error || 'Please try again.' });
       }
     } catch (err) {
-      alert('Failed to submit application.');
+      addToast({ type: 'error', title: 'Submission Failed', message: 'Please try again.' });
     } finally {
       setIsSubmitting(false);
     }

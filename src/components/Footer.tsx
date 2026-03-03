@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { emailService } from '../services/emailService';
 import { site } from '../data/site';
 import logo from '../images/logo1.jpeg';
+import { useToast } from './ToastProvider';
 
 interface FooterProps {
   onAboutClick?: () => void;
@@ -98,25 +99,22 @@ export default Footer;
 const NewsletterForm: React.FC = () => {
   const [email, setEmail] = useState('');
   const [loading, setLoading] = useState(false);
-  const [success, setSuccess] = useState<string | null>(null);
-  const [error, setError] = useState<string | null>(null);
+  const { addToast } = useToast();
   const isValidEmail = (val: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val);
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSuccess(null);
-    setError(null);
     if (!isValidEmail(email)) {
-      setError('Please enter a valid email.');
+      addToast({ type: 'error', title: 'Invalid Email', message: 'Please enter a valid email address.' });
       return;
     }
     setLoading(true);
     const res = await emailService.sendNewsletter(email.trim());
     setLoading(false);
     if (res.success) {
-      setSuccess('Subscribed successfully. Check your email for confirmation.');
+      addToast({ type: 'success', title: 'Subscribed', message: 'Check your email for confirmation.' });
       setEmail('');
     } else {
-      setError(res.error || 'Failed to subscribe. Please try again later.');
+      addToast({ type: 'error', title: 'Subscription Failed', message: res.error || 'Please try again later.' });
     }
   };
   return (
@@ -138,8 +136,7 @@ const NewsletterForm: React.FC = () => {
           {loading ? 'Subscribing...' : 'Subscribe'}
         </button>
       </div>
-      {success && <span className="text-emerald-400 text-xs font-semibold">{success}</span>}
-      {error && <span className="text-rose-400 text-xs font-semibold">{error}</span>}
+      
     </form>
   );
 };

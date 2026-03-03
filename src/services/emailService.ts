@@ -577,6 +577,89 @@ class EmailService {
     return `${minDays}–${maxDays} Days`;
   }
 
+  async sendProviderApplication(info: {
+    fullName: string;
+    email: string;
+    phone?: string;
+    country?: string;
+    skills: string;
+    portfolio?: string;
+    notes?: string;
+    files?: File[];
+  }): Promise<{ success: boolean; error?: string }> {
+    try {
+      const requestId = `PROV-${Date.now().toString().slice(-6).toUpperCase()}-${Math.random().toString(36).substr(2, 4).toUpperCase()}`;
+      const submittedAt = new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' });
+      const clientSubject = 'Wynqor Provider Application Received';
+      const companySubject = `New Provider Application - ${info.fullName}`;
+      const clientBody = this.renderPlainSections(
+        'Application Received',
+        'Thank you for applying to become a Wynqor provider. We will review your profile within 48 hours.',
+        [
+          { heading: 'Application', rows: [['Application ID', requestId], ['Submitted', submittedAt]] }
+        ]
+      );
+      const companyBody = this.renderPlainSections(
+        'Provider Application',
+        '',
+        [
+          { heading: 'Candidate', rows: [['Name', info.fullName], ['Email', info.email], ['Phone', info.phone || ''], ['Country', info.country || '']] },
+          { heading: 'Profile', rows: [['Skills', info.skills], ['Portfolio', info.portfolio || ''], ['Notes', info.notes || '']] },
+          { heading: 'Meta', rows: [['Application ID', requestId], ['Submitted', submittedAt]] }
+        ]
+      );
+      const clientHtml = this.renderHtmlSections('Application Received', 'Thank you for applying to become a Wynqor provider. We will review your profile within 48 hours.', [{ heading: 'Application', rows: [['Application ID', requestId], ['Submitted', submittedAt]] }]);
+      const companyHtml = this.renderHtmlSections('Provider Application', '', [
+        { heading: 'Candidate', rows: [['Name', info.fullName], ['Email', info.email], ['Phone', info.phone || ''], ['Country', info.country || '']] },
+        { heading: 'Profile', rows: [['Skills', info.skills], ['Portfolio', info.portfolio || ''], ['Notes', info.notes || '']] },
+        { heading: 'Meta', rows: [['Application ID', requestId], ['Submitted', submittedAt]] }
+      ]);
+
+      const attachments =
+        info.files && info.files.length > 0
+          ? await Promise.all(
+              info.files.map(
+                (file) =>
+                  new Promise<{ filename: string; content: string; contentType: string }>((resolve) => {
+                    const reader = new FileReader();
+                    reader.onload = () => {
+                      const result = reader.result as string;
+                      const base64 = result.split(',')[1] || '';
+                      resolve({ filename: file.name, content: base64, contentType: file.type });
+                    };
+                    reader.onerror = () => {
+                      resolve({ filename: file.name, content: '', contentType: file.type });
+                    };
+                    reader.readAsDataURL(file);
+                  })
+              )
+            )
+          : [];
+
+      const payload: Record<string, any> = {
+        clientTo: info.email,
+        clientSubject,
+        clientBody,
+        clientHtml,
+        companyTo: this.COMPANY_EMAIL,
+        companySubject,
+        companyBody,
+        companyHtml,
+      };
+      if (attachments.length) payload.attachments = attachments;
+
+      const response = await fetch('/api/sendMail', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+      const result = await response.json().catch(() => null);
+      if (response.ok && result?.success) return { success: true };
+      return { success: false, error: result?.error || 'Failed to submit provider application.' };
+    } catch (error) {
+      return { success: false, error: error instanceof Error ? error.message : 'Failed to submit provider application.' };
+    }
+  }
 
 
 

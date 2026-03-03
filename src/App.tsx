@@ -27,6 +27,7 @@ import BecomeProvider from './components/BecomeProvider';
 import Dashboard from './components/Dashboard';
 import Failed from './components/Failed';
 import { categories } from './data/servicesData';
+import { ToastProvider } from './components/ToastProvider';
 import About from './components/About';
 import Careers from './components/Careers';
 import Blog from './components/Blog';
@@ -39,7 +40,9 @@ function App() {
     <AuthProvider>
       <CartProvider>
         <WatchlistProvider>
-          <AppContent />
+          <ToastProvider>
+            <AppContent />
+          </ToastProvider>
         </WatchlistProvider>
       </CartProvider>
     </AuthProvider>

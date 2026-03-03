@@ -43,8 +43,8 @@ export const ToastProvider: React.FC<{ children: ReactNode }> = ({ children }) =
   return (
     <ToastContext.Provider value={{ addToast }}>
       {children}
-      <div style={{ position: 'fixed', inset: 0, pointerEvents: 'none' }}>
-        <div style={{ position: 'absolute', right: 24, top: 24, display: 'flex', flexDirection: 'column', gap: 8, width: 'min(400px, 92vw)' }}>
+      <div style={{ position: 'fixed', inset: 0, pointerEvents: 'none', zIndex: 10000 }}>
+        <div style={{ position: 'absolute', right: 24, top: 24, display: 'flex', flexDirection: 'column', gap: 8, width: 'min(400px, 92vw)', zIndex: 10001 }}>
           {toasts.map((t) => {
             const s = typeStyles[t.type];
             return (
@@ -58,7 +58,8 @@ export const ToastProvider: React.FC<{ children: ReactNode }> = ({ children }) =
                 display: 'flex',
                 alignItems: 'center',
                 gap: 10,
-                pointerEvents: 'auto'
+                pointerEvents: 'auto',
+                zIndex: 10002
               }}>
                 <span className="material-symbols-outlined" style={{ color: s.border }}> {s.icon} </span>
                 <div style={{ flex: 1 }}>

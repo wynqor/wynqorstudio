@@ -106,7 +106,7 @@ class EmailService {
       this.LOGO_URL ||
       (typeof window !== 'undefined' ? new URL(emailLogo, window.location.origin).href : '');
     const logoTag = computedLogoUrl
-      ? `<img src="${computedLogoUrl}" alt="${this.COMPANY_NAME}" width="36" height="36" style="display:block;border-radius:8px;max-width:100%;height:auto;border:0;outline:none;text-decoration:none" />`
+      ? `<img src="${computedLogoUrl}" alt="${this.COMPANY_NAME}" width="36" height="36" style="display:block;border-radius:12px;width:36px;height:36px;border:0;outline:none;text-decoration:none" />`
       : '';
     const brandContent =
       logoTag
@@ -115,14 +115,16 @@ class EmailService {
               <td style="padding-right:10px;vertical-align:middle">
                 ${logoTag}
               </td>
-              <td style="vertical-align:middle">
-                <div style="font-family:Inter,system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif;font-size:20px;font-weight:800;color:#0f172a;letter-spacing:.2px">${this.COMPANY_NAME}</div>
+              <td style="vertical-align:middle;white-space:nowrap">
+                <div style="font-family:Inter,system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif;font-size:22px;font-weight:800;color:#0f172a;letter-spacing:.2px;line-height:1">
+                  ${this.COMPANY_NAME}<span style="color:${this.PRIMARY_COLOR};font-size:26px;display:inline-block;line-height:0;margin-left:2px">.</span>
+                </div>
               </td>
             </tr>
            </table>`
-        : `<div style="font-family:Inter,system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif;font-size:22px;font-weight:800;color:#0f172a;">${this.COMPANY_NAME}</div>`;
+        : `<div style="font-family:Inter,system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif;font-size:22px;font-weight:800;color:#0f172a;">${this.COMPANY_NAME}<span style="color:${this.PRIMARY_COLOR};font-size:26px;display:inline-block;line-height:0;margin-left:2px">.</span></div>`;
     const brand = this.COMPANY_SITE
-      ? `<a href="${this.COMPANY_SITE}" target="_blank" rel="noopener" style="text-decoration:none;color:inherit">${brandContent}</a>`
+      ? `<a href="${this.COMPANY_SITE}" target="_blank" rel="noopener" style="text-decoration:none;color:inherit;display:inline-block">${brandContent}</a>`
       : brandContent;
     const cta = this.COMPANY_SITE
       ? `<tr>

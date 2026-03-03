@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useEffect, useState, ReactNode } from 'react';
 import { Service } from '../data/servicesData';
 import { useAuth } from './AuthContext';
+import { useToast } from '../components/ToastProvider';
 
 export interface WatchItem extends Service {}
 
@@ -31,6 +32,7 @@ export const WatchlistProvider: React.FC<WatchlistProviderProps> = ({ children }
   const [watchItems, setWatchItems] = useState<WatchItem[]>([]);
   const { user } = useAuth();
   const storageKey = `wynqor-watchlist${user?.email ? `:${user.email}` : ''}`;
+  const { addToast } = useToast();
 
   useEffect(() => {
     const saved = localStorage.getItem(storageKey) || localStorage.getItem('wynqor-watchlist');
@@ -50,12 +52,18 @@ export const WatchlistProvider: React.FC<WatchlistProviderProps> = ({ children }
   const addToWatchlist = (service: Service) => {
     setWatchItems(prev => {
       if (prev.some(item => item.id === service.id)) return prev;
+      addToast({ type: 'success', title: 'Saved to Watchlist', message: service.title });
       return [...prev, service];
     });
   };
 
   const removeFromWatchlist = (serviceId: string) => {
-    setWatchItems(prev => prev.filter(item => item.id !== serviceId));
+    setWatchItems(prev => {
+      const found = prev.find(i => i.id === serviceId);
+      const next = prev.filter(item => item.id !== serviceId);
+      if (found) addToast({ type: 'info', title: 'Removed from Watchlist', message: found.title });
+      return next;
+    });
   };
 
   const isInWatchlist = (serviceId: string) => {

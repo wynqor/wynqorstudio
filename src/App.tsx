@@ -37,15 +37,15 @@ import Privacy from './components/Privacy';
 
 function App() {
   return (
-    <AuthProvider>
-      <CartProvider>
-        <WatchlistProvider>
-          <ToastProvider>
+    <ToastProvider>
+      <AuthProvider>
+        <CartProvider>
+          <WatchlistProvider>
             <AppContent />
-          </ToastProvider>
-        </WatchlistProvider>
-      </CartProvider>
-    </AuthProvider>
+          </WatchlistProvider>
+        </CartProvider>
+      </AuthProvider>
+    </ToastProvider>
   );
 }
 

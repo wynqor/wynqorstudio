@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { useAuth } from './AuthContext';
 import { Service } from '../data/servicesData';
+import { useToast } from '../components/ToastProvider';
 
 export interface CartItem extends Service {
   quantity: number;
@@ -35,6 +36,7 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
   const { user } = useAuth();
   const storageKey = `wynqor-cart${user?.email ? `:${user.email}` : ''}`;
+  const { addToast } = useToast();
 
   // Load cart from localStorage on mount
   useEffect(() => {
@@ -57,19 +59,23 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
     setCartItems(prevItems => {
       const existingItem = prevItems.find(item => item.id === service.id);
       if (existingItem) {
+        addToast({ type: 'info', title: 'Cart Updated', message: `${service.title} quantity increased` });
         return prevItems.map(item =>
           item.id === service.id
             ? { ...item, quantity: item.quantity + 1 }
             : item
         );
       } else {
+        addToast({ type: 'success', title: 'Added to Cart', message: service.title });
         return [...prevItems, { ...service, quantity: 1 }];
       }
     });
   };
 
   const removeFromCart = (serviceId: string) => {
+    const removed = cartItems.find(i => i.id === serviceId);
     setCartItems(prevItems => prevItems.filter(item => item.id !== serviceId));
+    if (removed) addToast({ type: 'info', title: 'Removed from Cart', message: removed.title });
   };
 
   const updateQuantity = (serviceId: string, quantity: number) => {

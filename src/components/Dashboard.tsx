@@ -334,14 +334,14 @@ const Dashboard = ({ onHomeClick, onLoginClick, onSearch, onCartClick, onService
                 <div className="mt-3 text-sm text-slate-600">Amount Due: <span className="font-bold text-secondary">₹{Number(selectedRequest.total || 0).toFixed(2)}</span></div>
                 <div className="mt-6 space-y-4">
                   <div className="text-xs text-slate-700 bg-slate-50 border border-slate-200 rounded-lg p-3">
-                    UPI/QR ke through hi payment supported hai. Pay via UPI QR dabate hi Razorpay checkout khulega – QR scan karein ya UPI app me approve karein. Payment complete hote hi status “Paid” ho jayega; agar fail ho ya window band ho jaye to “Failed — Retry” dikhega.
+                    Payments are supported via UPI/QR only. Selecting “Pay via UPI QR” opens Razorpay Checkout — scan the QR or approve the request in your UPI app. On successful payment, status will update to “Paid”. If the payment fails or the window is closed, the status will show “Failed — Retry”.
                     {isPaying && (
                       <div className="mt-2 text-primary font-semibold">Opening Razorpay…</div>
                     )}
                   </div>
                   {!razorpayKey && (
                     <div className="text-xs text-rose-600 bg-rose-50 border border-rose-200 rounded-lg p-3">
-                      Real UPI/QR payment enable karne ke liye environment me VITE_RAZORPAY_KEY_ID set karna hoga.
+                      To enable real UPI/QR payments, set VITE_RAZORPAY_KEY_ID in your environment configuration.
                     </div>
                   )}
                   <div>

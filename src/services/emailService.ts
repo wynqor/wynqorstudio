@@ -1,5 +1,5 @@
 import { CartItem } from '../context/CartContext';
-import { site } from '../data/site';
+import { site } from '../data/site'; 
 
 export interface EmailData {
   // Client information

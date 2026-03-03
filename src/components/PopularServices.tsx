@@ -1,5 +1,6 @@
 import React from 'react';
 import { services, Service } from '../data/servicesData';
+import { popularFeaturedIds } from '../data/recommendationsData';
 import { useCart } from '../context/CartContext';
 import { useWatchlist } from '../context/WatchlistContext';
 
@@ -103,8 +104,9 @@ interface PopularServicesProps {
 }
 
 const PopularServices: React.FC<PopularServicesProps> = ({ onServiceDetails }) => {
-  // Show first 10 popular services
-  const popularServices = services.slice(0, 10);
+  // Exactly 10 services: only bestseller or favorite (trending), mixed across categories
+  const idSet = new Set(popularFeaturedIds);
+  const popularServices = services.filter(s => idSet.has(s.id)).slice(0, 10);
 
   return (
     <section className="py-20 bg-slate-50">

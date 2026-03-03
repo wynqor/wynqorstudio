@@ -1,4 +1,5 @@
 import { CartItem } from '../context/CartContext';
+import { site } from '../data/site';
 
 export interface EmailData {
   // Client information
@@ -27,6 +28,10 @@ export interface EmailData {
 
 class EmailService {
   private readonly COMPANY_EMAIL = import.meta.env.VITE_COMPANY_EMAIL || 'wynqor@gmail.com';
+  private readonly COMPANY_NAME = site.name || 'Wynqor';
+  private readonly COMPANY_PHONE = site.phone || '';
+  private readonly COMPANY_SITE = (import.meta as any).env?.VITE_COMPANY_SITE || '';
+  private readonly LOGO_URL = (import.meta as any).env?.VITE_COMPANY_LOGO_URL || '';
 
   private renderPlainSections(
     title: string,
@@ -49,7 +54,10 @@ class EmailService {
       .filter(Boolean)
       .join('\n\n');
     const servicesBlock = servicesList ? `\n\nSelected Services\n──────────────────\n${servicesList}` : '';
-    const signatureBlock = `\n\nRegards,\nWynqor Team\n${this.COMPANY_EMAIL}`;
+    const lines = [`Regards,`, `${this.COMPANY_NAME} Team`, this.COMPANY_EMAIL];
+    if (this.COMPANY_PHONE) lines.push(this.COMPANY_PHONE);
+    if (this.COMPANY_SITE) lines.push(this.COMPANY_SITE);
+    const signatureBlock = `\n\n${lines.join('\n')}`;
     const footerBlock = footer ? `\n\n${footer}` : '';
     return `${header}\n\n${introBlock}${secBlocks}${servicesBlock}${signatureBlock}${footerBlock}`.trim();
   }
@@ -92,12 +100,31 @@ class EmailService {
     const preheader = intro
       ? `<div style="display:none;max-height:0;overflow:hidden;opacity:0;color:transparent;height:0;visibility:hidden">${intro}</div>`
       : '';
+    const logo = this.LOGO_URL
+      ? `<img src="${this.LOGO_URL}" alt="${this.COMPANY_NAME}" width="120" height="36" style="display:block;margin:0 auto;max-width:100%;height:auto;border:0;outline:none;text-decoration:none" />`
+      : `<div style="font-family:Inter,system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif;font-size:22px;font-weight:700;color:#0f172a;">${this.COMPANY_NAME}</div>`;
+    const brand = this.COMPANY_SITE
+      ? `<a href="${this.COMPANY_SITE}" target="_blank" rel="noopener" style="text-decoration:none;color:inherit">${logo}</a>`
+      : logo;
+    const cta = this.COMPANY_SITE
+      ? `<tr>
+            <td style="padding-top:12px">
+              <a href="${this.COMPANY_SITE}" target="_blank" rel="noopener" style="display:inline-block;background:#2563eb;color:#ffffff;text-decoration:none;padding:10px 16px;border-radius:8px;font-family:Inter,system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif;font-weight:600;">Visit ${this.COMPANY_NAME}</a>
+            </td>
+         </tr>`
+      : '';
+    const phoneLine = this.COMPANY_PHONE
+      ? `<div style="margin:2px 0;">Phone: <a href="tel:${this.COMPANY_PHONE.replace(/\\s+/g,'')}" style="color:#2563eb;text-decoration:none">${this.COMPANY_PHONE}</a></div>`
+      : '';
+    const siteLine = this.COMPANY_SITE
+      ? `<div style="margin:2px 0;">Website: <a href="${this.COMPANY_SITE}" style="color:#2563eb;text-decoration:none">${this.COMPANY_SITE}</a></div>`
+      : '';
     return `<!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>${title} - Wynqor</title>
+  <title>${title} - ${this.COMPANY_NAME}</title>
 </head>
 <body style="margin:0;padding:0;background-color:#f6f9fc;">
   ${preheader}
@@ -108,9 +135,7 @@ class EmailService {
           <table role="presentation" width="600" cellspacing="0" cellpadding="0" border="0" style="width:600px;max-width:100%;">
             <tr>
               <td style="padding:8px 0 16px 0;text-align:center;">
-                <div style="font-family:Inter,system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif;font-size:22px;font-weight:700;color:#0f172a;">
-                  Wynqor
-                </div>
+                ${brand}
               </td>
             </tr>
             <tr>
@@ -120,14 +145,27 @@ class EmailService {
                   ${introBlock}
                   ${secBlocks}
                   ${services}
-                  <p style="color:#334155;line-height:1.6;margin:16px 0 0 0;">Regards,<br><strong>Wynqor Team</strong><br><a href="mailto:${this.COMPANY_EMAIL}" style="color:#2563eb;text-decoration:none">${this.COMPANY_EMAIL}</a></p>
+                  <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+                    ${cta}
+                    <tr>
+                      <td style="padding-top:16px">
+                        <div style="color:#334155;line-height:1.6;">
+                          Regards,<br>
+                          <strong>${this.COMPANY_NAME} Team</strong>
+                          <div style="margin:6px 0;"><a href="mailto:${this.COMPANY_EMAIL}" style="color:#2563eb;text-decoration:none">${this.COMPANY_EMAIL}</a></div>
+                          ${phoneLine}
+                          ${siteLine}
+                        </div>
+                      </td>
+                    </tr>
+                  </table>
                 </div>
               </td>
             </tr>
             <tr>
               <td style="padding:12px 0;text-align:center;color:#64748b;font-size:12px;font-family:Inter,system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif;">
                 <div style="margin:4px 0;">${computedFooter}</div>
-                <div style="margin:4px 0;">© ${year} Wynqor</div>
+                <div style="margin:4px 0;">© ${year} ${this.COMPANY_NAME}</div>
               </td>
             </tr>
           </table>

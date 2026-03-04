@@ -44,7 +44,7 @@ export const ToastProvider: React.FC<{ children: ReactNode }> = ({ children }) =
     <ToastContext.Provider value={{ addToast }}>
       {children}
       <div style={{ position: 'fixed', inset: 0, pointerEvents: 'none', zIndex: 10000 }}>
-        <div style={{ position: 'absolute', right: 24, top: 24, display: 'flex', flexDirection: 'column', gap: 8, width: 'min(400px, 92vw)', zIndex: 10001 }}>
+        <div style={{ position: 'absolute', left: '50%', bottom: 24, transform: 'translateX(-50%)', display: 'flex', flexDirection: 'column', gap: 8, width: 'min(560px, 92vw)', zIndex: 10001 }}>
           {toasts.map((t) => {
             const s = typeStyles[t.type];
             return (

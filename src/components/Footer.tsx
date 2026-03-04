@@ -15,18 +15,18 @@ interface FooterProps {
 
 const Footer: React.FC<FooterProps> = ({ onAboutClick, onCareersClick, onBlogClick, onHelpClick, onTermsClick, onPrivacyClick }) => {
   return (
-    <footer className="bg-secondary pt-20 pb-10 border-t border-slate-800">
+    <footer className="bg-secondary pt-16 lg:pt-20 pb-10 border-t border-slate-800">
       <div className="max-w-[1440px] mx-auto px-4 lg:px-6">
-        <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-20">
-          <div className="pr-8">
-            <div className="flex items-center gap-3 mb-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12 mb-16 lg:mb-20">
+          <div className="lg:pr-8">
+            <div className="flex items-center gap-3 mb-6 lg:mb-8">
               <img src={logo} alt="Wynqor" className="size-10 rounded-xl shadow-lg shadow-primary/20 object-cover" />
               <h2 className="text-3xl font-bold text-white tracking-tight">Wynqor</h2>
             </div>
             <p className="text-slate-400 text-sm leading-relaxed mb-8 max-w-sm">
               The world's leading creative & design studio platform. Connecting elite talent with global opportunity.
             </p>
-            <div className="flex gap-4">
+            <div className="flex gap-4 flex-wrap">
               <a className="size-10 rounded-full bg-slate-800/50 border border-slate-700 flex items-center justify-center text-slate-400 hover:bg-primary hover:text-white hover:border-primary transition-all duration-300" href={site.socials.linkedin}>
                 <span className="font-bold text-sm">in</span>
               </a>
@@ -44,7 +44,7 @@ const Footer: React.FC<FooterProps> = ({ onAboutClick, onCareersClick, onBlogCli
           </div>
 
           <div>
-            <h4 className="text-white font-bold mb-8 text-sm uppercase tracking-wider">Company</h4>
+            <h4 className="text-white font-bold mb-6 lg:mb-8 text-sm uppercase tracking-wider">Company</h4>
             <ul className="space-y-4 text-slate-400 text-sm font-medium">
               <li><button onClick={onAboutClick} className="hover:text-primary transition-colors bg-transparent border-0 p-0 text-left">About Us</button></li>
               <li><button onClick={onCareersClick} className="hover:text-primary transition-colors bg-transparent border-0 p-0 text-left">Careers</button></li>
@@ -53,7 +53,7 @@ const Footer: React.FC<FooterProps> = ({ onAboutClick, onCareersClick, onBlogCli
           </div>
 
           <div>
-            <h4 className="text-white font-bold mb-8 text-sm uppercase tracking-wider">Support</h4>
+            <h4 className="text-white font-bold mb-6 lg:mb-8 text-sm uppercase tracking-wider">Support</h4>
             <ul className="space-y-4 text-slate-400 text-sm font-medium">
               <li><button onClick={onHelpClick} className="hover:text-primary transition-colors bg-transparent border-0 p-0 text-left">Help Center</button></li>
               <li><button onClick={onTermsClick} className="hover:text-primary transition-colors bg-transparent border-0 p-0 text-left">Terms of Service</button></li>
@@ -62,7 +62,7 @@ const Footer: React.FC<FooterProps> = ({ onAboutClick, onCareersClick, onBlogCli
           </div>
           
           <div>
-            <h4 className="text-white font-bold mb-8 text-sm uppercase tracking-wider">Contact</h4>
+            <h4 className="text-white font-bold mb-6 lg:mb-8 text-sm uppercase tracking-wider">Contact</h4>
             <ul className="space-y-4 text-slate-400 text-sm font-medium">
               <li className="flex items-center gap-2">
                 <span className="material-symbols-outlined text-slate-500 text-base">mail</span>
@@ -80,7 +80,7 @@ const Footer: React.FC<FooterProps> = ({ onAboutClick, onCareersClick, onBlogCli
           </div>
         </div>
 
-        <div className="pt-8 border-t border-slate-800 flex flex-col md:flex-row justify-between items-center gap-6 text-xs text-slate-500 font-medium">
+        <div className="pt-6 lg:pt-8 border-t border-slate-800 flex flex-col md:flex-row justify-between items-center gap-4 md:gap-6 text-xs text-slate-500 font-medium">
           <p>© 2024 Wynqor Inc. All rights reserved.</p>
           <div className="flex gap-6 items-center">
             <span className="flex items-center gap-2 px-3 py-1 rounded-full bg-slate-900 border border-slate-800">
@@ -118,10 +118,10 @@ const NewsletterForm: React.FC = () => {
     }
   };
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col gap-3 max-w-sm">
-      <div className="flex gap-3">
+    <form onSubmit={handleSubmit} className="flex flex-col gap-3 w-full max-w-sm sm:max-w-md">
+      <div className="flex flex-col sm:flex-row gap-3 w-full">
         <input
-          className="flex-1 px-4 py-2.5 rounded-lg bg-slate-800/50 border border-slate-700 text-slate-200 placeholder:text-slate-500 focus:bg-slate-800 focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all"
+          className="w-full sm:flex-1 min-w-0 px-4 py-2.5 rounded-lg bg-slate-800/50 border border-slate-700 text-slate-200 placeholder:text-slate-500 focus:bg-slate-800 focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all"
           placeholder="Your email address"
           type="email"
           value={email}
@@ -131,12 +131,11 @@ const NewsletterForm: React.FC = () => {
         <button
           type="submit"
           disabled={loading}
-          className={`px-4 py-2.5 rounded-lg ${loading ? 'bg-slate-500 cursor-not-allowed' : 'bg-primary hover:bg-primary-dark'} text-white font-bold transition-colors`}
+          className={`w-full sm:w-auto px-4 py-2.5 rounded-lg ${loading ? 'bg-slate-500 cursor-not-allowed' : 'bg-primary hover:bg-primary-dark'} text-white font-bold transition-colors`}
         >
           {loading ? 'Subscribing...' : 'Subscribe'}
         </button>
       </div>
-      
     </form>
   );
 };

@@ -44,7 +44,7 @@ export const ToastProvider: React.FC<{ children: ReactNode }> = ({ children }) =
     <ToastContext.Provider value={{ addToast }}>
       {children}
       <div style={{ position: 'fixed', inset: 0, pointerEvents: 'none', zIndex: 10000 }}>
-        <div style={{ position: 'absolute', left: '50%', bottom: 24, transform: 'translateX(-50%)', display: 'flex', flexDirection: 'column', gap: 8, width: 'min(560px, 92vw)', zIndex: 10001 }}>
+        <div style={{ position: 'absolute', left: '50%', bottom: 20, transform: 'translateX(-50%)', display: 'flex', flexDirection: 'column', gap: 6, width: 'min(420px, 92vw)', zIndex: 10001 }}>
           {toasts.map((t) => {
             const s = typeStyles[t.type];
             return (
@@ -52,26 +52,26 @@ export const ToastProvider: React.FC<{ children: ReactNode }> = ({ children }) =
                 background: s.bg,
                 border: `1px solid ${s.border}`,
                 color: s.text,
-                borderRadius: 12,
-                boxShadow: '0 10px 30px rgba(0,0,0,0.12)',
-                padding: '12px 14px',
+                borderRadius: 10,
+                boxShadow: '0 6px 20px -6px rgba(0,0,0,0.15)',
+                padding: '10px 12px',
                 display: 'flex',
                 alignItems: 'center',
-                gap: 10,
+                gap: 8,
                 pointerEvents: 'auto',
                 zIndex: 10002
               }}>
-                <span className="material-symbols-outlined" style={{ color: s.border }}> {s.icon} </span>
+                <span className="material-symbols-outlined" style={{ color: s.border, fontSize: '18px' }}> {s.icon} </span>
                 <div style={{ flex: 1 }}>
-                  {t.title && <div style={{ fontWeight: 800, marginBottom: 2 }}>{t.title}</div>}
-                  <div style={{ fontWeight: 600 }}>{t.message}</div>
+                  {t.title && <div style={{ fontWeight: 700, marginBottom: 2 }}>{t.title}</div>}
+                  <div style={{ fontWeight: 500 }}>{t.message}</div>
                 </div>
                 <button
                   onClick={() => setToasts((prev) => prev.filter((x) => x.id !== t.id))}
                   style={{ background: 'transparent', border: 'none', color: s.text, cursor: 'pointer' }}
                   aria-label="Close notification"
                 >
-                  <span className="material-symbols-outlined">close</span>
+                  <span className="material-symbols-outlined" style={{ fontSize: '18px' }}>close</span>
                 </button>
               </div>
             );

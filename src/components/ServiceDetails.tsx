@@ -61,6 +61,17 @@ const ServiceDetails: React.FC<ServiceDetailsProps> = ({
     features: staticContent?.features || ['Professional Service', 'Quality Guarantee', 'Expert Support'],
     relatedServices: (staticContent?.relatedServices || []).map(id => services.find(s => s.id === id)).filter(Boolean) as Service[]
   };
+  const expandedWhy = (() => {
+    const base = (content.whyChoose || '').trim();
+    const needExpand = base.length < 160;
+    if (!needExpand) return base;
+    const f = (content.features || []).slice(0, 3).filter(Boolean).join(', ');
+    const p = (content.process || []).slice(0, 3).filter(Boolean).join(', ');
+    const addF = f ? ` You'll get ${f}.` : '';
+    const addP = p ? ` Our process covers ${p}.` : '';
+    const addD = content.description ? ` ${content.description}` : '';
+    return `${base}${addF}${addP}${addD}`.trim();
+  })();
 
   // Generate image gallery (using same image for demo)
   const images = [
@@ -205,12 +216,11 @@ const ServiceDetails: React.FC<ServiceDetailsProps> = ({
                   ))}
                 </div>
 
-                {/* About Section - Desktop */}
+                {/* Why Choose - Desktop */}
                 <div className="hidden lg:block pt-10 border-t border-slate-200 mt-10">
-                  <h3 className="text-xl font-bold text-secondary mb-6 font-display">About This Service</h3>
+                  <h3 className="text-xl font-bold text-secondary mb-6 font-display">Why Choose This Service</h3>
                   <div className="prose prose-slate text-slate-600 max-w-none">
-                    <p className="mb-4">{content.description}</p>
-                    <p className="mb-4">{content.whyChoose}</p>
+                    <p className="mb-4">{expandedWhy}</p>
                     <h4 className="text-lg font-semibold text-slate-800 mt-6 mb-3">Our Process:</h4>
                     <ul className="list-disc pl-5 space-y-2">
                       {content.process.map((step, index) => (
@@ -294,6 +304,9 @@ const ServiceDetails: React.FC<ServiceDetailsProps> = ({
                           </span>
                         </div>
                       </div>
+                    {/* <p className="text-slate-600 text-sm md:text-base leading-relaxed mb-6">
+                      {content.description}
+                    </p> */}
 
                       {/* Features */}
                       <div>

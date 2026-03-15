@@ -1,6 +1,5 @@
 import React from 'react';
 import { metrics } from '../data/metrics';
-
 const Statistics: React.FC = () => {
   const stats = metrics;
 

@@ -49,7 +49,19 @@ const collectOverrideRecords = (): Array<{ id: string; data: any }> => {
   return recs;
 };
 const normalizeOverrideFields = (data: any): Partial<Service> => {
-  const img = typeof data.image === 'string' ? (data.image as string).replace(/`/g, '').trim() : undefined;
+  const rawImg = typeof data.image === 'string' ? (data.image as string).replace(/`/g, '').trim() : undefined;
+  const resolveImage = (img?: string): string | undefined => {
+    if (!img) return undefined;
+    if (img.startsWith('../images/')) {
+      try {
+        return new URL(img, import.meta.url).href;
+      } catch {
+        return img;
+      }
+    }
+    return img;
+  };
+  const img = resolveImage(rawImg);
   const ratingVal =
     typeof data.rating === 'number'
       ? data.rating.toFixed(1)
